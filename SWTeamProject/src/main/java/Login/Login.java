@@ -129,7 +129,13 @@ public class Login extends javax.swing.JFrame {
 
         Originator originator = new Originator();
         String ID = jTextField1.getText();
-        if (ID.contains("")) {
+        
+        originator.setState("Password Test");
+        mementos.push(originator.createMemento());
+        originator.setState("ID Test");
+        mementos.push(originator.createMemento());
+
+        if (ID.contains("A")) {
             try {
                 File Imfofile = new File("데이터베이스");
                 FileReader filereader = new FileReader(Imfofile);
@@ -156,11 +162,6 @@ public class Login extends javax.swing.JFrame {
             }
         } else {
             JOptionPane.showMessageDialog(null, "ID를 정확히 입력해주세요");
-
-            originator.setState("Password Test");
-            mementos.push(originator.createMemento());
-            originator.setState("ID Test");
-            mementos.push(originator.createMemento());
 
             originator.restoreMement(mementos.pop());
             jTextField1.setText(originator.getState());
