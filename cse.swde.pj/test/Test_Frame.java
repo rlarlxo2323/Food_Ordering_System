@@ -96,7 +96,7 @@ public class Test_Frame extends javax.swing.JFrame {
                 new Test_Frame().setVisible(true);
                 abs test = new bus();
                 //test.getData(jButton1, jLabel1);
-                test.Join();
+                test.Join(jButton1, jLabel1);
             }
         });
         

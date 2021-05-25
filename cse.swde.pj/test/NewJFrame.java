@@ -98,7 +98,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 new NewJFrame().setVisible(true);
                 abs test = new bus();
                 //test.getData(jButton1, jLabel1);
-                test.Join();
+                test.Join(jButton1, jLabel1);
             }
         });
     }

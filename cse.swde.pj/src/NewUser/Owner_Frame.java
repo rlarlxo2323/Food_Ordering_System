@@ -5,29 +5,19 @@
  */
 package NewUser;
 
-import Address_API.dial;
-import Connect_DB.Connect_DB;
-import SFTP.JSchWrapper;
-import Login.Login_Frame;
-import java.awt.Color;
-import java.awt.Cursor;
-import java.io.File;
-import java.sql.*;
-import javax.swing.JOptionPane;
-
 /**
  *
  * @author rlarl
  */
 public class Owner_Frame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form User_Frame
-     */
-    boolean flag;
-    String[] data;
     public Owner_Frame() {
         initComponents();
+        Abstract test = new Owner_Template();
+        test.Brand_Data(Brand_Name_Field, Brand_Name_Field, Upload_Button, File_Name_Label, FileChooser);
+        test.Join(this, Name_Field, Age_Field, RRN_Field, ID_Field, Overlap_Test, Overlap_Label,
+                    PW_Field, PW_Test_Label, RePW_Field, RePW_Test_Label, M_RButton, FM_RButton,
+                    Address_Field, Set_Address_Field, Detail_Address_Field, Address_Button, End_Button);
     }
 
     /**
@@ -39,14 +29,14 @@ public class Owner_Frame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jFileChooser1 = new javax.swing.JFileChooser();
+        FileChooser = new javax.swing.JFileChooser();
         RePW_Test_Label = new javax.swing.JLabel();
         Warning_Label = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         RRN_Field = new javax.swing.JFormattedTextField();
         Address_Button = new javax.swing.JButton();
-        Set_Address = new javax.swing.JTextField();
-        Detail_Address = new javax.swing.JTextField();
+        Set_Address_Field = new javax.swing.JTextField();
+        Detail_Address_Field = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         Age_Field = new javax.swing.JTextField();
         Address_Field = new javax.swing.JTextField();
@@ -68,12 +58,13 @@ public class Owner_Frame extends javax.swing.JFrame {
         Name_Field = new javax.swing.JTextField();
         Overlap_Label = new javax.swing.JLabel();
         PW_Test_Label = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        Brand_Name_Field = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        Brand_Num_Field = new javax.swing.JFormattedTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        Upload_Button = new javax.swing.JButton();
+        File_Name_Label = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,21 +80,11 @@ public class Owner_Frame extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        RRN_Field.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                RRN_FieldFocusLost(evt);
-            }
-        });
 
         Address_Button.setText("주소검색");
-        Address_Button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Address_ButtonActionPerformed(evt);
-            }
-        });
 
-        Set_Address.setEditable(false);
-        Set_Address.setFocusable(false);
+        Set_Address_Field.setEditable(false);
+        Set_Address_Field.setFocusable(false);
 
         jLabel10.setText("상세 주소");
 
@@ -122,31 +103,9 @@ public class Owner_Frame extends javax.swing.JFrame {
 
         jLabel8.setText("재확인");
 
-        PW_Field.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                PW_FieldCaretUpdate(evt);
-            }
-        });
-
-        RePW_Field.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                RePW_FieldCaretUpdate(evt);
-            }
-        });
-
         Overlap_Test.setText("중복확인");
-        Overlap_Test.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Overlap_TestActionPerformed(evt);
-            }
-        });
 
         End_Button.setText("확인");
-        End_Button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                End_ButtonActionPerformed(evt);
-            }
-        });
 
         jLabel1.setFont(new java.awt.Font("굴림", 1, 18)); // NOI18N
         jLabel1.setText("가맹점 회원가입");
@@ -166,7 +125,7 @@ public class Owner_Frame extends javax.swing.JFrame {
         jLabel11.setText("상호명");
 
         try {
-            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###-##-#####")));
+            Brand_Num_Field.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###-##-#####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -175,12 +134,7 @@ public class Owner_Frame extends javax.swing.JFrame {
 
         jLabel13.setText("사업자 등록증");
 
-        jButton1.setText("upload");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        Upload_Button.setText("upload");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -251,17 +205,19 @@ public class Owner_Frame extends javax.swing.JFrame {
                             .addComponent(jLabel12)
                             .addComponent(jLabel13))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jFormattedTextField1)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(Address_Field, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(Address_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(Set_Address)
-                                .addComponent(Detail_Address)
-                                .addComponent(jTextField1))
-                            .addComponent(jButton1))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(Brand_Num_Field, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(Address_Field, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(Address_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Set_Address_Field, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Detail_Address_Field, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Brand_Name_Field, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(File_Name_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Upload_Button)))
                         .addGap(47, 47, 47))))
         );
         layout.setVerticalGroup(
@@ -310,23 +266,24 @@ public class Owner_Frame extends javax.swing.JFrame {
                     .addComponent(Address_Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Address_Button))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Set_Address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Set_Address_Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Detail_Address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Detail_Address_Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Brand_Name_Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Brand_Num_Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(jButton1))
+                    .addComponent(Upload_Button)
+                    .addComponent(File_Name_Label, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(End_Button)
                 .addContainerGap())
@@ -334,172 +291,6 @@ public class Owner_Frame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void RRN_FieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_RRN_FieldFocusLost
-        String years = RRN_Field.getText();
-        years = years.substring(0, 2);
-        if(Integer.parseInt(years)>50){
-            years="19"+years;
-        }
-        else{
-            years="20"+years;
-        }
-        int year = Integer.parseInt(years);
-        Age_Field.setText(Integer.toString(2021-year+1));
-    }//GEN-LAST:event_RRN_FieldFocusLost
-
-    private void Address_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Address_ButtonActionPerformed
-        dial s = new dial(this, true);
-        s.setVisible(true);
-        if(s.isFocusOwner()){
-            System.out.println("on");
-        }else{
-            System.out.println("off");
-            data=dial.Select_Adr;
-            Address_Field.setText(data[0]);
-            Set_Address.setText(data[1]);
-        }
-    }//GEN-LAST:event_Address_ButtonActionPerformed
-
-    private void PW_FieldCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_PW_FieldCaretUpdate
-        if(PW_Field.getText().equals("")){ //텍스트 필드가 비어있는 경우
-            PW_Test_Label.setText("비어있음.");
-            PW_Test_Label.setForeground(Color.red);
-        }
-        else if(PW_Field.getText().length()<7){ //텍스트 필드의 값이 7자리 이하
-            PW_Test_Label.setText("너무 짧습니다.");
-            PW_Test_Label.setForeground(Color.red);
-        }
-        else{//텍스트 필드 길이가 조건에 만족 시
-            boolean Number = false; //영문자 판별 부호
-            boolean Alpha = false; //숫자 판별 부호
-            for(int i=0; i<PW_Field.getText().length();i++){
-                int index = PW_Field.getText().charAt(i);
-
-                if(index>=65 && index<=122){ //영어 검출
-                    Alpha = true;
-                }
-                else if(index<=57 && index >= 48){//숫자 검출
-                    Number = true;
-                }
-            }
-            if(Number==false){
-                PW_Test_Label.setText("숫자를 포함해 주세요.");
-            }
-            else if(Alpha==false){
-                PW_Test_Label.setText("영문자를 포함해 주세요");
-            }
-            else{//모든 조건 만족
-                PW_Test_Label.setText("O");
-                PW_Test_Label.setForeground(Color.blue);
-            }
-        }
-    }//GEN-LAST:event_PW_FieldCaretUpdate
-
-    private void RePW_FieldCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_RePW_FieldCaretUpdate
-        if(RePW_Field.getText().equals("")){
-            RePW_Test_Label.setText("비어있음.");
-            RePW_Test_Label.setForeground(Color.red);
-        }
-        else if(!RePW_Field.getText().equals(PW_Field.getText())){//이전에 입력한 패스워드와 불일치 시
-            RePW_Test_Label.setText("일치하지 않습니다.");
-            RePW_Test_Label.setForeground(Color.red);
-        } else if(RePW_Field.getText().equals(PW_Field.getText())){
-            RePW_Test_Label.setText("O");
-            RePW_Test_Label.setForeground(Color.blue);
-        }
-    }//GEN-LAST:event_RePW_FieldCaretUpdate
-
-    private void Overlap_TestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Overlap_TestActionPerformed
-        String ID = ID_Field.getText(); //ID 값 변수
-        try{
-            Connect_DB db = new Connect_DB();
-            db.Use_DB();
-            ResultSet rs = db.Command_ExecuteQuery("select ID from Actor where ID='"+ID+"'"); //ID가 입력받은 ID와 같은 데이터 검사
-            if(rs.next()){ //같은 ID가 있으면
-                Overlap_Label.setText("이미 존재하는 아이디입니다.");
-                Overlap_Label.setForeground(Color.red);
-                flag = false; //확인 값
-            }
-            else{
-                ID_Field.setEnabled(false);
-                Overlap_Label.setText("사용 가능한 아이디입니다.");
-                Overlap_Label.setForeground(Color.blue);
-                flag = true; //확인 값
-            }
-        }catch(SQLException e){
-            e.printStackTrace();
-        }
-
-    }//GEN-LAST:event_Overlap_TestActionPerformed
-
-    private void End_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_End_ButtonActionPerformed
-        if((flag)
-            &&(PW_Test_Label.getText().equals("O"))
-            &&(RePW_Test_Label.getText().equals("O"))
-            &&(!Name_Field.getText().equals(""))
-            &&(!RRN_Field.getText().equals(""))
-            &&(!Address_Field.getText().equals(""))){
-            String ID = ID_Field.getText();
-            String PW = PW_Field.getText();
-            String Name = Name_Field.getText();
-            String RRN = RRN_Field.getText();
-            int Age = Integer.parseInt(Age_Field.getText());
-            String Gender="";
-            if(M_RButton.isSelected()){
-                Gender = M_RButton.getText();
-            }
-            else if(FM_RButton.isSelected()){
-                Gender = FM_RButton.getText();
-            }
-            String Address = (Set_Address.getText()+"/"+Detail_Address.getText());
-            System.out.println(Address);
-
-            int bool = JOptionPane.showConfirmDialog(null, "입력하신 정보로 가입하시겠습니까?", "회원가입", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
-
-            if(bool==0){
-                Connect_DB db = new Connect_DB();
-                db.Use_DB();
-                db.Command_ExecuteUpdate("insert into Actor values('"+ID+"', '"+PW+"', '"+RRN+"', '"+Name+"', '"+Age+"', '"+Gender+"', '"+Address+"', 'user');");
-                JOptionPane.showMessageDialog(null, "회원가입 완료");
-                Login_Frame frame = new Login_Frame();
-                frame.setVisible(true);
-                dispose();
-            }else{
-                JOptionPane.showMessageDialog(null, "회원가입 취소");
-            }
-
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "다시 한번 확인하세요.","회원가입 실패", JOptionPane.WARNING_MESSAGE);
-        }
-    }//GEN-LAST:event_End_ButtonActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        JSchWrapper jschWrapper = null;
-        jFileChooser1.showOpenDialog(null);
-        String path = jFileChooser1.getSelectedFile().getPath();
-        try {
-            jschWrapper = new JSchWrapper();
-
-            // SFTP 접속하기 (주소, 포트번호, 사용자아이디, 패스워드)
-            jschWrapper.connectSFTP("118.67.130.238", 22, "root", "rl794613!");
-
-            // /itarchives 폴더 위치에 test 폴더 생성
-            // C:\\test\\upload\\0001.png 파일을 /itarchives/test 위치에 업로드
-            jschWrapper.uploadFile(path, "/home/sub_admin/cse_swde/img");
-
-            // /itarchives/test/0001.png 파일을 C:\\test\\download 위치에 다운로드
-            //jschWrapper.downloadFile("/itarchives/test/0001.png", "C:\\test\\download", false);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        } finally {
-            // SFTP 접속해제
-            jschWrapper.disconnectSFTP();
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -541,9 +332,13 @@ public class Owner_Frame extends javax.swing.JFrame {
     private javax.swing.JButton Address_Button;
     private javax.swing.JTextField Address_Field;
     private javax.swing.JTextField Age_Field;
-    private javax.swing.JTextField Detail_Address;
+    private javax.swing.JTextField Brand_Name_Field;
+    private javax.swing.JFormattedTextField Brand_Num_Field;
+    private javax.swing.JTextField Detail_Address_Field;
     private javax.swing.JButton End_Button;
     private javax.swing.JRadioButton FM_RButton;
+    private javax.swing.JFileChooser FileChooser;
+    private javax.swing.JLabel File_Name_Label;
     private javax.swing.JTextField ID_Field;
     private javax.swing.JRadioButton M_RButton;
     private javax.swing.JTextField Name_Field;
@@ -554,11 +349,9 @@ public class Owner_Frame extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField RRN_Field;
     private javax.swing.JPasswordField RePW_Field;
     private javax.swing.JLabel RePW_Test_Label;
-    private javax.swing.JTextField Set_Address;
+    private javax.swing.JTextField Set_Address_Field;
+    private javax.swing.JButton Upload_Button;
     private javax.swing.JLabel Warning_Label;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JFileChooser jFileChooser1;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -572,6 +365,5 @@ public class Owner_Frame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

@@ -14,28 +14,25 @@ import javax.swing.*;
  * @author rlarl
  */
 public abstract class abs {
-    JFrame Frame;
-    boolean flag = true;
     JButton button;
     JLabel label;
     
-    
-    public final void Join(){
-        //getData(JButton a, JLabel b);
+    public final void Join(JButton a, JLabel b){
+        getData(a, b);
         setLabel();
         printt();
     }
-    public void getFrame(boolean a){
-        if(a){
-            this.Frame = new Test_Frame();
-        }
+    
+    public void getData(JButton a, JLabel b){
+        this.button = a;
+        this.label = b;
     }
+    
     public void setLabel(){
         button.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
                 if(e.getSource() == button){
-                //this.e = e;
                 label.setText("ㅋㅋㄹㅃㅃ");
                 }
             }
