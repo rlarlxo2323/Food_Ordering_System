@@ -5,9 +5,8 @@
  */
 package SystemAdministrator;
 
-import java.util.LinkedList;
-import java.util.List;
-import javax.swing.JOptionPane;
+import javax.swing.JButton;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -15,15 +14,65 @@ import javax.swing.table.DefaultTableModel;
  * @author jda05
  */
 public class SystemAdminView extends javax.swing.JFrame {
-    //String column[] = {"사업자 등록번호", "상호명", "대표자명", "사업자주소"}; // jtable의 column 내용
-    StoreListDb db = new StoreListDb();
     /**
      * Creates new form SystemManager
      */
     public SystemAdminView() {
-        initComponents();        
+        initComponents();  
+        System.out.println("SystemAdminView 생성자");        
+        setTitle("가맹점 신청 관리"); // gui창 제목 지정        
+        //setResizable(false); // 창 크기 조절 제한    
+        setLocationRelativeTo(null); // gui를 윈도우 창 가운데에 위치하게 한다.
+        setVisible(true); // gui를 보이게 한다.                   
     }
-
+    
+    JTable table1;
+    public void setTable1(JTable table){
+        this.table1 = table;
+    }
+    public JTable getTable1(){
+        return table1;
+    }
+    
+    JTable table2;
+    public void setTable2(JTable table){
+        this.table2 = table;
+    }
+    public JTable getTable2(){
+        return table2;
+    }
+    
+    JButton btn1;
+    public void setButton1(JButton btn){
+        this.btn1 = btn;
+    }
+    public JButton getButton1(){
+        return btn1;
+    }
+    
+    JButton btn2;
+    public void setButton2(JButton btn){
+        this.btn2 = btn;
+    }
+    public JButton getButton2(){
+        return btn2;
+    }
+    
+    JButton btn3;
+    public void setButton3(JButton btn){
+        this.btn3 = btn;
+    }
+    public JButton getButton3(){
+        return btn3;
+    }
+    
+    JButton btn4;
+    public void setButton4(JButton btn){
+        this.btn4 = btn;
+    }
+    public JButton getButton4(){
+        return btn4;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,86 +87,74 @@ public class SystemAdminView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton41 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(600, 400));
 
-        jPanel1.setPreferredSize(new java.awt.Dimension(600, 400));
+        jTabbedPane1.setPreferredSize(new java.awt.Dimension(650, 360));
+
+        jPanel1.setPreferredSize(new java.awt.Dimension(650, 360));
 
         jLabel1.setFont(new java.awt.Font("맑은 고딕 Semilight", 1, 18)); // NOI18N
         jLabel1.setText("가맹점 승인 대기 목록");
 
         jScrollPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(452, 400));
 
         //String[][] rows = setTable(); // db에서 데이터를 조회한다.
         //DefaultTableModel model = new DefaultTableModel(rows, column);
-        DefaultTableModel model = setTable();
-        jTable1.setModel(model);
+        //ApproveRefuseModel aR = new ApproveRefuseModel();
+        ApproveRefuseModel arModel = ApproveRefuseModel.getInstance();
+        //aR = ApproveRefuseModel.getInstance();
+        DefaultTableModel model1 = arModel.setTable1();
+        //DefaultTableModel model1 = model;
+        jTable1.setModel(model1);
         jTable1.setPreferredScrollableViewportSize(jTable1.getPreferredSize());
         jTable1.setFillsViewportHeight(true);
         jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTable1.setShowGrid(true);
+        setTable1(jTable1);
         jScrollPane1.setViewportView(jTable1);
-
-        jButton41.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
-        jButton41.setText("삭제");
-        jButton41.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton41ActionPerformed(evt);
-            }
-        });
-
-        jButton3.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
-        jButton3.setText("수정");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
 
         jButton1.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
         jButton1.setText("승인");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        //btn1 = jButton1;
+        //ApproveRefuseController ctr = new ApproveRefuseController();
+        //jButton1.addActionListener(ctr.listener);
+        setButton1(jButton1);
+        //jButton1.addActionListener(this);
 
         jButton2.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
         jButton2.setText("거절");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
+        //jButton2.addActionListener(this);
+        setButton2(jButton2);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                        .addComponent(jButton41, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(46, 46, 46))
+                .addGap(120, 120, 120)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(120, 120, 120))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(37, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(38, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(222, 222, 222)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,28 +163,77 @@ public class SystemAdminView extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
+                .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton41, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(58, Short.MAX_VALUE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("가맹점 승인 대기 처리", jPanel1);
 
-        jPanel2.setPreferredSize(new java.awt.Dimension(600, 400));
+        jPanel2.setPreferredSize(new java.awt.Dimension(650, 360));
+
+        jLabel2.setFont(new java.awt.Font("맑은 고딕 Semilight", 1, 18)); // NOI18N
+        jLabel2.setText("가맹점 정보 수정 & 삭제");
+
+        jScrollPane2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jScrollPane2.setPreferredSize(new java.awt.Dimension(452, 400));
+
+        //String[][] rows = setTable(); // db에서 데이터를 조회한다.
+        //DefaultTableModel model = new DefaultTableModel(rows, column);
+        //DefaultTableModel model2 = setTable();
+        //ModifyDeleteModel mD = new ModifyDeleteModel();
+        ModifyDeleteModel mdModel = ModifyDeleteModel.getInstance();
+        DefaultTableModel model2 = mdModel.setTable2();
+        jTable2.setModel(model2);
+        jTable2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jTable2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTable2.setShowGrid(true);
+        setTable2(jTable2);
+        jScrollPane2.setViewportView(jTable2);
+
+        jButton3.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        jButton3.setText("수정");
+        //jButton3.addActionListener(this);
+        setButton3(jButton3);
+
+        jButton4.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        jButton4.setText("삭제");
+        //jButton4.addActionListener(this);
+        setButton4(jButton4);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 595, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(120, 120, 120)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(120, 120, 120))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(38, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 371, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("가맹점 정보 수정 & 삭제 처리", jPanel2);
@@ -156,100 +242,46 @@ public class SystemAdminView extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // 가맹점 승인을 위해 "승인 버튼" 클릭시 발생하는 이벤트
-        int selectedRow = jTable1.getSelectedRow(); // jtable에서 선택한 row의 index
-        if (selectedRow > 0){
-            Object selectedStoreNumber = jTable1.getValueAt(selectedRow, 0); // jtable에서 선택한 row의 store_number
-            System.out.println(selectedStoreNumber);
-            //StoreListDb db = new StoreListDb();
-            db.storeStateUpdate(selectedStoreNumber); // db에서 선택한 store_number의 store_state를 y로 변경       
-            refreshTable(); // 변경된 db의 데이터로 jtable을 새로 보여줌
-        } else {
-            JOptionPane.showMessageDialog(null, "승인 처리 할 데이터가 선택되지 않았습니다. 다시 선택해 주세요.");
-        }   
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // 데이터 수정을 위해 "수정 버튼" 클릭 시 발생하는 이벤트
-        ModifyUpdateView view = new ModifyUpdateView(); // 선택한 row의 정보를 수정할 gui창 호출
-        int row = jTable1.getSelectedRow(); // 선택한 row의 번호        
-        int colCount = jTable1.getColumnCount(); // jtable의 column 수
-        if (row > 0 && colCount > 0){
-            view.setRow(row);
-            view.setColCount(colCount);
-            view.callSelectedRow(jTable1); // 선택한 row의 값을 수정 gui에서 보여주기
-            view.setTitle("가맹점 정보 수정");
-            view.setVisible(true); // 수정 gui를 보이게 함 
-            System.out.println("수정 버튼");            
-            
-            if (view.event == true){
-                System.out.println("event ㅜㅜ");    
-                super.dispose();
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "수정할 데이터가 선택되지 않았습니다. 다시 선택해 주세요.");
-        }
-               
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton41ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton41ActionPerformed
-        // 데이터 삭제를 위해 "삭제 버튼" 클릭 시 발생하는 이벤트
-        DefaultTableModel model = (DefaultTableModel)jTable1.getModel(); // 현재 jtable의 모델을 가져온다.
-        int row = jTable1.getSelectedRow(); 
-        if (row > 0){
-            String storeNumber = (String) jTable1.getValueAt(row, 0); // 선택한 row에서 사업자 등록번호를 가져옴
-            db.deleteRow(storeNumber); // 데이터를 삭제 할 db 호출
-            model.removeRow(row); // row를 table에서 삭제            
-        } else {
-            JOptionPane.showMessageDialog(null, "삭제할 데이터가 선택되지 않았습니다. 다시 선택해 주세요.");
-        }       
-    }//GEN-LAST:event_jButton41ActionPerformed
-
-    public DefaultTableModel setTable(){ // 처음 gui를 실행했을 때 테이블을 setting함
-        DefaultTableModel model;
-        //StoreListDb db = new StoreListDb();
-        model = db.selectAll(); //select문 결과를 저장
-        return model;      
-    }
     
-    public String[][] setTable2(){ // 처음 gui를 실행했을 때 테이블을 setting함
-        List<String[]> listData = new LinkedList<>();  // 타입이 없는(<>) Linkedlist로 dataList를 선언
-        StoreListDb db = new StoreListDb();
-        listData = db.selectAll2(); //select문 결과를 저장
-        
-        String[][] storeListData = new String[listData.size()][4];
-        for(int i=0 ; i < listData.size(); i++){ // list 타입의 데이터를 String 배열로 바꾸는 for문
-            storeListData[i] = listData.get(i);
-        }        
-        return storeListData;       
-    }
     
-    public void refreshTable(){ // 이벤트 처리 후 테이블 갱신할 때 사용함
-        DefaultTableModel model = (DefaultTableModel)jTable1.getModel(); // 현재 jtable의 모델을 가져온다.
-        
-        model.setRowCount(0); // 전체 테이블 화면을 모두 비운다.   
-        //StoreListDb db = new StoreListDb();
-        model = db.selectAll(); //select문 결과를 담는다.
-        //StoreListDb db = new StoreListDb();
-        //String[][] rows = setTable(); // db에서 데이터를 조회한다.
-        //DefaultTableModel refreshModel = new DefaultTableModel(rows, column);
-        jTable1.setModel(model); // 바뀐 내용을 jtable에 넣는다.    
-    }
+DefaultTableModel refreshModel1;
+public void setRefreshTable1(DefaultTableModel tableModel1){
+    refreshModel1 = tableModel1;
+    jTable1.setModel(refreshModel1); // 바뀐 내용을 jtable에 넣는다.
+}
+public DefaultTableModel getRefreshTable1(){
+    refreshModel1 = (DefaultTableModel)jTable1.getModel(); // 현재 jtable1의 모델을 가져온다.
+    return refreshModel1;
+}
+
+DefaultTableModel refreshModel2;
+public void setRefreshTable2(DefaultTableModel tableModel2){
+    refreshModel2 = tableModel2;
+    jTable2.setModel(refreshModel2); // 바뀐 내용을 jtable에 넣는다.
+}
+public DefaultTableModel getRefreshTable2(){
+    refreshModel2 = (DefaultTableModel)jTable2.getModel(); // 현재 jtable2의 모델을 가져온다.
+    return refreshModel2;
+}
+
+
+//public DefaultTableModel getRefreshTable2(){
+//    DefaultTableModel model = (DefaultTableModel)jTable2.getModel(); // 현재 jtable의 모델을 가져온다.
+//    return model;
+//}
+//public void setRefreshTable2(DefaultTableModel tableModel2){
+//    jTable2.setModel(tableModel2); // 바뀐 내용을 jtable에 넣는다.
+//}
+    
     /**
      * @param args the command line arguments
      */
@@ -283,11 +315,11 @@ public class SystemAdminView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                SystemAdminView admin = new SystemAdminView();
-                admin.setTitle("가맹점 신청 관리"); // gui창 제목 지정                
-                //admin.setResizable(false); // 창 크기 조절 제한    
-                admin.setLocationRelativeTo(null); // gui를 윈도우 창 가운데에 위치하게 한다.
-                admin.setVisible(true); // gui를 보이게 한다.               
+//                SystemAdminView admin = new SystemAdminView();
+//                admin.setTitle("가맹점 신청 관리"); // gui창 제목 지정                
+//                //admin.setResizable(false); // 창 크기 조절 제한    
+//                admin.setLocationRelativeTo(null); // gui를 윈도우 창 가운데에 위치하게 한다.
+//                admin.setVisible(true); // gui를 보이게 한다.               
             }
         });
     }
@@ -296,12 +328,17 @@ public class SystemAdminView extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton41;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
+
+    
 }

@@ -20,11 +20,11 @@ import javax.swing.table.DefaultTableModel;
  */
 public class StoreListDb extends StoreManager.DbConnection {
     public StoreListDb(){
-        super();
+        super();        
     }
     
     public DefaultTableModel selectAll(){
-        String column[] = {"사업자 등록번호", "상호명", "대표자명", "사업자주소"}; // jtable의 column 내용
+        String column[] = {"아이디", "사업자 등록번호", "상호명", "대표자명", "사업자주소"}; // jtable의 column 내용
         DefaultTableModel model = new DefaultTableModel(null, column){
             @Override
             public boolean isCellEditable(int row, int column){ // 셀 수정 못하게 하는 부분 
@@ -36,7 +36,7 @@ public class StoreListDb extends StoreManager.DbConnection {
         
        try (Connection con = getConnection()) { // 데이터베이스와 연결하는 객체로 부모 클래스(DbConnection)의 메소드이다.           
             System.out.println("[StoreListDb.selectAll 연결 성공]");
-            String sql = "select store_number, store_name, store_owner, store_address from store_list where store_state = 'w'"; // sql문 완성
+            String sql = "select id, store_number, store_name, store_owner, store_address from store_list where store_state = 'w'"; // sql문 완성
             //System.out.println(sql);
             preparedStatement = con.prepareStatement(sql);
             rs = preparedStatement.executeQuery();
