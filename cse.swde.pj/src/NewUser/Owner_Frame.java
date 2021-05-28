@@ -5,6 +5,9 @@
  */
 package NewUser;
 
+import Template_Method_Pattern.Owner_Template;
+import Template_Method_Pattern.Abstract;
+
 /**
  *
  * @author rlarl

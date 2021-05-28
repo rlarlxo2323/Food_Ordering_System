@@ -115,9 +115,36 @@ public class Login_Frame extends javax.swing.JFrame{
             try {
                 Connect_DB db = new Connect_DB();
                 db.Use_DB();
-                ResultSet rs = db.Command_ExecuteQuery("select ID, PW from Actor where ID='"+ID+"' and PW='"+PW+"'");
+                ResultSet rs = db.Command_ExecuteQuery("select id, pw, class from Actor where id='"+ID+"' and pw='"+PW+"'");
                 if(rs.next()){
-                    JOptionPane.showMessageDialog(null, "로그인 성공");
+                    
+                    String data = rs.getString("class");
+                    System.out.println(data);
+                    if(data.equals("owner")){
+                        rs = db.Command_ExecuteQuery("select * from store_list where id='"+ID +"'");
+                        rs.next();
+                        String state = rs.getString("store_state");
+                        System.out.println(state);
+                        if(state.equals("y")){
+                            JOptionPane.showMessageDialog(null, "로그인 성공");
+                        }
+                        else if(state.equals("w")){
+                            JOptionPane.showMessageDialog(null, "로그인 대기");
+                        }
+                        else{
+                            int bool = JOptionPane.showConfirmDialog(null, "가맹점 신청이 취소되었습니다.\n해당 계정을 유지하시겠습니까?(취소 시 계정 자동 삭제)",
+                                    "회원가입", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
+                            if(bool==1){
+                                db.Command_ExecuteUpdate("delete from store_list where id='"+ID+"'");
+                                db.Command_ExecuteUpdate("delete from Actor where id='"+ID+"'");
+                                JOptionPane.showMessageDialog(null, "계정이 삭제되었습니다.");
+                            }
+                        }
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "로그인 성공");
+                    }
+                    
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "아이디나 패스워드가 일치하지 않습니다.");

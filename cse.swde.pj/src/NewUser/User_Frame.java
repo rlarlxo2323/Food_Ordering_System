@@ -5,6 +5,8 @@
  */
 package NewUser;
 
+import Template_Method_Pattern.Abstract;
+import Template_Method_Pattern.User_Template;
 import java.awt.Cursor;
 
 /**

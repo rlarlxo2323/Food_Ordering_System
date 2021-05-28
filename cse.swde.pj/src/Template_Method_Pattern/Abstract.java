@@ -1,8 +1,7 @@
-package NewUser;
+package Template_Method_Pattern;
 
 import Address_API.dial;
 import Connect_DB.Connect_DB;
-import Login.Login_Frame;
 import java.awt.Color;
 import java.awt.event.*;
 import java.sql.*;

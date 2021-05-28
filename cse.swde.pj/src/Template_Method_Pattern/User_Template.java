@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package NewUser;
+package Template_Method_Pattern;
 
 import Connect_DB.Connect_DB;
 import Login.Login_Frame;
