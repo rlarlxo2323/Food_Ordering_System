@@ -48,7 +48,7 @@ public class User_Template extends Abstract {
                         if(bool==0){
                             Connect_DB db = new Connect_DB();
                             db.Use_DB();
-                            db.Command_ExecuteUpdate("insert into Actor values('"+ID+"', '"+PW+"', '"+RRN+"', '"+Name+"', '"+Age+"', '"+Gender+"', '"+Address+"', 'user');");
+                            db.Command_ExecuteUpdate("insert into actor values('"+ID+"', '"+PW+"', '"+Name+"', '"+RRN+"', '"+Gender+"', '"+Address+"', '"+Age+"', 'user');");
                             JOptionPane.showMessageDialog(null, "회원가입 완료");
                             Login_Frame frame = new Login_Frame();
                             frame.setVisible(true);
@@ -68,5 +68,10 @@ public class User_Template extends Abstract {
 
     @Override
     public void Upload() {
+    }
+
+    @Override
+    public void Category() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -34,10 +34,10 @@ public class Address_API {
     }
     
     public void get_Data() {
-        adr = dial.Adr_Field.getText();
-        if(dial.Adr_RButton.isSelected()){
+        adr = Address_Dialog.Adr_Field.getText();
+        if(Address_Dialog.Adr_RButton.isSelected()){
             mode = "dong";
-        }else if(dial.Radr_RButton.isSelected()){
+        }else if(Address_Dialog.Radr_RButton.isSelected()){
             mode = "road";
         }
     }

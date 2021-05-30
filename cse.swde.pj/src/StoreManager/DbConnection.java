@@ -20,9 +20,9 @@ import java.util.logging.Logger;
 public class DbConnection {    
     // 데이터베이스에 연결하기 위한 정보 
     private static final String driver = "com.mysql.cj.jdbc.Driver"; // 1. JDBC Driver Class 
-    private static final String url = "jdbc:mysql://118.67.130.238:3306/cse_swde?zeroDateTimeBehavior=CONVERT_TO_NULL&characterEncoding=UTF-8&serverTimezone=UTC";  
+    private static final String url = "jdbc:mysql://115.85.182.30:3306/cse_swde_DB?zeroDateTimeBehavior=CONVERT_TO_NULL&characterEncoding=UTF-8&serverTimezone=UTC";  
     // jdbc:mysql://localhost:3306/sw_design?&characterEncoding=UTF-8&serverTimezone=UTC
-    private static final String user = "test"; // 데이터베이스 ID 
+    private static final String user = "cse_swde"; // 데이터베이스 ID 
     private static final String pw = "password"; // 데이터베이스 PW
     //private Connection con;
         
