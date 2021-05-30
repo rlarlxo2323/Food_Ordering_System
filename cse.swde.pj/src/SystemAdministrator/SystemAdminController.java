@@ -18,119 +18,208 @@ import javax.swing.table.DefaultTableModel;
  * @author jda05
  */
 public class SystemAdminController implements ActionListener {
-    SystemAdminView view;
-    ApproveRefuseModel model1;
-    ModifyDeleteModel model2;
+    SystemAdminView mainView;
+    ModifyView modifyView;
+    ApproveRefuseModel approveRefuseModelSingleton;
+    ModifyDeleteModel modifyDeleteModelSingleton;
+   
+    JTable approveRefuseTable;
+    JTable modifyDeleteTable;
+    JButton approveBtn;
+    JButton refuseBtn;
+    JButton modifyBtn;
+    JButton deleteBtn;
     
-    JTable table1;
-    JTable table2;
-    JButton button1;
-    JButton button2;
-    JButton button3;
-    JButton button4;
+    JButton refreshBtn1;
+    JButton refreshBtn2;
+    JButton modifyCompleteBtn;
     //DefaultTableModel tableModel1;
     
     public SystemAdminController(){
-        view = new SystemAdminView();      
-        model1 =  ApproveRefuseModel.getInstance();       
-        model2 =  ModifyDeleteModel.getInstance();
+        mainView = new SystemAdminView();    
+        modifyView = new ModifyView();
+        approveRefuseModelSingleton =  ApproveRefuseModel.getInstance();       
+        modifyDeleteModelSingleton =  ModifyDeleteModel.getInstance();
         
-        table1 = view.getTable1();
-        table2 = view.getTable2();
-        button1 = view.getButton1();
-        button1.addActionListener(this);
-        button2 = view.getButton2();
-        button2.addActionListener(this);
-        button3 = view.getButton3();
-        button3.addActionListener(this);
-        button4 = view.getButton4();
-        button4.addActionListener(this);
+        approveRefuseTable = mainView.getTable1();
+        modifyDeleteTable = mainView.getTable2();
+        approveBtn = mainView.getButton1();
+        approveBtn.addActionListener(this);
+        refuseBtn = mainView.getButton2();
+        refuseBtn.addActionListener(this);
+        modifyBtn = mainView.getButton3();
+        modifyBtn.addActionListener(this);
+        deleteBtn = mainView.getButton4();
+        deleteBtn.addActionListener(this);        
+        modifyCompleteBtn = ModifyView.jButton1; //modifyCompleteBtn = modifyView.getButton1();
+        modifyCompleteBtn.addActionListener(this);
+        
+        refreshBtn1 = mainView.jButton5;
+        refreshBtn1.addActionListener(this);
+        refreshBtn2 = mainView.jButton6;
+        refreshBtn2.addActionListener(this);
     }
- 
+    
     public void setQuery(String sql){
-        model1.sql = sql;
+        approveRefuseModelSingleton.sql = sql;
     }   
 
     public void actionUpdate(String sql){
-        int selectedRow = table1.getSelectedRow(); // jtable에서 선택한 row의 index
+        int selectedRow = approveRefuseTable.getSelectedRow(); // jtable에서 선택한 row의 index 번호       
         if (selectedRow > 0){
-            Object selectedStoreNumber = table1.getValueAt(selectedRow, 1); // jtable에서 선택한 row의 store_number
-            System.out.println(selectedStoreNumber);                  
+            Object selectedStoreNumber = approveRefuseTable.getValueAt(selectedRow, 1); // jtable에서 선택한 row의 store_number
+            System.out.println("selectedStoreNumber: " + selectedStoreNumber);                  
             setQuery(sql);
-            model1.storeStateUpdate(selectedStoreNumber); // db에서 선택한 store_number의 store_state를 y로 변경       
-            //refreshTable(); // 변경된 db의 데이터로 jtable을 새로 보여줌
+            approveRefuseModelSingleton.storeStateUpdate(selectedStoreNumber); // db에서 선택한 store_number의 store_state를 y로 변경       
+            refreshTable1(); //  변경된 db의 데이터로 jtable을 새로고침 기능 실행
         } else {
             JOptionPane.showMessageDialog(null, "승인 처리 할 데이터가 선택되지 않았습니다. 다시 선택해 주세요.");
         }   
     }
+    
+    public void refreshTable1(){
+    DefaultTableModel tableModel1 = mainView.getRefreshTable1(); // 가장 최신의 jtable 모델을 가져온다.
+    //tableModel1 = mainView.getRefreshTable1(); // 가장 최신의 jtable 모델을 가져온다.
+    tableModel1.setRowCount(0); // 전체 테이블 화면을 모두 비운다.           
+    tableModel1 = approveRefuseModelSingleton.setTable1(); //select문 결과를 담는다.
+    approveRefuseTable.setModel(tableModel1); // controller에 저장되어있는 jtable 객체도 바뀐 값을 넣어준다.
+    mainView.setRefreshTable1(tableModel1); // 업데이트된 tablemodel을 jtable에 넣어준다.
+    }    
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    String originalStoreNumber ; // 선택한 row의 db상의 store_number
+    public void actionModify(){              
+        int selectedRow = modifyDeleteTable.getSelectedRow(); // jtable에서 선택한 row의 index 번호          
+        int colCount = modifyDeleteTable.getColumnCount(); // jtable의 column 수 
+        System.out.println("row: " + selectedRow + " / " + "colCount: " + colCount);
+        
+        if (selectedRow > 0 && colCount > 0){           
+            originalStoreNumber = callSelectedRow(selectedRow, colCount, modifyDeleteTable); // 선택한 row의 값을 수정 gui에서 보여주기
+            modifyView.setTitle("가맹점 정보 수정");
+            modifyView.setVisible(true); // 수정하는 창을 보이게 함 
+            System.out.println("actionModify - 수정 창이 보일것임");                     
+        } else {
+            JOptionPane.showMessageDialog(null, "수정할 데이터가 선택되지 않았습니다. 다시 선택해 주세요.");
+        }        
+    }
 
+    public String callSelectedRow(int selectedRow, int colCount, JTable table){ // 선택한 row의 값을 새로운 창의 textFeild에 넣어서 보여준다.    
+        for (int i = 0; i < colCount; i++) {            
+            System.out.print("callSelectedRow: " + table.getModel().getValueAt(selectedRow, i )+" / ");                 
+            String data = (String) table.getModel().getValueAt(selectedRow, i );
+            switch(i){               
+                case 1:
+                    originalStoreNumber = data;
+                    ModifyView.jTextField1.setText(data);
+                    break;                    
+                case 2:
+                    ModifyView.jTextField2.setText(data);
+                    break;
+                case 3:
+                    ModifyView.jTextField3.setText(data);
+                    break;                      
+                case 4:
+                    ModifyView.jTextField4.setText(data);
+                    break;
+                case 5:    
+                    ModifyView.jTextField5.setText(data);
+                    break;          
+            }                              
+        }     System.out.println();
+        return originalStoreNumber;
+    }
+    
+    public void actionModifyUpdate(){ // 수정 완료 버튼을 눌렀을 때 발생하는 이벤트로 입력받은 새로운 정보 db에 업데이트 하기         
+        String storeNumber = ModifyView.jTextField1.getText();
+        String storeCategory = ModifyView.jTextField2.getText();
+        String storeName = ModifyView.jTextField3.getText();
+        String storeOwner = ModifyView.jTextField4.getText();
+        String storeAddress = ModifyView.jTextField5.getText();
+        
+        String[] modifyData = {storeNumber, storeCategory, storeName, storeOwner, storeAddress};
+        System.out.println("actionModifyUpdate : " + storeNumber + storeCategory + storeName + storeOwner + storeAddress);
+        modifyDeleteModelSingleton.modifyUpdate(modifyData, originalStoreNumber); // db에서 수정하기위해 새로 입력받은 textfield 값을 배열형태로 넘겨줌
+         
+        modifyView.dispose(); // 떠있는 창이 사라짐
+        modifyView.setTitle("가맹점 신청 관리"); // gui창 제목 지정  
+        modifyView.setVisible(true); // 떠있는 창이 변경된 데이터로 다시 나타남
+        mainView.dispose(); // 현재 떠있는 창을 끄고
+        refreshTable2(); // 바뀐 정보로 table을 업데이트하고
+        mainView.setVisible(true); // 변경된 db의 데이터로 jtable을 새로 보여줌
+    }
+    
     public void actionDelete(){
-        DefaultTableModel tableModel2 = (DefaultTableModel)table2.getModel();
-        int row = table2.getSelectedRow(); 
-        System.out.println(row);
-        if (row > 0){
-            String storeNumber = (String) table2.getValueAt(row, 1); // 선택한 row에서 사업자 등록번호를 가져옴            
-            model2.deleteRow(storeNumber); // 데이터를 삭제 할 db 호출
-            //model.removeRow(row); // row를 table에서 삭제     
-            tableModel2.removeRow(row); // 선택한 row가 table에서 삭제된걸 화면에 바로 보여준다.
+        DefaultTableModel tableModel2 = (DefaultTableModel)modifyDeleteTable.getModel(); // 실행했을 때 저장된 상태의 jtable의 모델을 가져온다.
+        int selectedRow = modifyDeleteTable.getSelectedRow(); // jtable에서 선택한 row의 index 번호        
+        System.out.println(selectedRow);
+        if (selectedRow > 0){
+            String storeNumber = (String) modifyDeleteTable.getValueAt(selectedRow, 1); // 선택한 row에서 사업자 등록번호를 가져옴          
+            modifyDeleteModelSingleton.rowDelete(storeNumber); // 데이터를 삭제 할 db 호출        
+            tableModel2.removeRow(selectedRow); // 선택한 row가 table에서 삭제된걸 화면에 바로 보여준다.
+            refreshTable2();
         } else {
             JOptionPane.showMessageDialog(null, "삭제할 데이터가 선택되지 않았습니다. 다시 선택해 주세요.");
         }     
-    }
-    
-    public void refreshTable1(){
-    DefaultTableModel tableModel1 = view.getRefreshTable1();
-    //tableModel1 = view.getRefreshTable1(); // 가장 최신의 jtable 모델을 가져온다.
-    tableModel1.setRowCount(0); // 전체 테이블 화면을 모두 비운다.           
-    tableModel1 = model1.setTable1(); //select문 결과를 담는다.
-    table1.setModel(tableModel1); // controller에 저장되어있는 jtable 객체도 바뀐 값을 넣어준다.
-    view.setRefreshTable1(tableModel1); // 업데이트된 tablemodel을 jtable에 넣어준다.
-    }
+    }    
     
     public void refreshTable2(){
-    DefaultTableModel tableModel2 = view.getRefreshTable2();
-    //tableModel2 = view.getRefreshTable2(); // 가장 최신의 jtable 모델을 가져온다.
-    tableModel2.setRowCount(0); // 전체 테이블 화면을 모두 비운다.           
-    tableModel2 = model2.setTable2(); //select문 결과를 담는다.
-    table2.setModel(tableModel2); // controller에 저장되어있는 jtable 객체도 바뀐 값을 넣어준다.
-    view.setRefreshTable2(tableModel2); // 업데이트된 tablemodel을 jtable에 넣어준다.
+    DefaultTableModel tableModel2 = mainView.getRefreshTable2(); // 가장 최신의 jtable 모델을 가져온다.
+    //tableModel2 = mainView.getRefreshTable2(); // 가장 최신의 jtable 모델을 가져온다.
+    tableModel2.setRowCount(0); // 전체 테이블 화면의 row를 모두 비운다.           
+    tableModel2 = modifyDeleteModelSingleton.setTable2(); //select문 결과를 담는다.
+    modifyDeleteTable.setModel(tableModel2); // controller에 저장되어있는 jtable 객체도 바뀐 값을 넣어준다.
+    mainView.setRefreshTable2(tableModel2); // 업데이트된 tablemodel을 jtable에 넣어준다.
     }
     
-    public void tab1Buttons(){}
-    
+    @Override
     public void actionPerformed(ActionEvent e){
         String sql;
-        if(e.getSource() == button1){  // 가맹점 승인을 위해 "승인 버튼" 클릭시 발생하는 이벤트
+        if(e.getSource() == approveBtn){  // 가맹점 승인을 위해 "승인 버튼" 클릭시 발생하는 이벤트
             System.out.println("승인 버튼 누름");
             sql = "update store_list set store_state = 'y' where store_number = ?"; // 선택한 store_number의 store_state를 y로 변경
-            actionUpdate(sql);            
-            refreshTable1();
-        } else if(e.getSource() == button2){  // 가맹점 승인을 위해 "거절 버튼" 클릭시 발생하는 이벤트
+            actionUpdate(sql); // sql문에 따른 승인 또는 거절 버튼의 기능 실행                
+        } else if(e.getSource() == refuseBtn){  // 가맹점 승인을 위해 "거절 버튼" 클릭시 발생하는 이벤트
             System.out.println("거절 버튼 누름");
             sql = "update store_list set store_state = 'n' where store_number = ?"; // 선택한 store_number의 store_state를 n으로 변경
-            actionUpdate(sql);    
-            refreshTable1();
-        } else if(e.getSource() == button3){  // 데이터 수정을 위해 "수정 버튼" 클릭 시 발생하는 이벤트
-            System.out.println("수정 버튼 누름");
-            // 추가해야함
-        } else if(e.getSource() == button4){ // 데이터 삭제를 위해 "삭제 버튼" 클릭 시 발생하는 이벤트
+            actionUpdate(sql); // sql문에 따른 승인 또는 거절 버튼의 기능 실행     
+        } else if(e.getSource() == modifyBtn){  // 데이터 수정을 위해 "수정 버튼" 클릭 시 발생하는 이벤트
+            System.out.println("수정 버튼 누름");            
+            actionModify();
+        } else if(e.getSource() == modifyCompleteBtn){ // "수정 버튼" 클릭시 새로 뜬 창의 "수정 완료 버튼" 클릭 시 발생하는 이벤트
+            System.out.println("ModifyView의 수정 완료 버튼 누름");
+            actionModifyUpdate();            
+        } else if(e.getSource() == deleteBtn){ // 데이터 삭제를 위해 "삭제 버튼" 클릭 시 발생하는 이벤트
             System.out.println("삭제 버튼 누름");
-            actionDelete();
-            refreshTable2();
-        }
+            actionDelete();            
+        } else if(e.getSource() == refreshBtn1){ // 데이터 삭제를 위해 "삭제 버튼" 클릭 시 발생하는 이벤트
+            System.out.println("새로고침1 버튼 누름");
+            refreshTable1();            
+        } else if(e.getSource() == refreshBtn2){ // 데이터 삭제를 위해 "삭제 버튼" 클릭 시 발생하는 이벤트
+            System.out.println("새로고침2 버튼 누름");
+            refreshTable2();            
+        } 
     }
     
-    
-    
-    
+//   @Override
+//    public void mouseClicked(MouseEvent e) {
+//        if(e.getSource() == panel1){ 
+//            //panelRefresh();
+//            System.out.println("panel click 1");
+//            refreshTable1();
+//            panel1.revalidate();
+//            panel1.repaint();
+//        } else if(e.getSource() == panel2){ 
+//            //panelRefresh();
+//            System.out.println("panel click 2");
+//            refreshTable2();
+//            panel2.revalidate();
+//            panel2.repaint();
+//        }
+//    }
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {        
         // TODO code application logic here
-        SystemAdminController controller = new SystemAdminController();           
+        SystemAdminController controller = new SystemAdminController();   
     }
-
-  
-    
 }
