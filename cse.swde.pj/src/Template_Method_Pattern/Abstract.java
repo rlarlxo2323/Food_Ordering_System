@@ -1,6 +1,6 @@
 package Template_Method_Pattern;
 
-import Address_API.dial;
+import Address_API.Address_Dialog;
 import Connect_DB.Connect_DB;
 import java.awt.Color;
 import java.awt.event.*;
@@ -38,6 +38,8 @@ public abstract class Abstract {
     JButton Upload_Button;
     JLabel File_Name_Label;
     JFileChooser FileChooser;
+    JComboBox Category_Box;
+    JLabel Category_Label;
     
     
     public final void Join( JFrame Frame,
@@ -66,13 +68,15 @@ public abstract class Abstract {
         End();
         Search_Address();
         Upload();
+        Category();
     }
-    public final void Brand_Data(JTextField Brand_Name_Field, JTextField Brand_Num_Field, JButton Upload_Button, JLabel File_Name_Label, JFileChooser FileChooser){
-        get_Brand_Data(Brand_Name_Field, Brand_Num_Field, Upload_Button, File_Name_Label, FileChooser);
+    public final void Brand_Data(JTextField Brand_Name_Field, JTextField Brand_Num_Field, JButton Upload_Button, JLabel File_Name_Label, JFileChooser FileChooser, JComboBox Category_Box, JLabel Category_Label){
+        get_Brand_Data(Brand_Name_Field, Brand_Num_Field, Upload_Button, File_Name_Label, FileChooser, Category_Box, Category_Label);
     }
 
     public abstract void End();
     public abstract void Upload();
+    public abstract void Category();
     
     public void getData(JFrame Frame, JTextField Name, JTextField Age, JTextField RRN, JTextField ID,
             JButton Overlap_Button, JLabel Overlap_Label, JTextField PW, JLabel PW_Test,
@@ -99,12 +103,14 @@ public abstract class Abstract {
             this.End_Button = End_Button;
     }
     
-    public void get_Brand_Data(JTextField Brand_Name_Field, JTextField Brand_Num_Field, JButton Upload_Button, JLabel File_Name_Label, JFileChooser FileChooser){
+    public void get_Brand_Data(JTextField Brand_Name_Field, JTextField Brand_Num_Field, JButton Upload_Button, JLabel File_Name_Label, JFileChooser FileChooser, JComboBox Category_Box, JLabel Category_Label){
         this.Brand_Name_Field = Brand_Name_Field;
         this.Brand_Num_Field = Brand_Num_Field;
         this.Upload_Button = Upload_Button;
         this.File_Name_Label = File_Name_Label;
         this.FileChooser = FileChooser;
+        this.Category_Box = Category_Box;
+        this.Category_Label = Category_Label;
     }
     
     public void RRN(){
@@ -139,7 +145,7 @@ public abstract class Abstract {
                     try{
                     Connect_DB db = new Connect_DB();
                     db.Use_DB();
-                    ResultSet rs = db.Command_ExecuteQuery("select ID from Actor where ID='"+ID+"'"); //ID가 입력받은 ID와 같은 데이터 검사
+                    ResultSet rs = db.Command_ExecuteQuery("select id from actor where id='"+ID+"'"); //ID가 입력받은 ID와 같은 데이터 검사
                     if(rs.next()){ //같은 ID가 있으면
                         Overlap_Label.setText("이미 존재하는 아이디입니다.");
                         Overlap_Label.setForeground(Color.red);
@@ -225,9 +231,9 @@ public abstract class Abstract {
         Address_Button.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                dial s = new dial(Frame, true);
+                Address_Dialog s = new Address_Dialog(Frame, true);
                 s.setVisible(true);
-                data=dial.Select_Adr;
+                data=Address_Dialog.Select_Adr;
                 Address_Field.setText(data[0]);
                 Set_Address.setText(data[1]);
             }

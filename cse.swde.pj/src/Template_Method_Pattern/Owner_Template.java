@@ -10,6 +10,8 @@ import Login.Login_Frame;
 import SFTP.JSchWrapper;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import javax.swing.JOptionPane;
 
 /**
@@ -32,7 +34,8 @@ public class Owner_Template extends Abstract {
                     &&(!Brand_Name_Field.getText().equals(""))
                     &&(!Brand_Num_Field.getText().equals(""))
                     &&(!Set_Address.getText().equals(""))
-                    &&(!File_Name_Label.getText().equals(""))){
+                    &&(!File_Name_Label.getText().equals(""))
+                    &&(!Category_Label.getText().equals(""))){
                         String ID = ID_Field.getText();
                         String PW = PW_Field.getText();
                         String Name = Name_Field.getText();
@@ -46,6 +49,10 @@ public class Owner_Template extends Abstract {
                             Gender = FM_RButton.getText();
                         }
                         String Address = (Set_Address.getText()+"/"+Detail_Address.getText());
+                        String store_Number = Brand_Num_Field.getText();
+                        String store_Name = Brand_Name_Field.getText();
+                        String store_Category = Category_Label.getText();
+                        
                         System.out.println(Address);
 
                         int bool = JOptionPane.showConfirmDialog(null, "입력하신 정보로 가입하시겠습니까?", "회원가입", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
@@ -53,7 +60,8 @@ public class Owner_Template extends Abstract {
                         if(bool==0){
                             Connect_DB db = new Connect_DB();
                             db.Use_DB();
-                            db.Command_ExecuteUpdate("insert into Actor values('"+ID+"', '"+PW+"', '"+RRN+"', '"+Name+"', '"+Age+"', '"+Gender+"', '"+Address+"', 'owner');");
+                            db.Command_ExecuteUpdate("insert into actor values('"+ID+"', '"+PW+"', '"+Name+"', '"+RRN+"', '"+Gender+"', '"+Address+"', '"+Age+"', 'owner');");
+                            db.Command_ExecuteUpdate("insert into store_list values('"+ID+"', '"+store_Number+"', '"+store_Category+"', '"+store_Name+"', '"+Name+"', '"+Address+"', 'w');");
                             JOptionPane.showMessageDialog(null, "회원가입 완료");
                             Login_Frame frame = new Login_Frame();
                             frame.setVisible(true);
@@ -84,11 +92,11 @@ public class Owner_Template extends Abstract {
                     jschWrapper = new JSchWrapper();
 
                     // SFTP 접속하기 (주소, 포트번호, 사용자아이디, 패스워드)
-                    jschWrapper.connectSFTP("118.67.130.238", 22, "root", "rl794613!");
+                    jschWrapper.connectSFTP("115.85.182.30", 22, "root", "rl794613");
 
                     // /itarchives 폴더 위치에 test 폴더 생성
                     // C:\\test\\upload\\0001.png 파일을 /itarchives/test 위치에 업로드
-                    jschWrapper.uploadFile(path, "/home/sub_admin/cse_swde/img");
+                    jschWrapper.uploadFile(path, "/home/cse_swde/img");
 
                     // /itarchives/test/0001.png 파일을 C:\\test\\download 위치에 다운로드
                     //jschWrapper.downloadFile("/itarchives/test/0001.png", "C:\\test\\download", false);
@@ -100,6 +108,18 @@ public class Owner_Template extends Abstract {
                     // SFTP 접속해제
                     jschWrapper.disconnectSFTP();
                 }
+            }
+            
+        });
+    }
+
+    @Override
+    public void Category() {
+        Category_Box.addItemListener(new ItemListener(){
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                String Category = Category_Box.getSelectedItem().toString();
+                Category_Label.setText(Category);
             }
             
         });
