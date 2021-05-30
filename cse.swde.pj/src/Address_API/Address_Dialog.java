@@ -12,14 +12,15 @@ import javax.swing.JList;
  *
  * @author rlarl
  */
-public class Search_Address_Frame extends javax.swing.JFrame {
+public class Address_Dialog extends javax.swing.JDialog {
 
     /**
-     * Creates new form Search_Address_Frame
+     * Creates new form Address_Dialog
      */
     static public String[] Select_Adr;
     
-    public Search_Address_Frame() {
+    public Address_Dialog(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
     }
 
@@ -41,7 +42,8 @@ public class Search_Address_Frame extends javax.swing.JFrame {
         Search_Button = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
 
         Adr_List.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         Adr_List.setToolTipText("");
@@ -125,25 +127,27 @@ public class Search_Address_Frame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void set_Data(String[] data){
+        Select_Adr = data;
+    }
+    
+    private void Adr_ListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Adr_ListMouseClicked
+        JList<String> theList = (JList) evt.getSource();
+        if (evt.getClickCount() == 2) {
+            int index = theList.locationToIndex(evt.getPoint());
+            if (index >= 0) {
+                Object o = theList.getModel().getElementAt(index);
+                set_Data(o.toString().split("/"));
+                dispose();
+            }
+        }
+    }//GEN-LAST:event_Adr_ListMouseClicked
+
     private void Search_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Search_ButtonActionPerformed
         Address_API api = new Address_API();
         api.get_Data();
         Adr_List.setModel(api.set_Data());
     }//GEN-LAST:event_Search_ButtonActionPerformed
-
-    private void Adr_ListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Adr_ListMouseClicked
-        JList<String> theList = (JList) evt.getSource();
-        if (evt.getClickCount() == 2) {
-          int index = theList.locationToIndex(evt.getPoint());
-          if (index >= 0) {
-            Object o = theList.getModel().getElementAt(index);
-            Select_Adr = o.toString().split("/");
-            System.out.println(Select_Adr[0]);
-            System.out.println(Select_Adr[1]);
-            dispose();
-          }
-        }
-    }//GEN-LAST:event_Adr_ListMouseClicked
 
     /**
      * @param args the command line arguments
@@ -162,20 +166,28 @@ public class Search_Address_Frame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Search_Address_Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Address_Dialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Search_Address_Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Address_Dialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Search_Address_Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Address_Dialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Search_Address_Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Address_Dialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Search_Address_Frame().setVisible(true);
+                Address_Dialog dialog = new Address_Dialog(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }

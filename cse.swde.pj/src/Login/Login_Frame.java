@@ -2,6 +2,8 @@ package Login;
 
 import Connect_DB.Connect_DB;
 import NewUser.NewUser_Frame;
+import StoreManager.StoreManagerView;
+import SystemAdministrator.SystemAdminController;
 import java.awt.Cursor;
 import java.sql.*;
 import java.util.logging.Level;
@@ -115,7 +117,7 @@ public class Login_Frame extends javax.swing.JFrame{
             try {
                 Connect_DB db = new Connect_DB();
                 db.Use_DB();
-                ResultSet rs = db.Command_ExecuteQuery("select id, pw, class from Actor where id='"+ID+"' and pw='"+PW+"'");
+                ResultSet rs = db.Command_ExecuteQuery("select id, pw, class from actor where id='"+ID+"' and pw='"+PW+"'");
                 if(rs.next()){
                     
                     String data = rs.getString("class");
@@ -127,6 +129,9 @@ public class Login_Frame extends javax.swing.JFrame{
                         System.out.println(state);
                         if(state.equals("y")){
                             JOptionPane.showMessageDialog(null, "로그인 성공");
+                            StoreManagerView view = new StoreManagerView();
+                            view.setVisible(true);
+                            this.setVisible(false);
                         }
                         else if(state.equals("w")){
                             JOptionPane.showMessageDialog(null, "로그인 대기");
@@ -136,13 +141,15 @@ public class Login_Frame extends javax.swing.JFrame{
                                     "회원가입", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
                             if(bool==1){
                                 db.Command_ExecuteUpdate("delete from store_list where id='"+ID+"'");
-                                db.Command_ExecuteUpdate("delete from Actor where id='"+ID+"'");
+                                db.Command_ExecuteUpdate("delete from actor where id='"+ID+"'");
                                 JOptionPane.showMessageDialog(null, "계정이 삭제되었습니다.");
                             }
                         }
                     }
-                    else{
+                    else if(data.equals("admin")){
                         JOptionPane.showMessageDialog(null, "로그인 성공");
+                        SystemAdminController view = new SystemAdminController();
+                        this.setVisible(false);
                     }
                     
                 }

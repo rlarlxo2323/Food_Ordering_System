@@ -9,7 +9,7 @@ public class Connect_DB {
     
     public void Use_DB(){
         try{
-            con = DriverManager.getConnection("jdbc:mysql://118.67.130.238:3306/cse_swde?useUnicode=true&characterEncoding=UTF-8&characterSetResults=UTF-8", "test", "password");
+            con = DriverManager.getConnection("jdbc:mysql://115.85.182.30:3306/cse_swde_DB?useUnicode=true&characterEncoding=UTF-8&characterSetResults=UTF-8", "cse_swde", "password");
             stmt = con.createStatement();
         }catch (SQLException e){
                 e.printStackTrace();
