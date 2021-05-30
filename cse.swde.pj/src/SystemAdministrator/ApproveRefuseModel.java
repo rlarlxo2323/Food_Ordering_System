@@ -33,7 +33,7 @@ public class ApproveRefuseModel extends StoreManager.DbConnection {
 //    }
     
     public DefaultTableModel setTable1() {
-        String column[] = {"아이디", "사업자 등록번호", "상호명", "대표자명", "사업자주소"}; // jtable의 column 내용
+        String[] column = {"아이디", "사업자 등록번호", "가게 카테고리","상호명", "대표자명", "사업자주소"}; // jtable의 column 내용
         DefaultTableModel model = new DefaultTableModel(null, column){
             @Override
             public boolean isCellEditable(int row, int column){ // 셀 수정 못하게 하는 부분 
@@ -42,25 +42,26 @@ public class ApproveRefuseModel extends StoreManager.DbConnection {
         };
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
-        String sql = "select id, store_number, store_name, store_owner, store_address from store_list where store_state = 'w'"; // sql문 완성
+        String sql = "select id, store_number, store_category, store_name, store_owner, store_address from store_list where store_state = 'w'"; // sql문 완성
         
         try (Connection con = getConnection()) { // 데이터베이스와 연결하는 객체로 부모 클래스(DbConnection)의 메소드이다.           
-            System.out.println("[ApproveRefuseModel.setTable 연결 성공]");            
+            System.out.println("[ApproveRefuseModel.setTable1 연결 성공]");            
             //System.out.println(sql);
             preparedStatement = con.prepareStatement(sql);
             rs = preparedStatement.executeQuery();
             
             while(rs.next()){
-                String[] data = new String[5];
-                data[0] = rs.getString(1);
-                data[1] = rs.getString(2);
-                data[2] = rs.getString(3);
-                data[3] = rs.getString(4);
-                data[4] = rs.getString(5);                
+                String[] data = new String[6];
+                data[0] = rs.getString(1); // 아이디
+                data[1] = rs.getString(2); // 사업자 등록번호
+                data[2] = rs.getString(3); // 가게 카테고리
+                data[3] = rs.getString(4); // 상호명
+                data[4] = rs.getString(5); // 대표자명
+                data[5] = rs.getString(6); // 사업자주소                
                 model.addRow(data); // db에 튜플이 있으면 연결 리스트에 String 배열 형식으로 바로 넣어줌
                 
-                for(int i=0 ; i< 5; i++)
-                    System.out.println("store_list DB 'selectAll' -> data " + i + "번째 " + data[i]);                
+                for(int i=0 ; i< 6; i++)
+                    System.out.println("ApproveRefuseModel의 'setTable1' -> " + i + "번째 " + data[i]);                
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -82,8 +83,8 @@ public class ApproveRefuseModel extends StoreManager.DbConnection {
         String storeNumber = selectedStoreNumber.toString(); // jtable에서 선택한 row의 store_number를 string 타입으로 변환        
         
         try (Connection con = getConnection()) { // 데이터베이스와 연결하는 객체로 부모 클래스(DbConnection)의 메소드     
-            System.out.println("[StoreListDb.storeStateUpdate 연결 성공]");            
-            System.out.println(sql);
+            System.out.println("[ApproveRefuseModel.storeStateUpdate 연결 성공]");            
+            //System.out.println(sql);
             preparedStatement = con.prepareStatement(sql);
             preparedStatement.setString(1, storeNumber);
             
@@ -104,10 +105,6 @@ public class ApproveRefuseModel extends StoreManager.DbConnection {
                 }
             }               
         }  
-    }
-    
-    
-    
-    
-    
+    }  
+  
 }
