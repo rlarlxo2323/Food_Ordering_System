@@ -3,21 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Decorator;
+package Decorator_Option;
+
+import Decorator.Menu;
+import Decorator.OptionDecorator;
 
 /**
  *
  * @author user
  */
-public class CheeseOption extends OptionDecorator {
-    public CheeseOption(Menu menu){
+public class FastfoodsingleOption extends OptionDecorator {
+    public FastfoodsingleOption(Menu menu){
         this.menu = menu;
     }
-    
     public String getDescription(){
         return menu.getDescription();
     }
     public int price(){
-        return 1000 + menu.price();
+        return menu.price();
     }
 }

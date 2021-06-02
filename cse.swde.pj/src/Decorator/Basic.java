@@ -5,7 +5,7 @@
  */
 package Decorator;
 
-import User.OptionValue;
+import GetSet.OptionValue;
 
 public class Basic extends Menu {
 
@@ -15,6 +15,7 @@ public class Basic extends Menu {
 
     public int price() {
         OptionValue sv = new OptionValue();
+        System.out.print("tlqkf");
         return sv.getMenuPrice();
     }
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package User;
+package GetSet;
 
 /**
  *
@@ -17,7 +17,7 @@ public class StoreCategory {
         return storeCategory;
     }
 
-    public void setHashSearch(String storeCategory) {
+    public void setStoreCategory(String storeCategory) {
         this.storeCategory = storeCategory;
     }
 }

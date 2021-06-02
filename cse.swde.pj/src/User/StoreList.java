@@ -5,6 +5,8 @@
  */
 package User;
 
+import GetSet.StoreCategory;
+import GetSet.StoreNum;
 import static User.Store.Menu_jLabel;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -134,6 +136,7 @@ public class StoreList extends javax.swing.JFrame {
 
         StoreCategory sc = new StoreCategory();
         String storeCategory = sc.getStoreCategory();
+        jLabel1.setText(storeCategory);
 
         try {
             con = DriverManager.getConnection("jdbc:mysql://115.85.182.30:3306/cse_swde_DB?zeroDateTimeBehavior=CONVERT_TO_NULL&characterEncoding=UTF-8&serverTimezone=UTC", "cse_swde", "password");
@@ -157,10 +160,10 @@ public class StoreList extends javax.swing.JFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        int i = jTable1.getSelectedRow();
-
-        jLabel1.setText(model.getValueAt(i, 0).toString());
-
+        int row = jTable1.getSelectedRow();
+        int col = jTable1.getSelectedColumn();
+        jTable1.isCellEditable(row, col);
+        jLabel1.setText(model.getValueAt(row, 0).toString());
         
             StoreNum storelist = new StoreNum();
             String sl = storelist.getStoreList();

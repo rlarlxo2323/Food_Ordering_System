@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package User;
+package GetSet;
 
+import User.StoreList;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -37,7 +38,6 @@ public class StoreNum {
 
     public static String getStore() {
 
-        
         Connection con = null;
         PreparedStatement st = null;
         ResultSet rs = null;
