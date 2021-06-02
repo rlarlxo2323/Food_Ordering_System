@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="메뉴검색_jButton" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="카페_jButton" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="치킨피자_jButton" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="야식_jButton" min="-2" pref="87" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="패스트푸드_jButton" pref="0" max="32767" attributes="0"/>
+                                  <Component id="분식_jButton" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="족발보쌈_jButton" alignment="1" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="중국집_jButton" max="32767" attributes="0"/>
+                                  <Component id="양식_jButton" max="32767" attributes="0"/>
+                                  <Component id="일식회_jButton" alignment="0" pref="87" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="jTextField1" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="중국집_jButton" max="32767" attributes="0"/>
+                  <Component id="카페_jButton" pref="50" max="32767" attributes="0"/>
+                  <Component id="분식_jButton" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="양식_jButton" max="32767" attributes="0"/>
+                  <Component id="족발보쌈_jButton" max="32767" attributes="0"/>
+                  <Component id="치킨피자_jButton" pref="50" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="야식_jButton" min="-2" pref="50" max="-2" attributes="0"/>
+                  <Component id="일식회_jButton" max="32767" attributes="0"/>
+                  <Component id="패스트푸드_jButton" alignment="0" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="10" max="32767" attributes="0"/>
+              <Component id="메뉴검색_jButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JButton" name="&#xce74;&#xd398;_jButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#xce74;&#xd398;"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="&#xce74;&#xd398;_jButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#xd300;&#xd504;&#xb85c;&#xc81d;&#xd2b8;"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="&#xce58;&#xd0a8;&#xd53c;&#xc790;_jButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#xce58;&#xd0a8;/&#xd53c;&#xc790;"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="&#xce58;&#xd0a8;&#xd53c;&#xc790;_jButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="&#xc57c;&#xc2dd;_jButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#xc57c;&#xc2dd;"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="&#xc57c;&#xc2dd;_jButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="&#xbd84;&#xc2dd;_jButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#xbd84;&#xc2dd;"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="&#xbd84;&#xc2dd;_jButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="&#xc871;&#xbc1c;&#xbcf4;&#xc308;_jButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#xc871;&#xbc1c;/&#xbcf4;&#xc308;"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="&#xd328;&#xc2a4;&#xd2b8;&#xd478;&#xb4dc;_jButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#xd328;&#xc2a4;&#xd2b8;&#xd478;&#xb4dc;"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="&#xd328;&#xc2a4;&#xd2b8;&#xd478;&#xb4dc;_jButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="&#xc911;&#xad6d;&#xc9d1;_jButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#xc911;&#xad6d;&#xc9d1;"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="&#xc911;&#xad6d;&#xc9d1;_jButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="&#xc591;&#xc2dd;_jButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#xc591;&#xc2dd;"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="&#xc591;&#xc2dd;_jButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="&#xc77c;&#xc2dd;&#xd68c;_jButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#xc77c;&#xc2dd;/&#xd68c;"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="&#xc77c;&#xc2dd;&#xd68c;_jButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="&#xba54;&#xb274;&#xac80;&#xc0c9;_jButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#xba54;&#xb274;&#xac80;&#xc0c9;&#xd558;&#xae30;"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="&#xba54;&#xb274;&#xac80;&#xc0c9;_jButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTextField1">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextField1KeyPressed"/>
+      </Events>
+    </Component>
+  </SubComponents>
+</Form>
