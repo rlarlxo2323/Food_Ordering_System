@@ -410,7 +410,7 @@ public class HashtagStore extends javax.swing.JFrame {
         User user = new User();
         user.setVisible(true);
         dispose();
-
+        
     }//GEN-LAST:event_Back_jButtonActionPerformed
 
     private void Review_jTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Review_jTextFieldActionPerformed
