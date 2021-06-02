@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 public class DbConnection {    
     // 데이터베이스에 연결하기 위한 정보 
     private static final String driver = "com.mysql.cj.jdbc.Driver"; // 1. JDBC Driver Class 
-    private static final String url = "jdbc:mysql://115.85.182.30:3306/cse_swde_DB?zeroDateTimeBehavior=CONVERT_TO_NULL&characterEncoding=UTF-8&serverTimezone=UTC";  
+    private static final String url = "jdbc:mysql://115.85.182.30:3306/cse_swde_DB?useUnicode=true&characterEncoding=UTF-8&characterSetResults=UTF-8";  
     private static final String user = "cse_swde"; // 데이터베이스 ID 
     private static final String pw = "password"; // 데이터베이스 PW
     //private Connection con;
@@ -35,16 +35,6 @@ public class DbConnection {
     }
     
     protected Connection getConnection() throws SQLException {        
-        /*
-        try {
-            con = DriverManager.getConnection(url, user, pw); // Do something with the Connection           
-         } catch (SQLException ex) {
-             // handle any errors
-             System.out.println("SQLException: " + ex.getMessage());
-             System.out.println("SQLState: " + ex.getSQLState());
-             System.out.println("VendorError: " + ex.getErrorCode());
-         }
-        */
         return DriverManager.getConnection(url, user, pw);
     } 
 }

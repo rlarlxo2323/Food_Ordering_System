@@ -144,8 +144,12 @@ public abstract class Abstract {
                 if(!ID.equals("")){
                     try{
                     Connect_DB db = new Connect_DB();
-                    db.Use_DB();
-                    ResultSet rs = db.Command_ExecuteQuery("select id from actor where id='"+ID+"'"); //ID가 입력받은 ID와 같은 데이터 검사
+                    Connection con = db.getConnection();
+                    PreparedStatement preparedStatement = null;
+                    String sql = "select id from actor where id=?";
+                    preparedStatement = con.prepareStatement(sql);
+                    preparedStatement.setString(1, ID);
+                    ResultSet rs = preparedStatement.executeQuery();
                     if(rs.next()){ //같은 ID가 있으면
                         Overlap_Label.setText("이미 존재하는 아이디입니다.");
                         Overlap_Label.setForeground(Color.red);
@@ -154,7 +158,7 @@ public abstract class Abstract {
                         ID_Field.setEnabled(false);
                         Overlap_Label.setText("사용 가능한 아이디입니다.");
                         Overlap_Label.setForeground(Color.blue);
-                    }
+                    }preparedStatement.close();
                     }catch(SQLException er){
                         er.printStackTrace();
                     }

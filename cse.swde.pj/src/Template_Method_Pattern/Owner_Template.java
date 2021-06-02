@@ -8,10 +8,10 @@ package Template_Method_Pattern;
 import Connect_DB.Connect_DB;
 import Login.Login_Frame;
 import SFTP.JSchWrapper;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.event.*;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -59,18 +59,42 @@ public class Owner_Template extends Abstract {
 
                         if(bool==0){
                             Connect_DB db = new Connect_DB();
-                            db.Use_DB();
-                            db.Command_ExecuteUpdate("insert into actor values('"+ID+"', '"+PW+"', '"+Name+"', '"+RRN+"', '"+Gender+"', '"+Address+"', '"+Age+"', 'owner');");
-                            db.Command_ExecuteUpdate("insert into store_list values('"+ID+"', '"+store_Number+"', '"+store_Category+"', '"+store_Name+"', '"+Name+"', '"+Address+"', 'w');");
-                            JOptionPane.showMessageDialog(null, "회원가입 완료");
-                            Login_Frame frame = new Login_Frame();
-                            frame.setVisible(true);
-                            Frame.dispose();
-                            
+                            Connection con;
+                            try {
+                                con = db.getConnection();
+                                PreparedStatement preparedStatement = null;
+                                String sql = "insert into actor values(?, ?, ?, ?, ?, ?, ?, 'owner')";
+                                preparedStatement = con.prepareStatement(sql);
+                                preparedStatement.setString(1, ID);
+                                preparedStatement.setString(2, PW);
+                                preparedStatement.setString(3, Name);
+                                preparedStatement.setString(4, RRN);
+                                preparedStatement.setString(5, Gender);
+                                preparedStatement.setString(6, Address);
+                                preparedStatement.setInt(7, Age);
+                                preparedStatement.executeUpdate();
+                                
+                                sql = "insert into store_list values(?, ?, ?, ?, ?, ?, 'w')";
+                                preparedStatement = con.prepareStatement(sql);
+                                preparedStatement.setString(1, ID);
+                                preparedStatement.setString(2, store_Number);
+                                preparedStatement.setString(3, store_Category);
+                                preparedStatement.setString(4, store_Name);
+                                preparedStatement.setString(5, Name);
+                                preparedStatement.setString(6, Address);
+                                preparedStatement.executeUpdate();
+                                
+                                JOptionPane.showMessageDialog(null, "회원가입 완료");
+                                Login_Frame frame = new Login_Frame();
+                                frame.setVisible(true);
+                                Frame.dispose();
+                                
+                            } catch (SQLException ex) {
+                                Logger.getLogger(Owner_Template.class.getName()).log(Level.SEVERE, null, ex);
+                            }   
                         }else{
                             JOptionPane.showMessageDialog(null, "회원가입 취소");
                         }
-
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "다시 한번 확인하세요.","회원가입 실패", JOptionPane.WARNING_MESSAGE);

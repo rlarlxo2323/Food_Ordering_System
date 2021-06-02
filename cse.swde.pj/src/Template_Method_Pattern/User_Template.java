@@ -9,6 +9,7 @@ import Connect_DB.Connect_DB;
 import Login.Login_Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.*;
 import javax.swing.JOptionPane;
 
 /**
@@ -47,13 +48,28 @@ public class User_Template extends Abstract {
 
                         if(bool==0){
                             Connect_DB db = new Connect_DB();
-                            db.Use_DB();
-                            db.Command_ExecuteUpdate("insert into actor values('"+ID+"', '"+PW+"', '"+Name+"', '"+RRN+"', '"+Gender+"', '"+Address+"', '"+Age+"', 'user');");
-                            JOptionPane.showMessageDialog(null, "회원가입 완료");
-                            Login_Frame frame = new Login_Frame();
-                            frame.setVisible(true);
-                            Frame.dispose();
-                            
+                            Connection con;
+                            try {
+                                con = db.getConnection();
+                                PreparedStatement preparedStatement = null;
+                                String sql = "insert into actor values(?, ?, ?, ?, ?, ?, ?, 'user')";
+                                preparedStatement = con.prepareStatement(sql);
+                                preparedStatement.setString(1, ID);
+                                preparedStatement.setString(2, PW);
+                                preparedStatement.setString(3, Name);
+                                preparedStatement.setString(4, RRN);
+                                preparedStatement.setString(5, Gender);
+                                preparedStatement.setString(6, Address);
+                                preparedStatement.setInt(7, Age);
+                                preparedStatement.executeUpdate();
+                                JOptionPane.showMessageDialog(null, "회원가입 완료");
+                                
+                                Login_Frame frame = new Login_Frame();
+                                frame.setVisible(true);
+                                Frame.dispose();
+                            }catch(SQLException er){
+                                er.printStackTrace();
+                            }
                         }else{
                             JOptionPane.showMessageDialog(null, "회원가입 취소");
                         }
@@ -72,6 +88,5 @@ public class User_Template extends Abstract {
 
     @Override
     public void Category() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
