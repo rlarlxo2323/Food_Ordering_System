@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author jda05
  */
-public class ApproveRefuseModel extends StoreManager.DbConnection {
+public class ApproveRefuseModel extends StoreOwner.DbConnection {
     private static ApproveRefuseModel arModel;
     private ApproveRefuseModel(){
         super();

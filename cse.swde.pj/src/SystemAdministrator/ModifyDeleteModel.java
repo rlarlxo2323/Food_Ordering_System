@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author jda05
  */
-public class ModifyDeleteModel extends StoreManager.DbConnection {
+public class ModifyDeleteModel extends StoreOwner.DbConnection {
     private static ModifyDeleteModel mdModel;
     private ModifyDeleteModel(){
         super();

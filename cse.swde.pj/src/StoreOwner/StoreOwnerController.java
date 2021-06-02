@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package StoreManager;
+package StoreOwner;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,10 +16,10 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author jda05
  */
-public class StoreManagerController implements ActionListener{
+public class StoreOwnerController implements ActionListener{
     String storeNumber;
     
-    StoreManagerView mainView;
+    StoreOwnerView mainView;
     StoreInfoModel storeInfoModelSingleton;
     MenuInfoModel menuInfoModelSingleton;
     ReviewsModel reviewsModelSingleton;
@@ -35,10 +35,10 @@ public class StoreManagerController implements ActionListener{
     JButton reviewsDeleteBtn;
     JButton reviewsRefreshBtn;
     
-    public StoreManagerController(String number){ // storeNumber를 생성자에서 받을것임
+    public StoreOwnerController(String number){ // storeNumber를 생성자에서 받을것임
         storeNumber = number;
         
-        mainView = new StoreManagerView(storeNumber);
+        mainView = new StoreOwnerView(storeNumber);
         storeInfoModelSingleton = StoreInfoModel.getInstance();
         menuInfoModelSingleton = MenuInfoModel.getInstance();
         reviewsModelSingleton = ReviewsModel.getInstance();
@@ -171,7 +171,7 @@ public class StoreManagerController implements ActionListener{
     public static void main(String[] args) {
         // TODO code application logic here
         String number = null;
-        StoreManagerController ctr = new StoreManagerController(number);
+        StoreOwnerController ctr = new StoreOwnerController(number);
     }
     
 }

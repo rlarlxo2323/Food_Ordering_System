@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package StoreManager;
+package StoreOwner;
 
 import javax.swing.JFrame;
 import javax.swing.JTable;
@@ -13,13 +13,13 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author jda05
  */
-public class StoreManagerView extends JFrame {
+public class StoreOwnerView extends JFrame {
     String storeNumber;
 
     /**
      * Creates new form StoreManager
      */
-    public StoreManagerView(String storeNumber) {
+    public StoreOwnerView(String storeNumber) {
         this.storeNumber = storeNumber;
         initComponents();
         System.out.println("StoreManagerView 생성자");        
@@ -177,10 +177,7 @@ public class StoreManagerView extends JFrame {
                                         .addComponent(JTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel7))))
-                            .addComponent(JScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(107, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(JScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -443,21 +440,23 @@ public DefaultTableModel getRefreshTable2(){
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StoreManagerView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StoreOwnerView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StoreManagerView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StoreOwnerView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StoreManagerView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StoreOwnerView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StoreManagerView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StoreOwnerView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-//                StoreManagerView manager = new StoreManagerView();
+//                StoreOwnerView manager = new StoreOwnerView();
 //                manager.setTitle("가게 관리"); // gui창 제목 지정      
 //                manager.setLocationRelativeTo(null); // gui를 윈도우 창 가운데에 위치하게 한다.
 //                manager.setResizable(false); // 창 크기 조절 제한

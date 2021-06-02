@@ -2,7 +2,7 @@ package Login;
 
 import Connect_DB.Connect_DB;
 import NewUser.NewUser_Frame;
-import StoreManager.StoreManagerView;
+import StoreOwner.StoreOwnerController;
 import SystemAdministrator.SystemAdminController;
 import User.User;
 import java.awt.Cursor;
@@ -137,10 +137,19 @@ public class Login_Frame extends javax.swing.JFrame{
                         String state = rs.getString("store_state");
                         System.out.println(state);
                         if(state.equals("y")){
-                            JOptionPane.showMessageDialog(null, "로그인 성공");
-                            StoreManagerView view = new StoreManagerView();
-                            view.setVisible(true);
-                            this.setVisible(false);
+                            sql = "select store_number from store_list where id = ?";
+                            preparedStatement = con.prepareStatement(sql);
+                            preparedStatement.setString(1, ID);
+                            rs = preparedStatement.executeQuery();
+                            if(rs.next()){
+                                String store_num = rs.getString("store_number");
+                                JOptionPane.showMessageDialog(null, "로그인 성공");
+                                StoreOwnerController view= new StoreOwnerController(store_num);
+                                this.setVisible(false);
+                            }else{
+                                JOptionPane.showMessageDialog(null, "로그인 실패");
+                            }
+                            
                         }
                         else if(state.equals("w")){
                             JOptionPane.showMessageDialog(null, "로그인 대기");
