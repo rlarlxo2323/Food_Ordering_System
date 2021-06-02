@@ -23,17 +23,16 @@ public class SystemAdminController implements ActionListener {
     ApproveRefuseModel approveRefuseModelSingleton;
     ModifyDeleteModel modifyDeleteModelSingleton;
    
-    JTable approveRefuseTable;
-    JTable modifyDeleteTable;
+    JTable approveRefuseTable;    
     JButton approveBtn;
     JButton refuseBtn;
-    JButton modifyBtn;
-    JButton deleteBtn;
-    
     JButton refreshBtn1;
-    JButton refreshBtn2;
+    
+    JTable modifyDeleteTable;
+    JButton modifyBtn;
     JButton modifyCompleteBtn;
-    //DefaultTableModel tableModel1;
+    JButton deleteBtn;  
+    JButton refreshBtn2;
     
     public SystemAdminController(){
         mainView = new SystemAdminView();    
@@ -42,20 +41,20 @@ public class SystemAdminController implements ActionListener {
         modifyDeleteModelSingleton =  ModifyDeleteModel.getInstance();
         
         approveRefuseTable = mainView.getTable1();
-        modifyDeleteTable = mainView.getTable2();
         approveBtn = mainView.getButton1();
         approveBtn.addActionListener(this);
         refuseBtn = mainView.getButton2();
         refuseBtn.addActionListener(this);
-        modifyBtn = mainView.getButton3();
-        modifyBtn.addActionListener(this);
-        deleteBtn = mainView.getButton4();
-        deleteBtn.addActionListener(this);        
-        modifyCompleteBtn = ModifyView.jButton1; //modifyCompleteBtn = modifyView.getButton1();
-        modifyCompleteBtn.addActionListener(this);
-        
         refreshBtn1 = mainView.jButton5;
         refreshBtn1.addActionListener(this);
+        
+        modifyDeleteTable = mainView.getTable2();
+        modifyBtn = mainView.getButton3();
+        modifyBtn.addActionListener(this);
+        modifyCompleteBtn = ModifyView.jButton1; 
+        modifyCompleteBtn.addActionListener(this);
+        deleteBtn = mainView.getButton4();
+        deleteBtn.addActionListener(this);    
         refreshBtn2 = mainView.jButton6;
         refreshBtn2.addActionListener(this);
     }
@@ -106,6 +105,7 @@ public class SystemAdminController implements ActionListener {
         for (int i = 0; i < colCount; i++) {            
             System.out.print("callSelectedRow: " + table.getModel().getValueAt(selectedRow, i )+" / ");                 
             String data = (String) table.getModel().getValueAt(selectedRow, i );
+            
             switch(i){               
                 case 1:
                     originalStoreNumber = data;
@@ -151,9 +151,10 @@ public class SystemAdminController implements ActionListener {
         DefaultTableModel tableModel2 = (DefaultTableModel)modifyDeleteTable.getModel(); // 실행했을 때 저장된 상태의 jtable의 모델을 가져온다.
         int selectedRow = modifyDeleteTable.getSelectedRow(); // jtable에서 선택한 row의 index 번호        
         System.out.println(selectedRow);
+        
         if (selectedRow > 0){
             String storeNumber = (String) modifyDeleteTable.getValueAt(selectedRow, 1); // 선택한 row에서 사업자 등록번호를 가져옴          
-            modifyDeleteModelSingleton.rowDelete(storeNumber); // 데이터를 삭제 할 db 호출        
+            modifyDeleteModelSingleton.storeDataDelete(storeNumber); // 데이터를 삭제 할 db 호출        
             tableModel2.removeRow(selectedRow); // 선택한 row가 table에서 삭제된걸 화면에 바로 보여준다.
             refreshTable2();
         } else {
@@ -181,6 +182,9 @@ public class SystemAdminController implements ActionListener {
             System.out.println("거절 버튼 누름");
             sql = "update store_list set store_state = 'n' where store_number = ?"; // 선택한 store_number의 store_state를 n으로 변경
             actionUpdate(sql); // sql문에 따른 승인 또는 거절 버튼의 기능 실행     
+        } else if(e.getSource() == refreshBtn1){ // 데이터를 가져오기위해 "새로고침 버튼" 클릭 시 발생하는 이벤트
+            System.out.println("새로고침1 버튼 누름");
+            refreshTable1();            
         } else if(e.getSource() == modifyBtn){  // 데이터 수정을 위해 "수정 버튼" 클릭 시 발생하는 이벤트
             System.out.println("수정 버튼 누름");            
             actionModify();
@@ -190,31 +194,12 @@ public class SystemAdminController implements ActionListener {
         } else if(e.getSource() == deleteBtn){ // 데이터 삭제를 위해 "삭제 버튼" 클릭 시 발생하는 이벤트
             System.out.println("삭제 버튼 누름");
             actionDelete();            
-        } else if(e.getSource() == refreshBtn1){ // 데이터 삭제를 위해 "삭제 버튼" 클릭 시 발생하는 이벤트
-            System.out.println("새로고침1 버튼 누름");
-            refreshTable1();            
-        } else if(e.getSource() == refreshBtn2){ // 데이터 삭제를 위해 "삭제 버튼" 클릭 시 발생하는 이벤트
+        } else if(e.getSource() == refreshBtn2){ // 데이터를 가져오기위해 "새로고침 버튼" 클릭 시 발생하는 이벤트
             System.out.println("새로고침2 버튼 누름");
             refreshTable2();            
         } 
     }
     
-//   @Override
-//    public void mouseClicked(MouseEvent e) {
-//        if(e.getSource() == panel1){ 
-//            //panelRefresh();
-//            System.out.println("panel click 1");
-//            refreshTable1();
-//            panel1.revalidate();
-//            panel1.repaint();
-//        } else if(e.getSource() == panel2){ 
-//            //panelRefresh();
-//            System.out.println("panel click 2");
-//            refreshTable2();
-//            panel2.revalidate();
-//            panel2.repaint();
-//        }
-//    }
     /**
      * @param args the command line arguments
      */
