@@ -141,7 +141,7 @@
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="setTable1(jTable1);"/>
-                    <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="//String[][] rows = setTable(); // db&#xc5d0;&#xc11c; &#xb370;&#xc774;&#xd130;&#xb97c; &#xc870;&#xd68c;&#xd55c;&#xb2e4;.&#xa;//DefaultTableModel model = new DefaultTableModel(rows, column);&#xa;//ApproveRefuseModel aR = new ApproveRefuseModel();&#xa;ApproveRefuseModel arModel = ApproveRefuseModel.getInstance();&#xa;//aR = ApproveRefuseModel.getInstance();&#xa;DefaultTableModel model1 = arModel.setTable1();&#xa;//DefaultTableModel model1 = model;"/>
+                    <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="ApproveRefuseModel arModel = ApproveRefuseModel.getInstance();&#xa;DefaultTableModel model1 = arModel.setTable1();"/>
                   </AuxValues>
                 </Component>
               </SubComponents>
@@ -280,7 +280,7 @@
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="setTable2(jTable2);"/>
-                    <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="//String[][] rows = setTable(); // db&#xc5d0;&#xc11c; &#xb370;&#xc774;&#xd130;&#xb97c; &#xc870;&#xd68c;&#xd55c;&#xb2e4;.&#xa;//DefaultTableModel model = new DefaultTableModel(rows, column);&#xa;//DefaultTableModel model2 = setTable();&#xa;//ModifyDeleteModel mD = new ModifyDeleteModel();&#xa;ModifyDeleteModel mdModel = ModifyDeleteModel.getInstance();&#xa;DefaultTableModel model2 = mdModel.setTable2();"/>
+                    <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="ModifyDeleteModel mdModel = ModifyDeleteModel.getInstance();&#xa;DefaultTableModel model2 = mdModel.setTable2();"/>
                   </AuxValues>
                 </Component>
               </SubComponents>

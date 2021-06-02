@@ -113,7 +113,7 @@ public class ModifyDeleteModel extends StoreManager.DbConnection {
         } 
     }    
     
-    public void rowDelete(String storeNumber){
+    public void storeDataDelete(String storeNumber){
         PreparedStatement preparedStatement = null;
         
         try (Connection con = getConnection()){

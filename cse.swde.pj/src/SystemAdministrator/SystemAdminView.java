@@ -111,13 +111,8 @@ public class SystemAdminView extends JFrame {
         jScrollPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane1.setPreferredSize(new java.awt.Dimension(452, 400));
 
-        //String[][] rows = setTable(); // db에서 데이터를 조회한다.
-        //DefaultTableModel model = new DefaultTableModel(rows, column);
-        //ApproveRefuseModel aR = new ApproveRefuseModel();
         ApproveRefuseModel arModel = ApproveRefuseModel.getInstance();
-        //aR = ApproveRefuseModel.getInstance();
         DefaultTableModel model1 = arModel.setTable1();
-        //DefaultTableModel model1 = model;
         jTable1.setModel(model1);
         jTable1.setPreferredScrollableViewportSize(jTable1.getPreferredSize());
         jTable1.setFillsViewportHeight(true);
@@ -189,10 +184,6 @@ public class SystemAdminView extends JFrame {
         jScrollPane2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane2.setPreferredSize(new java.awt.Dimension(452, 400));
 
-        //String[][] rows = setTable(); // db에서 데이터를 조회한다.
-        //DefaultTableModel model = new DefaultTableModel(rows, column);
-        //DefaultTableModel model2 = setTable();
-        //ModifyDeleteModel mD = new ModifyDeleteModel();
         ModifyDeleteModel mdModel = ModifyDeleteModel.getInstance();
         DefaultTableModel model2 = mdModel.setTable2();
         jTable2.setModel(model2);
