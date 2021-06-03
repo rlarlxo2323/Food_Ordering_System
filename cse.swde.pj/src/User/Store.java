@@ -10,7 +10,9 @@ import GetSet.OptionValue;
 import Decorator.Basic;
 import Decorator.Menu;
 import Memento.CareTaker;
+import static Memento.CareTaker.mementos;
 import Memento.Information;
+import Memento.Memento;
 import Strategy.Price;
 import Strategy.OptionPrice;
 import java.sql.Connection;
@@ -20,6 +22,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -30,6 +33,10 @@ import javax.swing.table.DefaultTableModel;
  * @author 김두현
  */
 public class Store extends javax.swing.JFrame {
+    //Stack<Memento> mementos = new Stack<>();
+
+    Information info = new Information("장바구니가 없습니다", "장바구니가 없습니다", 0);
+    CareTaker caretaker = new CareTaker();
 
     public Store() {
         initComponents();
@@ -67,6 +74,7 @@ public class Store extends javax.swing.JFrame {
         Storename_jLabel = new javax.swing.JLabel();
         Back_jButton = new javax.swing.JButton();
         Totalreview_jLabel = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -154,7 +162,7 @@ public class Store extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(Size_jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(Basket_jButton)))
+                        .addComponent(Basket_jButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(Menu_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Menu_PanelLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
@@ -264,6 +272,13 @@ public class Store extends javax.swing.JFrame {
 
         Totalreview_jLabel.setFont(new java.awt.Font("굴림", 1, 18)); // NOI18N
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -275,6 +290,8 @@ public class Store extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(175, 175, 175)
                 .addComponent(Storename_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Totalreview_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(100, 100, 100))
@@ -287,11 +304,14 @@ public class Store extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(Back_jButton)
                 .addGap(8, 8, 8)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Totalreview_jLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Storename_jLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
-                .addGap(19, 19, 19)
-                .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Totalreview_jLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Storename_jLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
+                        .addGap(19, 19, 19)
+                        .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -316,9 +336,6 @@ public class Store extends javax.swing.JFrame {
         String menu = Menu_jLabel.getText();
         String sizeBox = (String) Size_jComboBox.getSelectedItem();
 
-        Information info = new Information(null,null, 0);
-        CareTaker caretaker = new CareTaker();
-
         if (menu.equals("-")) {
             JOptionPane.showMessageDialog(null, "메뉴를 선택해 주세요.");
         } else {
@@ -328,7 +345,7 @@ public class Store extends javax.swing.JFrame {
                 Menu m = new Basic();
                 Price option = new OptionPrice();
                 int price = option.display(); //비교가 되
-                
+
                 DefaultTableModel model = (DefaultTableModel) Basket_jTable.getModel();
 
                 Object[] row = new Object[3];
@@ -336,12 +353,13 @@ public class Store extends javax.swing.JFrame {
                 row[1] = sizeBox;
                 row[2] = price;
                 model.addRow(row);
-                
+                /*
+                //System.out.println(info.getData1());
                 info.setData1(menu);
                 info.setData2(sizeBox);
                 info.setData3(price);
                 caretaker.push(info.CreateMemento());
-
+                System.out.println(info.getData1());*/
             }
         }
         Size_jComboBox.setSelectedItem("-");
@@ -365,8 +383,9 @@ public class Store extends javax.swing.JFrame {
         Connection con = null;
         PreparedStatement st = null;
         ResultSet rs = null;
-        String testSql = "select * from menu_info where menu_info.store_number = ";
+        String menuSql = "select * from menu_info where menu_info.store_number = ";
         String myRating = "select avg(rating) from menu_info join reviews using (store_number) where reviews.store_number =";
+        String reviewSql = "select * from menu_info join reviews using (store_number) where reviews.store_number =";
 
         try {
             con = DriverManager.getConnection("jdbc:mysql://115.85.182.30:3306/cse_swde_DB?zeroDateTimeBehavior=CONVERT_TO_NULL&characterEncoding=UTF-8&serverTimezone=UTC", "cse_swde", "password");
@@ -377,7 +396,7 @@ public class Store extends javax.swing.JFrame {
                 Totalreview_jLabel.setText(myRating2);
             }
             //메뉴
-            st = con.prepareStatement(testSql + "'" + s + "'");
+            st = con.prepareStatement(menuSql + "'" + s + "'");
             rs = st.executeQuery();
 
             while (rs.next()) {
@@ -390,7 +409,6 @@ public class Store extends javax.swing.JFrame {
             }
 
             //리뷰
-            /*
             st = con.prepareStatement(reviewSql + "'" + s + "'");
             rs = st.executeQuery();
 
@@ -404,14 +422,20 @@ public class Store extends javax.swing.JFrame {
                 Object data2[] = {id, menuName, review, storeRating, nowTime};
                 model2.addRow(data2);
             }
-             */
-            Information info = new Information(null, null, 0);
-            CareTaker caretaker = new CareTaker();
-            info.RestorMemento(caretaker.pop());
-            
-            Object data3[] = {info.getData1(), info.getData2(), info.getData3()};
-            model3.addRow(data3);
 
+            //장바구니
+            if (mementos.isEmpty()) {
+                System.out.println(info.getData1());
+                caretaker.push(info.CreateMemento());
+                Object data3[] = {info.getData1(), info.getData2(), info.getData3()};
+                model3.addRow(data3);
+            } else {
+                while (!mementos.isEmpty()) {
+                    info.RestorMemento(caretaker.pop());
+                    Object data3[] = {info.getData1(), info.getData2(), info.getData3()};
+                    model3.addRow(data3);
+                }
+            }
         } catch (SQLException ex) {
             Logger.getLogger(StoreList.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -424,6 +448,21 @@ public class Store extends javax.swing.JFrame {
 
     private void Back_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Back_jButtonActionPerformed
         // TODO add your handling code here:
+
+        DefaultTableModel model = (DefaultTableModel) Basket_jTable.getModel();
+        int row = model.getRowCount();
+        System.out.println(row);
+        int col = model.getColumnCount();
+        for (int i = 0; i < row; i++) {
+            String name = (String) model.getValueAt(i, 0);
+            String option = (String) model.getValueAt(i, 1);
+            int price = (int) model.getValueAt(i, 2);
+            info.setData1(name);
+            info.setData2(option);
+            info.setData3(price);
+            caretaker.push(info.CreateMemento());
+        }
+
         User user = new User();
         user.setVisible(true);
         dispose();
@@ -486,6 +525,12 @@ public class Store extends javax.swing.JFrame {
 
     }//GEN-LAST:event_Review_jButtonActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        info.RestorMemento(caretaker.pop());
+        System.out.println(info.getData1());
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -547,6 +592,7 @@ public class Store extends javax.swing.JFrame {
     private javax.swing.JPanel Storeinfo_jPanel;
     private javax.swing.JLabel Storename_jLabel;
     private javax.swing.JLabel Totalreview_jLabel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JTabbedPane jTabbedPane;
     // End of variables declaration//GEN-END:variables
 }

@@ -69,6 +69,7 @@ public class StoreList extends javax.swing.JFrame {
                 "이름", "평점"
             }
         ));
+        jTable1.setCellSelectionEnabled(true);
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
@@ -157,6 +158,7 @@ public class StoreList extends javax.swing.JFrame {
 
         try {
             con = DriverManager.getConnection("jdbc:mysql://115.85.182.30:3306/cse_swde_DB?zeroDateTimeBehavior=CONVERT_TO_NULL&characterEncoding=UTF-8&serverTimezone=UTC", "cse_swde", "password");
+<<<<<<< HEAD
             st = con.prepareStatement(sql);
             rs = st.executeQuery();
             while (rs.next()) {
@@ -170,12 +172,27 @@ public class StoreList extends javax.swing.JFrame {
                         model.addRow(data);
                     }
                 } else {
+=======
+            st = con.prepareStatement(storeSql + "'" + storeCategory + "'group by store_name");
+            rs = st.executeQuery();
+            if (!rs.isBeforeFirst()) {
+                st = con.prepareStatement(storeSql2 + "'" + storeCategory + "' and store_state = 'y'");
+                rs = st.executeQuery();
+                while (rs.next()) {
+                    String name = rs.getString("store_name");
+                    Object data[] = {name, "평점이 없습니다."};
+                    model.addRow(data);
+                }
+            } else {
+                while (rs.next()) {
+                    String name = rs.getString("store_name");
+>>>>>>> feature/user
                     String rating = rs.getString("avg(rating)");
                     Object data[] = {name, rating};
                     model.addRow(data);
                 }
-
             }
+
         } catch (SQLException ex) {
             Logger.getLogger(StoreList.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -185,6 +202,7 @@ public class StoreList extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
+        
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
 
         int row = jTable1.getSelectedRow();
@@ -235,7 +253,7 @@ public class StoreList extends javax.swing.JFrame {
                     model.addRow(data);
                 }
             } else {
-                st = con.prepareStatement(menuSql + "'" + storeCategory + "'" + "group by avg(rating) order by avg(rating) desc");
+                st = con.prepareStatement(menuSql + "'" + storeCategory + "'" + "group by store_name order by avg(rating) desc");
                 rs = st.executeQuery();
 
                 while (rs.next()) {
