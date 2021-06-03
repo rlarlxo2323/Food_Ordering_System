@@ -11,6 +11,7 @@ import Memento.CareTaker;
 import Memento.Information;
 import Strategy.OptionPrice;
 import Strategy.Price;
+import static User.Store.Menu_jLabel;
 import static User.Store.Size_jComboBox;
 import static User.User.Hashsearch_jTextField;
 import java.sql.Connection;
@@ -192,6 +193,8 @@ public class HashtagStore extends javax.swing.JFrame {
         String hash = Hashsearch_jTextField.getText();
         Storename_jLabel.setText(hash);
         DefaultTableModel model = (DefaultTableModel) Menu_jTable.getModel();
+        DefaultTableModel model2 = (DefaultTableModel) Basket_jTable.getModel();
+
         Connection con = null;
         PreparedStatement st = null;
         ResultSet rs = null;
@@ -215,6 +218,13 @@ public class HashtagStore extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(StoreList.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        Information info = new Information(null, null, 0);
+        CareTaker caretaker = new CareTaker();
+        info.RestorMemento(caretaker.pop());
+
+        Object data2[] = {info.getData1(), info.getData2(), info.getData3()};
+        model2.addRow(data2);
 
 
     }//GEN-LAST:event_formWindowOpened
@@ -245,9 +255,9 @@ public class HashtagStore extends javax.swing.JFrame {
         String menu = Menu_jLabel.getText();
         String sizeBox = (String) Size_jComboBox.getSelectedItem();
 
-        Information info;
-        CareTaker caretaker;
-        
+        Information info = new Information(null,null, 0);
+        CareTaker caretaker = new CareTaker();
+
         if (menu.equals("-")) {
             JOptionPane.showMessageDialog(null, "메뉴를 선택해 주세요.");
         } else {
@@ -256,15 +266,21 @@ public class HashtagStore extends javax.swing.JFrame {
             } else {
                 Menu m = new Basic();
                 Price option = new OptionPrice();
-                option.display();
-
+                int price = option.display(); //비교가 되
+                
                 DefaultTableModel model = (DefaultTableModel) Basket_jTable.getModel();
 
                 Object[] row = new Object[3];
                 row[0] = menu;
                 row[1] = sizeBox;
-                row[2] = m.price();
+                row[2] = price;
                 model.addRow(row);
+                
+                info.setData1(menu);
+                info.setData2(sizeBox);
+                info.setData3(price);
+                caretaker.push(info.CreateMemento());
+
             }
         }
         Size_jComboBox.setSelectedItem("-");

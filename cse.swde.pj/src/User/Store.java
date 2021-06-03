@@ -336,10 +336,11 @@ public class Store extends javax.swing.JFrame {
                 row[1] = sizeBox;
                 row[2] = price;
                 model.addRow(row);
-
+                
                 info.setData1(menu);
                 info.setData2(sizeBox);
                 info.setData3(price);
+                caretaker.push(info.CreateMemento());
 
             }
         }
@@ -355,13 +356,11 @@ public class Store extends javax.swing.JFrame {
         StoreNum storelist = new StoreNum();
         String sl = storelist.getStoreList();
 
-        Information info;
-        CareTaker caretaker;
-
         Storename_jLabel.setText(sl);
         String s = storelist.getStore();
         DefaultTableModel model1 = (DefaultTableModel) Menu_jTable.getModel();
         DefaultTableModel model2 = (DefaultTableModel) Review_jTable.getModel();
+        DefaultTableModel model3 = (DefaultTableModel) Basket_jTable.getModel();
 
         Connection con = null;
         PreparedStatement st = null;
@@ -377,10 +376,8 @@ public class Store extends javax.swing.JFrame {
                 String myRating2 = rs.getString("avg(rating)");
                 Totalreview_jLabel.setText(myRating2);
             }
-
             //메뉴
             st = con.prepareStatement(testSql + "'" + s + "'");
-            System.out.println(s);
             rs = st.executeQuery();
 
             while (rs.next()) {
@@ -395,7 +392,6 @@ public class Store extends javax.swing.JFrame {
             //리뷰
             /*
             st = con.prepareStatement(reviewSql + "'" + s + "'");
-            System.out.println(s);
             rs = st.executeQuery();
 
             while (rs.next()) {
@@ -405,10 +401,17 @@ public class Store extends javax.swing.JFrame {
                 String storeRating = rs.getString("rating");
                 String nowTime = rs.getString("time");
 
-                Object data[] = {id, menuName, review, storeRating, nowTime};
-                model2.addRow(data);
+                Object data2[] = {id, menuName, review, storeRating, nowTime};
+                model2.addRow(data2);
             }
              */
+            Information info = new Information(null, null, 0);
+            CareTaker caretaker = new CareTaker();
+            info.RestorMemento(caretaker.pop());
+            
+            Object data3[] = {info.getData1(), info.getData2(), info.getData3()};
+            model3.addRow(data3);
+
         } catch (SQLException ex) {
             Logger.getLogger(StoreList.class.getName()).log(Level.SEVERE, null, ex);
         }
