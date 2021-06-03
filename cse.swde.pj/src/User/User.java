@@ -348,7 +348,6 @@ public class User extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         OptionValue ov = new OptionValue();
-        String myOption = ov.getMyOption();
         ov.setMyOption("카페");
 
     }//GEN-LAST:event_formWindowOpened

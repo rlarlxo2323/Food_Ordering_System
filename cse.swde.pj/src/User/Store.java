@@ -33,17 +33,7 @@ import javax.swing.table.DefaultTableModel;
  * @author 김두현
  */
 public class Store extends javax.swing.JFrame {
-<<<<<<< Updated upstream
-    //Stack<Memento> mementos = new Stack<>();
-
-<<<<<<< HEAD
     Information info = new Information(null, null, null, 0);
-=======
-    Information info = new Information("장바구니가 없습니다", "장바구니가 없습니다", 0);
-=======
-    Information info = new Information(null, null, null, 0);
->>>>>>> Stashed changes
->>>>>>> feature/user
     CareTaker caretaker = new CareTaker();
 
 
@@ -342,16 +332,9 @@ public class Store extends javax.swing.JFrame {
         String store = Storename_jLabel.getText();
         String menu = Menu_jLabel.getText();
         String sizeBox = (String) Size_jComboBox.getSelectedItem();
-<<<<<<< HEAD
-        int sum = 0;
-=======
-<<<<<<< Updated upstream
 
-=======
-        
         int sum = 0;
->>>>>>> Stashed changes
->>>>>>> feature/user
+
         if (menu.equals("-")) {
             JOptionPane.showMessageDialog(null, "메뉴를 선택해 주세요.");
         } else {
@@ -372,13 +355,7 @@ public class Store extends javax.swing.JFrame {
                 model.addRow(row);
             }
         }
-<<<<<<< HEAD
-        
-=======
-<<<<<<< Updated upstream
-=======
 
->>>>>>> feature/user
         for (int i = 0; i < Basket_jTable.getRowCount(); i++) {
             String pocket = Basket_jTable.getValueAt(i, 3).toString();
             int s = Integer.parseInt(pocket);
@@ -387,10 +364,6 @@ public class Store extends javax.swing.JFrame {
             Price_jLabel.setText(money);
         }
 
-<<<<<<< HEAD
-=======
->>>>>>> Stashed changes
->>>>>>> feature/user
         Size_jComboBox.setSelectedItem("-");
         Menu_jLabel.setText("-");
     }//GEN-LAST:event_Basket_jButtonActionPerformed

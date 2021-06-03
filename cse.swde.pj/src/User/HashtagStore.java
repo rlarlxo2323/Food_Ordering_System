@@ -288,36 +288,18 @@ public class HashtagStore extends javax.swing.JFrame {
 
     private void Menu_jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_jTableMouseClicked
         // TODO add your handling code here:
-<<<<<<< HEAD
-        
-=======
-<<<<<<< Updated upstream
->>>>>>> feature/user
-        DefaultTableModel model = (DefaultTableModel) Menu_jTable.getModel();
-        int i = Menu_jTable.getSelectedRow();
 
-<<<<<<< HEAD
-=======
-        }
-        Menu_jLabel.setText(model.getValueAt(row, 0).toString());
-=======
 
         DefaultTableModel model = (DefaultTableModel) Menu_jTable.getModel();
         int i = Menu_jTable.getSelectedRow();
 
->>>>>>> feature/user
         Menu_jLabel.setText(model.getValueAt(i, 0).toString());
 
         OptionValue ov = new OptionValue();
         int price = ov.getMenuPrice();
         price = Integer.parseInt(model.getValueAt(i, 2).toString());
         ov.setMenuPrice(price);
-<<<<<<< HEAD
-        //if (evt.getClickCount() == 2) {
 
-        //}
-        // Menu_jLabel.setText(model.getValueAt(row, 0).toString());
-=======
 
         String myOption = ov.getMyOption();
         myOption = (String) model.getValueAt(i, 1);
@@ -326,11 +308,7 @@ public class HashtagStore extends javax.swing.JFrame {
         Price option2 = new OptionPrice_H();
         option2.performFly();
 
-        //if (evt.getClickCount() == 2) {
-        //}
-        // Menu_jLabel.setText(model.getValueAt(row, 0).toString());
->>>>>>> Stashed changes
->>>>>>> feature/user
+
 
     }//GEN-LAST:event_Menu_jTableMouseClicked
 
@@ -361,14 +339,7 @@ public class HashtagStore extends javax.swing.JFrame {
                 model.addRow(row);
             }
         }
-<<<<<<< HEAD
-        
-=======
-<<<<<<< Updated upstream
         Size_jComboBox.setSelectedItem("-");
-=======
-
->>>>>>> feature/user
         for (int i = 0; i < Basket_jTable.getRowCount(); i++) {
             String pocket = Basket_jTable.getValueAt(i, 3).toString();
             int s = Integer.parseInt(pocket);
@@ -376,14 +347,7 @@ public class HashtagStore extends javax.swing.JFrame {
             String money = Integer.toString(sum);
             Price_jLabel.setText(money);
         }
-
-<<<<<<< HEAD
-
         Size_jComboBoxH.setSelectedItem("-");
-=======
-        Size_jComboBoxH.setSelectedItem("-");
->>>>>>> Stashed changes
->>>>>>> feature/user
         Menu_jLabel.setText("-");
     }//GEN-LAST:event_Basket_jButtonActionPerformed
 

@@ -47,39 +47,7 @@ public class CategoyBox implements PriceInterface {
             Size_jComboBox.setModel(new DefaultComboBoxModel(fastfoodOption));
         } else if (myOption.equals("일식")) {
             Size_jComboBox.setModel(new DefaultComboBoxModel(japanOption));
-<<<<<<< Updated upstream
-        }
-<<<<<<< HEAD
-        if (storeCategory.equals("카페")) {
-=======
-=======
-        }/* if (storeCategory.equals("카페")) {
->>>>>>> feature/user
-            Size_jComboBoxH.setModel(new DefaultComboBoxModel(cafeOption));
-        } else if (storeCategory.equals("분식")) {
-            Size_jComboBoxH.setModel(new DefaultComboBoxModel(bunsickOption));
-        } else if (storeCategory.equals("중국집")) {
-            Size_jComboBoxH.setModel(new DefaultComboBoxModel(chinaOption));
-        } else if (storeCategory.equals("치킨")) {
-            Size_jComboBoxH.setModel(new DefaultComboBoxModel(chickenOption));
-        } else if (storeCategory.equals("피자")) {
-            Size_jComboBoxH.setModel(new DefaultComboBoxModel(pizzaOption));
-        } else if (storeCategory.equals("족발")) {
-            Size_jComboBoxH.setModel(new DefaultComboBoxModel(jokbalOption));
-        } else if (storeCategory.equals("양식")) {
-            Size_jComboBoxH.setModel(new DefaultComboBoxModel(westernOption));
-        } else if (storeCategory.equals("패스트푸드")) {
-            Size_jComboBoxH.setModel(new DefaultComboBoxModel(fastfoodOption));
-        } else if (storeCategory.equals("일식")) {
-            Size_jComboBoxH.setModel(new DefaultComboBoxModel(japanOption));
-<<<<<<< HEAD
-        }
-        
-=======
-        }*/
 
->>>>>>> Stashed changes
->>>>>>> feature/user
-
+        }
     }
 }
