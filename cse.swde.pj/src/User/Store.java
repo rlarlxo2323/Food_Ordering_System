@@ -35,7 +35,7 @@ import javax.swing.table.DefaultTableModel;
 public class Store extends javax.swing.JFrame {
     //Stack<Memento> mementos = new Stack<>();
 
-    Information info = new Information("장바구니가 없습니다", "장바구니가 없습니다", 0);
+    Information info = new Information(null, null, null, 0);
     CareTaker caretaker = new CareTaker();
 
     public Store() {
@@ -74,7 +74,6 @@ public class Store extends javax.swing.JFrame {
         Storename_jLabel = new javax.swing.JLabel();
         Back_jButton = new javax.swing.JButton();
         Totalreview_jLabel = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -112,7 +111,7 @@ public class Store extends javax.swing.JFrame {
 
             },
             new String [] {
-                "MENU", "SIZE", "PRICE"
+                "STORE", "MENU", "SIZE", "PRICE"
             }
         ));
         Basket_jScrollPane.setViewportView(Basket_jTable);
@@ -142,14 +141,16 @@ public class Store extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(Menu_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Menu_PanelLayout.createSequentialGroup()
-                        .addGroup(Menu_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Basket_jButton)
-                            .addComponent(Menu_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Size_jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Menu_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(Price_jLabel)
-                        .addComponent(Pay_jButton))))
+                        .addGap(40, 40, 40)
+                        .addComponent(Price_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Menu_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(Menu_PanelLayout.createSequentialGroup()
+                            .addGroup(Menu_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(Basket_jButton)
+                                .addComponent(Menu_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Size_jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addContainerGap())
+                        .addComponent(Pay_jButton, javax.swing.GroupLayout.Alignment.TRAILING))))
         );
         Menu_PanelLayout.setVerticalGroup(
             Menu_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,8 +166,8 @@ public class Store extends javax.swing.JFrame {
                         .addComponent(Basket_jButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(Menu_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Menu_PanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
-                        .addComponent(Price_jLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Price_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(Pay_jButton)
                         .addContainerGap())
@@ -272,13 +273,6 @@ public class Store extends javax.swing.JFrame {
 
         Totalreview_jLabel.setFont(new java.awt.Font("굴림", 1, 18)); // NOI18N
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -290,8 +284,6 @@ public class Store extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(175, 175, 175)
                 .addComponent(Storename_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Totalreview_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(100, 100, 100))
@@ -304,14 +296,11 @@ public class Store extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(Back_jButton)
                 .addGap(8, 8, 8)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Totalreview_jLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Storename_jLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
-                        .addGap(19, 19, 19)
-                        .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Totalreview_jLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Storename_jLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
+                .addGap(19, 19, 19)
+                .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -332,10 +321,11 @@ public class Store extends javax.swing.JFrame {
     }//GEN-LAST:event_Menu_jTableMouseClicked
 
     private void Basket_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Basket_jButtonActionPerformed
-        // TODO add your handling code here:      
+        // TODO add your handling code here:
+        String store = Storename_jLabel.getText();
         String menu = Menu_jLabel.getText();
         String sizeBox = (String) Size_jComboBox.getSelectedItem();
-
+        int sum = 0;
         if (menu.equals("-")) {
             JOptionPane.showMessageDialog(null, "메뉴를 선택해 주세요.");
         } else {
@@ -348,20 +338,23 @@ public class Store extends javax.swing.JFrame {
 
                 DefaultTableModel model = (DefaultTableModel) Basket_jTable.getModel();
 
-                Object[] row = new Object[3];
-                row[0] = menu;
-                row[1] = sizeBox;
-                row[2] = price;
+                Object[] row = new Object[4];
+                row[0] = store;
+                row[1] = menu;
+                row[2] = sizeBox;
+                row[3] = price;
                 model.addRow(row);
-                /*
-                //System.out.println(info.getData1());
-                info.setData1(menu);
-                info.setData2(sizeBox);
-                info.setData3(price);
-                caretaker.push(info.CreateMemento());
-                System.out.println(info.getData1());*/
             }
         }
+        
+        for (int i = 0; i < Basket_jTable.getRowCount(); i++) {
+            String pocket = Basket_jTable.getValueAt(i, 3).toString();
+            int s = Integer.parseInt(pocket);
+            sum += s;
+            String money = Integer.toString(sum);
+            Price_jLabel.setText(money);
+        }
+
         Size_jComboBox.setSelectedItem("-");
         Menu_jLabel.setText("-");
     }//GEN-LAST:event_Basket_jButtonActionPerformed
@@ -426,13 +419,10 @@ public class Store extends javax.swing.JFrame {
             //장바구니
             if (mementos.isEmpty()) {
                 System.out.println(info.getData1());
-                caretaker.push(info.CreateMemento());
-                Object data3[] = {info.getData1(), info.getData2(), info.getData3()};
-                model3.addRow(data3);
             } else {
                 while (!mementos.isEmpty()) {
                     info.RestorMemento(caretaker.pop());
-                    Object data3[] = {info.getData1(), info.getData2(), info.getData3()};
+                    Object data3[] = {info.getData0(), info.getData1(), info.getData2(), info.getData3()};
                     model3.addRow(data3);
                 }
             }
@@ -454,9 +444,11 @@ public class Store extends javax.swing.JFrame {
         System.out.println(row);
         int col = model.getColumnCount();
         for (int i = 0; i < row; i++) {
-            String name = (String) model.getValueAt(i, 0);
-            String option = (String) model.getValueAt(i, 1);
-            int price = (int) model.getValueAt(i, 2);
+            String store = (String) model.getValueAt(i, 0);
+            String name = (String) model.getValueAt(i, 1);
+            String option = (String) model.getValueAt(i, 2);
+            int price = (int) model.getValueAt(i, 3);
+            info.setData0(store);
             info.setData1(name);
             info.setData2(option);
             info.setData3(price);
@@ -525,12 +517,6 @@ public class Store extends javax.swing.JFrame {
 
     }//GEN-LAST:event_Review_jButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        info.RestorMemento(caretaker.pop());
-        System.out.println(info.getData1());
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -592,7 +578,6 @@ public class Store extends javax.swing.JFrame {
     private javax.swing.JPanel Storeinfo_jPanel;
     private javax.swing.JLabel Storename_jLabel;
     private javax.swing.JLabel Totalreview_jLabel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JTabbedPane jTabbedPane;
     // End of variables declaration//GEN-END:variables
 }

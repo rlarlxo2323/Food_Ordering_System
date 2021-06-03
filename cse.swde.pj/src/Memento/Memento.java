@@ -11,17 +11,22 @@ package Memento;
  */
 public class Memento {
 
+    private String pStore;
     private String pMenuName;
     private String pOption;
     private int pPrice ;
      
 
-    public Memento(String pMenuName, String pOption, int pPrice) {
+    public Memento(String pStore,String pMenuName, String pOption, int pPrice) {
+        this.pStore = pStore;
         this.pMenuName = pMenuName;
         this.pOption = pOption;
         this.pPrice = pPrice;
     }
 
+    public String getData0() {
+        return this.pStore;
+    }
     public String getData1() {
         return this.pMenuName;
     }

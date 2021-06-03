@@ -20,6 +20,6 @@ public class CafemediumOption extends OptionDecorator {
         return menu.getDescription();
     }
     public int price(){
-        return menu.price();
+        return menu.price()+1000;
     }
 }
