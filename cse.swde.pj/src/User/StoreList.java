@@ -145,21 +145,24 @@ public class StoreList extends javax.swing.JFrame {
         Connection con = null;
         PreparedStatement st = null;
         ResultSet rs = null;
-        String storeSql = "select store_name ,avg(rating) from store_list join reviews using (store_number) where store_list.store_category=";
-        String storeSql2 = "select * from store_list where store_list.store_category=";
+//        String storeSql = "select store_name ,avg(rating) from store_list join reviews using (store_number) where store_list.store_category=";
+//        String storeSql2 = "select * from store_list where store_list.store_category=";
+        
 
         StoreCategory sc = new StoreCategory();
         String storeCategory = sc.getStoreCategory();
+        String sql = "select store_name from store_list where store_category = "+ storeCategory;
+        String sql2 = "select avg(rating) from reviews where = ";
         jLabel1.setText(storeCategory);
 
         try {
             con = DriverManager.getConnection("jdbc:mysql://115.85.182.30:3306/cse_swde_DB?zeroDateTimeBehavior=CONVERT_TO_NULL&characterEncoding=UTF-8&serverTimezone=UTC", "cse_swde", "password");
-            st = con.prepareStatement(storeSql + storeCategory);
+            st = con.prepareStatement(sql);
             rs = st.executeQuery();
             while (rs.next()) {
                 String name = rs.getString("store_name");
                 if (name.equals(null)) {
-                    st = con.prepareStatement(storeSql2 + storeCategory);
+                    st = con.prepareStatement(sql2 + storeCategory);
                     rs = st.executeQuery();
                     while (rs.next()) {
                         String name2 = rs.getString("store_name");

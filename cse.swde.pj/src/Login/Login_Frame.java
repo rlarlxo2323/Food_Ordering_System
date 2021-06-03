@@ -12,7 +12,9 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class Login_Frame extends javax.swing.JFrame{
-
+    
+    public static String Login_Session;
+    
     public Login_Frame(){
         initComponents();
         NewUser_Label.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -144,6 +146,7 @@ public class Login_Frame extends javax.swing.JFrame{
                             if(rs.next()){
                                 String store_num = rs.getString("store_number");
                                 JOptionPane.showMessageDialog(null, "로그인 성공");
+                                Login_Session = ID;
                                 StoreOwnerController view= new StoreOwnerController(store_num);
                                 this.setVisible(false);
                             }else{
@@ -172,11 +175,13 @@ public class Login_Frame extends javax.swing.JFrame{
                     }
                     else if(data.equals("admin")){
                         JOptionPane.showMessageDialog(null, "로그인 성공");
+                        Login_Session = ID;
                         SystemAdminController view = new SystemAdminController();
                         this.setVisible(false);
                     }
                     else{
                         JOptionPane.showMessageDialog(null, "로그인 성공");
+                        Login_Session = ID;
                         User frame = new User();
                         frame.setVisible(true);
                         this.setVisible(false);

@@ -5,6 +5,11 @@
  */
 package User;
 
+import Connect_DB.Connect_DB;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author rlarl
@@ -16,6 +21,7 @@ public class Payment_Frame extends javax.swing.JFrame {
      */
     public Payment_Frame() {
         initComponents();
+        Set_Address();
     }
 
     /**
@@ -39,17 +45,17 @@ public class Payment_Frame extends javax.swing.JFrame {
         Choose_Combo = new javax.swing.JComboBox<>();
         Choose_Label = new javax.swing.JLabel();
         Card_Label = new javax.swing.JLabel();
-        CN_1 = new javax.swing.JTextField();
         Label_1 = new javax.swing.JLabel();
-        CN_2 = new javax.swing.JTextField();
         Label_3 = new javax.swing.JLabel();
         Label_2 = new javax.swing.JLabel();
-        CN_3 = new javax.swing.JTextField();
-        CN_4 = new javax.swing.JTextField();
         Period_Label = new javax.swing.JLabel();
-        Month_Field = new javax.swing.JTextField();
         Label_4 = new javax.swing.JLabel();
-        Year_Field = new javax.swing.JTextField();
+        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        jFormattedTextField2 = new javax.swing.JFormattedTextField();
+        jFormattedTextField3 = new javax.swing.JFormattedTextField();
+        jFormattedTextField4 = new javax.swing.JFormattedTextField();
+        jFormattedTextField5 = new javax.swing.JFormattedTextField();
+        jFormattedTextField6 = new javax.swing.JFormattedTextField();
         jPanel1 = new javax.swing.JPanel();
         agree_Label = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -85,11 +91,6 @@ public class Payment_Frame extends javax.swing.JFrame {
 
         buttonGroup1.add(Now_RButton);
         Now_RButton.setText("직접 결제");
-        Now_RButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Now_RButtonMouseClicked(evt);
-            }
-        });
 
         Pay_Label.setText(" 결제 방식 : ");
 
@@ -99,25 +100,51 @@ public class Payment_Frame extends javax.swing.JFrame {
 
         Card_Label.setText("카드 번호 : ");
 
-        CN_1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-
         Label_1.setText("-");
-
-        CN_2.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
         Label_3.setText("-");
 
         Label_2.setText("-");
 
-        CN_3.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-
-        CN_4.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-
         Period_Label.setText("유효 기간 : ");
 
-        Month_Field.setActionCommand("");
-
         Label_4.setText("/");
+
+        try {
+            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            jFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            jFormattedTextField3.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            jFormattedTextField4.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            jFormattedTextField5.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            jFormattedTextField6.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         javax.swing.GroupLayout Card_PanelLayout = new javax.swing.GroupLayout(Card_Panel);
         Card_Panel.setLayout(Card_PanelLayout);
@@ -131,27 +158,27 @@ public class Payment_Frame extends javax.swing.JFrame {
                     .addComponent(Period_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(Card_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Choose_Combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(Card_PanelLayout.createSequentialGroup()
-                        .addGroup(Card_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(Month_Field, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CN_1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
+                        .addComponent(jFormattedTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(Card_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Label_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Label_4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(Label_4, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(Card_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(CN_2, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                            .addComponent(Year_Field))
+                        .addComponent(jFormattedTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Card_PanelLayout.createSequentialGroup()
+                        .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Label_1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Label_2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CN_3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Label_3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CN_4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jFormattedTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Choose_Combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         Card_PanelLayout.setVerticalGroup(
@@ -164,19 +191,19 @@ public class Payment_Frame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(Card_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Card_Label)
-                    .addComponent(CN_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Label_1)
-                    .addComponent(CN_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Label_2)
-                    .addComponent(CN_3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Label_3, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CN_4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(Card_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Month_Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Period_Label)
                     .addComponent(Label_4)
-                    .addComponent(Year_Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFormattedTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -191,7 +218,9 @@ public class Payment_Frame extends javax.swing.JFrame {
         jTextArea2.setText("필수적인 개인정보의 수집·이용에 관한 사항\n\n ① 수집ㆍ이용 항목 | 성명,전화번호,주소,신용카드 정보\n ② 수집ㆍ이용 목적 | 예약 서비스 제공\n\n동의가 없을 경우 예약 서비스 제공과 관련된 제반 절차 \n진행이 불가능 할 수 있음을 알려드립니다.");
         jScrollPane3.setViewportView(jTextArea2);
 
+        jTextArea3.setEditable(false);
         jTextArea3.setColumns(20);
+        jTextArea3.setLineWrap(true);
         jTextArea3.setRows(5);
         jScrollPane4.setViewportView(jTextArea3);
 
@@ -259,7 +288,7 @@ public class Payment_Frame extends javax.swing.JFrame {
                                 .addGap(30, 30, 30)
                                 .addComponent(Now_RButton))
                             .addComponent(Address_Field, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 11, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(Card_Panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -283,7 +312,7 @@ public class Payment_Frame extends javax.swing.JFrame {
                 .addComponent(Card_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton1))
@@ -293,10 +322,23 @@ public class Payment_Frame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Now_RButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Now_RButtonMouseClicked
-        //Card_Panel.setVisible(false);
-    }//GEN-LAST:event_Now_RButtonMouseClicked
-
+    private void Set_Address(){
+        Connect_DB db = new Connect_DB();
+        try {
+            Connection con = db.getConnection();
+            PreparedStatement preparedStatement = null;
+            String sql = "select address from actor where id='"+ Login.Login_Frame.Login_Session +"'";
+            preparedStatement = con.prepareStatement(sql);
+            ResultSet rs = preparedStatement.executeQuery();
+            rs.next();
+            String add[] = rs.getString("address").split("/");
+            Address_Field.setText(add[0]);
+            Address_Detail.setText(add[1]);
+        } catch (SQLException ex) {
+            Logger.getLogger(Payment_Frame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     private void Card_RButtonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_Card_RButtonItemStateChanged
         if(Card_RButton.isSelected()){
             Card_Panel.setVisible(true);
@@ -348,10 +390,6 @@ public class Payment_Frame extends javax.swing.JFrame {
     private javax.swing.JTextField Address_Detail;
     private javax.swing.JTextField Address_Field;
     private javax.swing.JLabel Address_Label;
-    private javax.swing.JTextField CN_1;
-    private javax.swing.JTextField CN_2;
-    private javax.swing.JTextField CN_3;
-    private javax.swing.JTextField CN_4;
     private javax.swing.JLabel Card_Label;
     private javax.swing.JPanel Card_Panel;
     private javax.swing.JRadioButton Card_RButton;
@@ -362,16 +400,20 @@ public class Payment_Frame extends javax.swing.JFrame {
     private javax.swing.JLabel Label_3;
     private javax.swing.JLabel Label_4;
     private javax.swing.JLabel Money_Label;
-    private javax.swing.JTextField Month_Field;
     private javax.swing.JRadioButton Now_RButton;
     private javax.swing.JLabel Pay_Label;
     private javax.swing.JLabel Period_Label;
-    private javax.swing.JTextField Year_Field;
     private javax.swing.JLabel agree_Label;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JFormattedTextField jFormattedTextField1;
+    private javax.swing.JFormattedTextField jFormattedTextField2;
+    private javax.swing.JFormattedTextField jFormattedTextField3;
+    private javax.swing.JFormattedTextField jFormattedTextField4;
+    private javax.swing.JFormattedTextField jFormattedTextField5;
+    private javax.swing.JFormattedTextField jFormattedTextField6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
