@@ -123,9 +123,9 @@ public class StoreOwnerController implements ActionListener{
         
         if (selectedRow != -1){
             String id = (String) reviewsTable.getValueAt(selectedRow, 0); // 선택한 row에서 메뉴 이름을 가져옴          
-            String menuName = (String) reviewsTable.getValueAt(selectedRow, 1); // 선택한 row에서 메뉴 이름을 가져옴          
-            String time = (String) reviewsTable.getValueAt(selectedRow, 4); // 선택한 row에서 메뉴 이름을 가져옴          
-            reviewsModelSingleton.reviewsDelete(storeNumber, id, menuName, time); // 데이터를 삭제 할 db 호출         
+            //String menuName = (String) reviewsTable.getValueAt(selectedRow, 1); // 선택한 row에서 메뉴 이름을 가져옴          
+            String time = (String) reviewsTable.getValueAt(selectedRow, 3); // 선택한 row에서 메뉴 이름을 가져옴          
+            reviewsModelSingleton.reviewsDelete(storeNumber, id, time); // 데이터를 삭제 할 db 호출         
             tableModel2.removeRow(selectedRow); // 선택한 row가 table에서 삭제된걸 화면에 바로 보여준다.
             refreshReviewsTable2();
         } else {
