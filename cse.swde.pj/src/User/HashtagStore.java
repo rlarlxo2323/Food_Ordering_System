@@ -10,6 +10,7 @@ import Decorator.Menu;
 import Memento.CareTaker;
 import Memento.Information;
 import Strategy.OptionPrice;
+import Strategy.OptionPrice_H;
 import Strategy.Price;
 import static User.Store.Menu_jLabel;
 import static User.Store.Size_jComboBox;
@@ -90,7 +91,7 @@ public class HashtagStore extends javax.swing.JFrame {
 
             },
             new String [] {
-                "MENU", "SIZE", "PRICE"
+                "STORE", "MENU", "SIZE", "PRICE"
             }
         ));
         Basket_jScrollPane.setViewportView(Basket_jTable);
@@ -190,6 +191,10 @@ public class HashtagStore extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
+
+        Price option2 = new OptionPrice_H();
+        option2.performFly();
+
         String hash = Hashsearch_jTextField.getText();
         Storename_jLabel.setText(hash);
         DefaultTableModel model = (DefaultTableModel) Menu_jTable.getModel();
@@ -239,6 +244,7 @@ public class HashtagStore extends javax.swing.JFrame {
 
     private void Menu_jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_jTableMouseClicked
         // TODO add your handling code here:
+<<<<<<< Updated upstream
         DefaultTableModel model = (DefaultTableModel) Menu_jTable.getModel();
         int row = Menu_jTable.getSelectedRow();
         int col = Menu_jTable.getSelectedColumn();
@@ -247,6 +253,29 @@ public class HashtagStore extends javax.swing.JFrame {
 
         }
         Menu_jLabel.setText(model.getValueAt(row, 0).toString());
+=======
+
+        DefaultTableModel model = (DefaultTableModel) Menu_jTable.getModel();
+        int i = Menu_jTable.getSelectedRow();
+
+        Menu_jLabel.setText(model.getValueAt(i, 0).toString());
+
+        OptionValue ov = new OptionValue();
+        int price = ov.getMenuPrice();
+        price = Integer.parseInt(model.getValueAt(i, 2).toString());
+        ov.setMenuPrice(price);
+
+        String myOption = ov.getMyOption();
+        myOption = (String) model.getValueAt(i, 1);
+        ov.setMyOption(myOption);
+        System.out.println(myOption);
+        Price option2 = new OptionPrice_H();
+        option2.performFly();
+
+        //if (evt.getClickCount() == 2) {
+        //}
+        // Menu_jLabel.setText(model.getValueAt(row, 0).toString());
+>>>>>>> Stashed changes
 
     }//GEN-LAST:event_Menu_jTableMouseClicked
 
@@ -265,7 +294,7 @@ public class HashtagStore extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "옵션을 선택해 주세요.");
             } else {
                 Menu m = new Basic();
-                Price option = new OptionPrice();
+                Price option = new OptionPrice_H();
                 int price = option.display(); //비교가 되
                 
                 DefaultTableModel model = (DefaultTableModel) Basket_jTable.getModel();
@@ -283,7 +312,20 @@ public class HashtagStore extends javax.swing.JFrame {
 
             }
         }
+<<<<<<< Updated upstream
         Size_jComboBox.setSelectedItem("-");
+=======
+
+        for (int i = 0; i < Basket_jTable.getRowCount(); i++) {
+            String pocket = Basket_jTable.getValueAt(i, 3).toString();
+            int s = Integer.parseInt(pocket);
+            sum += s;
+            String money = Integer.toString(sum);
+            Price_jLabel.setText(money);
+        }
+
+        Size_jComboBoxH.setSelectedItem("-");
+>>>>>>> Stashed changes
         Menu_jLabel.setText("-");
     }//GEN-LAST:event_Basket_jButtonActionPerformed
 

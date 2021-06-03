@@ -12,12 +12,19 @@ package GetSet;
 public class OptionValue {
 
     public static int menuPrice;
-
+    public static String myOption = null;
+    
     public static int getMenuPrice() {
         return menuPrice;
+    }
+    public static String getMyOption() {
+        return myOption;
     }
 
     public void setMenuPrice(int menuPrice) {
         this.menuPrice = menuPrice;
+    }
+    public void setMyOption(String myOption) {
+        this.myOption = myOption;
     }
 }
