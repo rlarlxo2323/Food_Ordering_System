@@ -234,7 +234,7 @@ public class HashtagStore extends javax.swing.JFrame {
         User user = new User();
         user.setVisible(true);
         dispose();
-
+        
     }//GEN-LAST:event_Back_jButtonActionPerformed
 
     private void Menu_jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_jTableMouseClicked

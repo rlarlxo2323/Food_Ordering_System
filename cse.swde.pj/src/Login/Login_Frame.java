@@ -4,6 +4,7 @@ import Connect_DB.Connect_DB;
 import NewUser.NewUser_Frame;
 import StoreManager.StoreManagerView;
 import SystemAdministrator.SystemAdminController;
+import User.User;
 import java.awt.Cursor;
 import java.sql.*;
 import java.util.logging.Level;
@@ -149,6 +150,12 @@ public class Login_Frame extends javax.swing.JFrame{
                     else if(data.equals("admin")){
                         JOptionPane.showMessageDialog(null, "로그인 성공");
                         SystemAdminController view = new SystemAdminController();
+                        this.setVisible(false);
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "로그인 성공");
+                        User frame = new User();
+                        frame.setVisible(true);
                         this.setVisible(false);
                     }
                     
