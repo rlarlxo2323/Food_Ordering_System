@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
 public class StoreOwnerController implements ActionListener{
     String storeNumber;
     
-    StoreOwnerView mainView;
+    StoreOwnerView storeOwnerView;
     StoreInfoModel storeInfoModelSingleton;
     MenuInfoModel menuInfoModelSingleton;
     ReviewsModel reviewsModelSingleton;
@@ -38,36 +38,36 @@ public class StoreOwnerController implements ActionListener{
     public StoreOwnerController(String number){ // storeNumber를 생성자에서 받을것임
         storeNumber = number;
         
-        mainView = new StoreOwnerView(storeNumber);
+        storeOwnerView = new StoreOwnerView(storeNumber);
         storeInfoModelSingleton = StoreInfoModel.getInstance();
         menuInfoModelSingleton = MenuInfoModel.getInstance();
         reviewsModelSingleton = ReviewsModel.getInstance();
         
-        storeInfoRegisterBtn = mainView.jButton1;
+        storeInfoRegisterBtn = storeOwnerView.jButton1;
         storeInfoRegisterBtn.addActionListener(this);
         
-        menuInfoTable = mainView.getTable1();       
-        menuInfoRegisterBtn = mainView.jButton3;
+        menuInfoTable = storeOwnerView.getTable1();       
+        menuInfoRegisterBtn = storeOwnerView.jButton3;
         menuInfoRegisterBtn.addActionListener(this);
-        menuInfoDeleteBtn = mainView.jButton4;
+        menuInfoDeleteBtn = storeOwnerView.jButton4;
         menuInfoDeleteBtn.addActionListener(this);
-        menuInfoRegisterRefreshBtn = mainView.jButton5;
+        menuInfoRegisterRefreshBtn = storeOwnerView.jButton5;
         menuInfoRegisterRefreshBtn.addActionListener(this);
         
-        reviewsTable = mainView.getTable2();
-        reviewsDeleteBtn = mainView.jButton6;
+        reviewsTable = storeOwnerView.getTable2();
+        reviewsDeleteBtn = storeOwnerView.jButton6;
         reviewsDeleteBtn.addActionListener(this);
-        reviewsRefreshBtn = mainView.jButton7;
+        reviewsRefreshBtn = storeOwnerView.jButton7;
         reviewsRefreshBtn.addActionListener(this);
     }    
     
     public void storeInfoRegister(){ // 가게 정보 등록 버튼을 누르면 실행함
-        String introduction = mainView.JTextArea1.getText(); // 가게 소개
-        String operatingTime = mainView.JTextField1.getText(); // 운영 시간
-        String closedDays = mainView.JTextField2.getText(); // 휴무일
-        String phone = mainView.JTextField3.getText(); // 전화번호
-        String address = mainView.JTextField4.getText(); // 주소
-        String deliveryCost = mainView.JTextField5.getText(); // 배달팁
+        String introduction = storeOwnerView.JTextArea1.getText(); // 가게 소개
+        String operatingTime = storeOwnerView.JTextField1.getText(); // 운영 시간
+        String closedDays = storeOwnerView.JTextField2.getText(); // 휴무일
+        String phone = storeOwnerView.JTextField3.getText(); // 전화번호
+        String address = storeOwnerView.JTextField4.getText(); // 주소
+        String deliveryCost = storeOwnerView.JTextField5.getText(); // 배달팁
        
         // 정보가 비어있는지 확인하는 if문
         if(introduction.equals("") || operatingTime.equals("") ||closedDays.equals("") || phone.equals("") || address.equals("")){ 
@@ -80,10 +80,10 @@ public class StoreOwnerController implements ActionListener{
     
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void menuInfoRegister(){ // 메뉴 등록 버튼 누름
-        String menuName = mainView.JTextField6.getText();
-        String menuOption = mainView.jComboBox1.getSelectedItem().toString();
-        int menuPrice = Integer.parseInt(mainView.JTextField7.getText());
-        String menuHashtag = mainView.JTextField8.getText();
+        String menuName = storeOwnerView.JTextField6.getText();
+        String menuOption = storeOwnerView.jComboBox1.getSelectedItem().toString();
+        int menuPrice = Integer.parseInt(storeOwnerView.JTextField7.getText());
+        String menuHashtag = storeOwnerView.JTextField8.getText();
         
         if(menuName.equals("") || menuOption.equals("") || menuPrice == 0 || menuHashtag.equals("")){ 
             JOptionPane.showMessageDialog(null, "메뉴 정보가 비어있습니다. 모두 채워주세요.");       
@@ -98,7 +98,7 @@ public class StoreOwnerController implements ActionListener{
         int selectedRow = menuInfoTable.getSelectedRow(); // jtable에서 선택한 row의 index 번호        
         System.out.println(selectedRow);
         
-        if (selectedRow > 0){
+        if (selectedRow != -1){
             String menuName = (String) menuInfoTable.getValueAt(selectedRow, 0); // 선택한 row에서 메뉴 이름을 가져옴          
             menuInfoModelSingleton.menuInfoDelete(storeNumber, menuName); // 데이터를 삭제 할 db 호출        
             tableModel2.removeRow(selectedRow); // 선택한 row가 table에서 삭제된걸 화면에 바로 보여준다.
@@ -109,11 +109,11 @@ public class StoreOwnerController implements ActionListener{
     }
     
     public void refreshMenuInfoTable1(){ // 메뉴 탭의 새로고침 버튼 누름
-        DefaultTableModel tableModel1 = mainView.getRefreshTable1(); // 가장 최신의 jtable 모델을 가져온다.
+        DefaultTableModel tableModel1 = storeOwnerView.getRefreshTable1(); // 가장 최신의 jtable 모델을 가져온다.
         tableModel1.setRowCount(0); // 전체 테이블 화면을 모두 비운다.           
         tableModel1 = menuInfoModelSingleton.setMenuInfoTable(storeNumber); //select문 결과를 담는다.
         menuInfoTable.setModel(tableModel1); // controller에 저장되어있는 jtable 객체도 바뀐 값을 넣어준다.
-        mainView.setRefreshTable1(tableModel1); // 업데이트된 tablemodel을 jtable에 넣어준다.
+        storeOwnerView.setRefreshTable1(tableModel1); // 업데이트된 tablemodel을 jtable에 넣어준다.
     }    
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////   
     public void reviewsDelete(){ // 리뷰 삭제 버튼 누름
@@ -121,7 +121,7 @@ public class StoreOwnerController implements ActionListener{
         int selectedRow = reviewsTable.getSelectedRow(); // jtable에서 선택한 row의 index 번호        
         System.out.println(selectedRow);
         
-        if (selectedRow > 0){
+        if (selectedRow != -1){
             String id = (String) reviewsTable.getValueAt(selectedRow, 0); // 선택한 row에서 메뉴 이름을 가져옴          
             String menuName = (String) reviewsTable.getValueAt(selectedRow, 1); // 선택한 row에서 메뉴 이름을 가져옴          
             String time = (String) reviewsTable.getValueAt(selectedRow, 4); // 선택한 row에서 메뉴 이름을 가져옴          
@@ -134,11 +134,11 @@ public class StoreOwnerController implements ActionListener{
     }
     
     public void refreshReviewsTable2(){
-        DefaultTableModel tableModel2 = mainView.getRefreshTable2(); // 가장 최신의 jtable 모델을 가져온다.
+        DefaultTableModel tableModel2 = storeOwnerView.getRefreshTable2(); // 가장 최신의 jtable 모델을 가져온다.
         tableModel2.setRowCount(0); // 전체 테이블 화면의 row를 모두 비운다.           
         tableModel2 = reviewsModelSingleton.setReviewsTable(storeNumber); //select문 결과를 담는다.
         reviewsTable.setModel(tableModel2); // controller에 저장되어있는 jtable 객체도 바뀐 값을 넣어준다.
-        mainView.setRefreshTable2(tableModel2); // 업데이트된 tablemodel을 jtable에 넣어준다.
+        storeOwnerView.setRefreshTable2(tableModel2); // 업데이트된 tablemodel을 jtable에 넣어준다.
     }
     
     @Override

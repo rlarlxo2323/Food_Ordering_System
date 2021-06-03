@@ -37,7 +37,7 @@ public class MenuInfoModel extends DbConnection{
     public DefaultTableModel setMenuInfoTable(String storeNumber) {
         this.storeNumber = storeNumber;
         String[] column = {"메뉴 이름", "메뉴 옵션", "가격","해시 태그"}; // jtable의 column 내용
-        DefaultTableModel model = new DefaultTableModel(null, column){
+        DefaultTableModel model = new DefaultTableModel(column, 0){
             @Override
             public boolean isCellEditable(int row, int column){ // 셀 수정 못하게 하는 부분 
                 return false; 

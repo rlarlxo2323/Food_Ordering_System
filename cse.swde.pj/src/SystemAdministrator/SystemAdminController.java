@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  * @author jda05
  */
 public class SystemAdminController implements ActionListener {
-    SystemAdminView mainView;
+    SystemAdminView systemAdminView;
     ModifyView modifyView;
     ApproveRefuseModel approveRefuseModelSingleton;
     ModifyDeleteModel modifyDeleteModelSingleton;
@@ -35,27 +35,27 @@ public class SystemAdminController implements ActionListener {
     JButton refreshBtn2;
     
     public SystemAdminController(){
-        mainView = new SystemAdminView();    
+        systemAdminView = new SystemAdminView();    
         modifyView = new ModifyView();
         approveRefuseModelSingleton =  ApproveRefuseModel.getInstance();       
         modifyDeleteModelSingleton =  ModifyDeleteModel.getInstance();
         
-        approveRefuseTable = mainView.getTable1();
-        approveBtn = mainView.getButton1();
+        approveRefuseTable = systemAdminView.getTable1();
+        approveBtn = systemAdminView.getButton1();
         approveBtn.addActionListener(this);
-        refuseBtn = mainView.getButton2();
+        refuseBtn = systemAdminView.getButton2();
         refuseBtn.addActionListener(this);
-        refreshBtn1 = mainView.jButton5;
+        refreshBtn1 = systemAdminView.jButton5;
         refreshBtn1.addActionListener(this);
         
-        modifyDeleteTable = mainView.getTable2();
-        modifyBtn = mainView.getButton3();
+        modifyDeleteTable = systemAdminView.getTable2();
+        modifyBtn = systemAdminView.getButton3();
         modifyBtn.addActionListener(this);
         modifyCompleteBtn = ModifyView.jButton1; 
         modifyCompleteBtn.addActionListener(this);
-        deleteBtn = mainView.getButton4();
+        deleteBtn = systemAdminView.getButton4();
         deleteBtn.addActionListener(this);    
-        refreshBtn2 = mainView.jButton6;
+        refreshBtn2 = systemAdminView.jButton6;
         refreshBtn2.addActionListener(this);
     }
     
@@ -65,7 +65,7 @@ public class SystemAdminController implements ActionListener {
 
     public void actionUpdate(String sql){
         int selectedRow = approveRefuseTable.getSelectedRow(); // jtable에서 선택한 row의 index 번호       
-        if (selectedRow > 0){
+        if (selectedRow != -1){
             Object selectedStoreNumber = approveRefuseTable.getValueAt(selectedRow, 1); // jtable에서 선택한 row의 store_number
             System.out.println("selectedStoreNumber: " + selectedStoreNumber);                  
             setQuery(sql);
@@ -77,12 +77,12 @@ public class SystemAdminController implements ActionListener {
     }
     
     public void refreshTable1(){
-    DefaultTableModel tableModel1 = mainView.getRefreshTable1(); // 가장 최신의 jtable 모델을 가져온다.
-    //tableModel1 = mainView.getRefreshTable1(); // 가장 최신의 jtable 모델을 가져온다.
+    DefaultTableModel tableModel1 = systemAdminView.getRefreshTable1(); // 가장 최신의 jtable 모델을 가져온다.
+    //tableModel1 = systemAdminView.getRefreshTable1(); // 가장 최신의 jtable 모델을 가져온다.
     tableModel1.setRowCount(0); // 전체 테이블 화면을 모두 비운다.           
     tableModel1 = approveRefuseModelSingleton.setTable1(); //select문 결과를 담는다.
     approveRefuseTable.setModel(tableModel1); // controller에 저장되어있는 jtable 객체도 바뀐 값을 넣어준다.
-    mainView.setRefreshTable1(tableModel1); // 업데이트된 tablemodel을 jtable에 넣어준다.
+    systemAdminView.setRefreshTable1(tableModel1); // 업데이트된 tablemodel을 jtable에 넣어준다.
     }    
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     String originalStoreNumber ; // 선택한 row의 db상의 store_number
@@ -91,7 +91,7 @@ public class SystemAdminController implements ActionListener {
         int colCount = modifyDeleteTable.getColumnCount(); // jtable의 column 수 
         System.out.println("row: " + selectedRow + " / " + "colCount: " + colCount);
         
-        if (selectedRow > 0 && colCount > 0){           
+        if (selectedRow != -1 && colCount > 0){           
             originalStoreNumber = callSelectedRow(selectedRow, colCount, modifyDeleteTable); // 선택한 row의 값을 수정 gui에서 보여주기
             modifyView.setTitle("가맹점 정보 수정");
             modifyView.setVisible(true); // 수정하는 창을 보이게 함 
@@ -142,9 +142,9 @@ public class SystemAdminController implements ActionListener {
         modifyView.dispose(); // 떠있는 창이 사라짐
         modifyView.setTitle("가맹점 신청 관리"); // gui창 제목 지정  
         modifyView.setVisible(true); // 떠있는 창이 변경된 데이터로 다시 나타남
-        mainView.dispose(); // 현재 떠있는 창을 끄고
+        systemAdminView.dispose(); // 현재 떠있는 창을 끄고
         refreshTable2(); // 바뀐 정보로 table을 업데이트하고
-        mainView.setVisible(true); // 변경된 db의 데이터로 jtable을 새로 보여줌
+        systemAdminView.setVisible(true); // 변경된 db의 데이터로 jtable을 새로 보여줌
     }
     
     public void actionDelete(){
@@ -152,7 +152,7 @@ public class SystemAdminController implements ActionListener {
         int selectedRow = modifyDeleteTable.getSelectedRow(); // jtable에서 선택한 row의 index 번호        
         System.out.println(selectedRow);
         
-        if (selectedRow > 0){
+        if (selectedRow != -1){
             String storeNumber = (String) modifyDeleteTable.getValueAt(selectedRow, 1); // 선택한 row에서 사업자 등록번호를 가져옴          
             modifyDeleteModelSingleton.storeDataDelete(storeNumber); // 데이터를 삭제 할 db 호출        
             tableModel2.removeRow(selectedRow); // 선택한 row가 table에서 삭제된걸 화면에 바로 보여준다.
@@ -163,12 +163,12 @@ public class SystemAdminController implements ActionListener {
     }    
     
     public void refreshTable2(){
-    DefaultTableModel tableModel2 = mainView.getRefreshTable2(); // 가장 최신의 jtable 모델을 가져온다.
-    //tableModel2 = mainView.getRefreshTable2(); // 가장 최신의 jtable 모델을 가져온다.
+    DefaultTableModel tableModel2 = systemAdminView.getRefreshTable2(); // 가장 최신의 jtable 모델을 가져온다.
+    //tableModel2 = systemAdminView.getRefreshTable2(); // 가장 최신의 jtable 모델을 가져온다.
     tableModel2.setRowCount(0); // 전체 테이블 화면의 row를 모두 비운다.           
     tableModel2 = modifyDeleteModelSingleton.setTable2(); //select문 결과를 담는다.
     modifyDeleteTable.setModel(tableModel2); // controller에 저장되어있는 jtable 객체도 바뀐 값을 넣어준다.
-    mainView.setRefreshTable2(tableModel2); // 업데이트된 tablemodel을 jtable에 넣어준다.
+    systemAdminView.setRefreshTable2(tableModel2); // 업데이트된 tablemodel을 jtable에 넣어준다.
     }
     
     @Override

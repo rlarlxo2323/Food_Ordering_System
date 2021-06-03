@@ -34,7 +34,7 @@ public class ApproveRefuseModel extends StoreOwner.DbConnection {
     
     public DefaultTableModel setTable1() {
         String[] column = {"아이디", "사업자 등록번호", "가게 카테고리","상호명", "대표자명", "사업자주소"}; // jtable의 column 내용
-        DefaultTableModel model = new DefaultTableModel(null, column){
+        DefaultTableModel model = new DefaultTableModel(column, 0){
             @Override
             public boolean isCellEditable(int row, int column){ // 셀 수정 못하게 하는 부분 
                 return false; 

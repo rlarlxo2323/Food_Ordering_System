@@ -116,7 +116,6 @@ public class SystemAdminView extends JFrame {
         jTable1.setModel(model1);
         jTable1.setPreferredScrollableViewportSize(jTable1.getPreferredSize());
         jTable1.setFillsViewportHeight(true);
-        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTable1.setShowGrid(true);
         setTable1(jTable1);
@@ -187,7 +186,6 @@ public class SystemAdminView extends JFrame {
         ModifyDeleteModel mdModel = ModifyDeleteModel.getInstance();
         DefaultTableModel model2 = mdModel.setTable2();
         jTable2.setModel(model2);
-        jTable2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jTable2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTable2.setShowGrid(true);
         setTable2(jTable2);

@@ -29,11 +29,10 @@ public class ReviewsModel extends DbConnection {
     
     public DefaultTableModel setReviewsTable(String storeNumber) {        
         String[] column = {"아이디", "메뉴 이름", "리뷰 내용", "평점", "리뷰 작성 시간"}; // jtable의 column 내용
-        DefaultTableModel model = new DefaultTableModel(null, column){
+        DefaultTableModel model = new DefaultTableModel(column, 0){
             @Override
             public boolean isCellEditable(int row, int column){ // 셀 수정 못하게 하는 부분 
-                //return false; 
-                return super.isCellEditable(row, column);
+                return false;                 
             }
         };
         PreparedStatement preparedStatement = null;
