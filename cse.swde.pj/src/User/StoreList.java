@@ -141,38 +141,19 @@ public class StoreList extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         Connection con = null;
         PreparedStatement st = null;
         ResultSet rs = null;
-//        String storeSql = "select store_name ,avg(rating) from store_list join reviews using (store_number) where store_list.store_category=";
-//        String storeSql2 = "select * from store_list where store_list.store_category=";
-        
+        String storeSql = "select store_name ,avg(rating) from store_list join reviews using (store_number) where store_list.store_category=";
+        String storeSql2 = "select * from store_list where store_list.store_category=";
 
         StoreCategory sc = new StoreCategory();
         String storeCategory = sc.getStoreCategory();
-        String sql = "select store_name from store_list where store_category = "+ storeCategory;
-        String sql2 = "select avg(rating) from reviews where = ";
         jLabel1.setText(storeCategory);
 
         try {
             con = DriverManager.getConnection("jdbc:mysql://115.85.182.30:3306/cse_swde_DB?zeroDateTimeBehavior=CONVERT_TO_NULL&characterEncoding=UTF-8&serverTimezone=UTC", "cse_swde", "password");
-<<<<<<< HEAD
-            st = con.prepareStatement(sql);
-            rs = st.executeQuery();
-            while (rs.next()) {
-                String name = rs.getString("store_name");
-                if (name.equals(null)) {
-                    st = con.prepareStatement(sql2 + storeCategory);
-                    rs = st.executeQuery();
-                    while (rs.next()) {
-                        String name2 = rs.getString("store_name");
-                        Object data[] = {name2, "평점이 없습니다."};
-                        model.addRow(data);
-                    }
-                } else {
-=======
             st = con.prepareStatement(storeSql + "'" + storeCategory + "'group by store_name");
             rs = st.executeQuery();
             if (!rs.isBeforeFirst()) {
@@ -186,7 +167,6 @@ public class StoreList extends javax.swing.JFrame {
             } else {
                 while (rs.next()) {
                     String name = rs.getString("store_name");
->>>>>>> feature/user
                     String rating = rs.getString("avg(rating)");
                     Object data[] = {name, rating};
                     model.addRow(data);
@@ -196,8 +176,6 @@ public class StoreList extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(StoreList.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-
     }//GEN-LAST:event_formWindowOpened
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
