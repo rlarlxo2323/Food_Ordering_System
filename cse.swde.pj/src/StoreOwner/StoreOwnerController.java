@@ -5,10 +5,8 @@
  */
 package StoreOwner;
 
-import Connect_DB.Connect_DB;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.*;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -38,12 +36,13 @@ public class StoreOwnerController implements ActionListener{
     JButton reviewsRefreshBtn;
     
     public StoreOwnerController(String number){ // storeNumber를 생성자에서 받을것임
-        storeNumber = number;
+        storeNumber = number; // 로그인에서 가져온 사업자 등록번호(store_number)를 인스턴스변수 storeNumber에 넘겨줌
         
         storeOwnerView = new StoreOwnerView(storeNumber);
         storeInfoModelSingleton = StoreInfoModel.getInstance();
         menuInfoModelSingleton = MenuInfoModel.getInstance();
         reviewsModelSingleton = ReviewsModel.getInstance();
+        
         storeInfoRegisterBtn = storeOwnerView.jButton1;
         storeInfoRegisterBtn.addActionListener(this);
         
@@ -74,7 +73,7 @@ public class StoreOwnerController implements ActionListener{
         if(introduction.equals("") || operatingTime.equals("") ||closedDays.equals("") || phone.equals("") || address.equals("")){ 
             JOptionPane.showMessageDialog(null, "가게 정보가 비어있습니다. 모두 채워주세요.");       
         } else { //DB 처리 클래스 호출                        
-            storeInfoModelSingleton.setData(introduction, operatingTime, closedDays, phone, address, deliveryCost); // 입력값을 다른 객체에 넣어준다. 
+            storeInfoModelSingleton.setData(introduction, operatingTime, closedDays, phone, address, deliveryCost); // 입력값을 
             storeInfoModelSingleton.storeInfoUpdate(storeNumber); // 해당 storeNumber를 가지는 가맹점의 가게 정보를 업데이트 한다.
         }    
     }

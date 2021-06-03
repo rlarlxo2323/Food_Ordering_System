@@ -90,7 +90,8 @@ public class ApproveRefuseModel extends Connect_DB {
             preparedStatement.setString(1, storeNumber);
             
             int result = preparedStatement.executeUpdate();
-            if (result > 0){ // 변경이 성공해서 영향받은 레코드 갯수를 반환하면
+            if (result > 0){ // 변경이 성공해서 영향받은 레코드 갯수를 반환하면                
+                storeInfoDataUpdate1(storeNumber); // store_info DB에 승인된 가맹점의 주소와 가맹점 번호를 넣어준다.
                 JOptionPane.showMessageDialog(null, "가맹점 신청 상태 변경이 완료되었습니다.");
             } else {
                 JOptionPane.showMessageDialog(null, "가맹점 신청 상태 변경이 실패하였습니다.");
@@ -101,6 +102,70 @@ public class ApproveRefuseModel extends Connect_DB {
             if (preparedStatement != null) {
                 try {
                     preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }               
+        }  
+    }  
+    
+    public void storeInfoDataUpdate1(String storeNumber){ // store_info DB에 승인된 가맹점의 주소와 가맹점 번호를 넣어준다.
+        String storeAddress = null; // 사업자주소  
+        PreparedStatement preparedStatement = null;       
+        ResultSet rs = null;
+        String sql = "select store_address from store_list where store_number = ?"; // sql문 완성
+        
+        try (Connection con = getConnection()) { // 데이터베이스와 연결하는 객체로 부모 클래스(DbConnection)의 메소드이다.           
+            System.out.println("[ApproveRefuseModel.storeInfoDataUpdate 연결 성공]");            
+            //System.out.println(sql);
+            preparedStatement = con.prepareStatement(sql);
+            preparedStatement.setString(1, storeNumber);
+            rs = preparedStatement.executeQuery();
+            
+            while(rs.next()){ // store_list에서 사업자 주소를 가녀오는게 성공하면        
+                storeAddress = rs.getString("store_address"); // 사업자 주소 값을 넣어준다. 
+                storeInfoDataUpdate2(storeNumber, storeAddress);                                    
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }               
+        }           
+    }
+    
+    public void storeInfoDataUpdate2(String storeNumber, String storeAddress){ // stor_info에 가맹점 주소와 가맹점등록번호 데이터를 넣어준다.
+        PreparedStatement preparedStatement2 = null;
+        String sql2 = "insert into store_info values(?, ?, ?, ?, ?, ?, ?)"; 
+                
+        try (Connection con = getConnection()) { // 데이터베이스와 연결하는 객체로 부모 클래스(DbConnection)의 메소드     
+            System.out.println("[ApproveRefuseModel.storeInfoDataUpdate2 연결 성공]");            
+            //System.out.println(sql);            
+            preparedStatement2 = con.prepareStatement(sql2);
+            preparedStatement2.setString(1, storeNumber);
+            preparedStatement2.setString(2, "");                
+            preparedStatement2.setString(3, "");                
+            preparedStatement2.setString(4, "");                
+            preparedStatement2.setString(5, "");                
+            preparedStatement2.setString(6, storeAddress);                
+            preparedStatement2.setString(7, "");                
+                int result = preparedStatement2.executeUpdate();
+                if (result > 0){ // 등록이 성공해서 영향받은 레코드 갯수를 반환하면
+                    System.out.println("store_info에 데이터를 넣었습니다.");
+                } else {
+                    System.out.println("store_info에 데이터를 넣는데 실패하였습니다.");
+                }                   
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            if (preparedStatement2 != null) {
+                try {
+                    preparedStatement2.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
