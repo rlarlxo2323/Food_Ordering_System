@@ -5,6 +5,7 @@
  */
 package StoreOwner;
 
+import Connect_DB.Connect_DB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author jda05
  */
-public class MenuInfoModel extends DbConnection{
+public class MenuInfoModel extends Connect_DB{
     String storeNumber; // 사업자 등록번호
     String menuName; // 메뉴 이름
     String menuOption; // 메뉴 옵션

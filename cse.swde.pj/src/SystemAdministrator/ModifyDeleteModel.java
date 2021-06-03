@@ -5,6 +5,7 @@
  */
 package SystemAdministrator;
 
+import Connect_DB.Connect_DB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author jda05
  */
-public class ModifyDeleteModel extends StoreOwner.DbConnection {
+public class ModifyDeleteModel extends Connect_DB {
     private static ModifyDeleteModel mdModel;
     private ModifyDeleteModel(){
         super();

@@ -5,6 +5,7 @@
  */
 package StoreOwner;
 
+import Connect_DB.Connect_DB;
 import java.sql.*;
 import javax.swing.JOptionPane;
 
@@ -12,7 +13,7 @@ import javax.swing.JOptionPane;
  *
  * @author jda05
  */
-public class StoreInfoModel extends DbConnection {
+public class StoreInfoModel extends Connect_DB {
     String introduction; // 가게 소개
     String operatingTime; // 운영시간
     String closedDays; // 휴무일
@@ -39,6 +40,37 @@ public class StoreInfoModel extends DbConnection {
 //        this.address = address;
 //        this.deliveryCost = deliveryCost;
 //    }
+    
+    public String setSotreNameLabel(String storeNumber){
+        String storeName = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        String sql = "select store_name from store_list where store_number = ?"; // 
+        
+        try (Connection con = getConnection()) { // 데이터베이스와 연결하는 객체로 부모 클래스(DbConnection)의 메소드이다.           
+            System.out.println("[StoreInfoModel.setSotreNameLabel 연결 성공]");            
+            //System.out.println(sql);
+            preparedStatement = con.prepareStatement(sql);
+            preparedStatement.setString(1, storeNumber);
+            rs = preparedStatement.executeQuery();
+            
+            while(rs.next()){    
+                storeName = rs.getString("store_name");
+                System.out.println("store_name : " + storeName);                     
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }               
+        }        
+       return storeName;
+    }
     
     public void setStoreInfoTextField(String storeNumber){        
         PreparedStatement preparedStatement = null;

@@ -5,6 +5,7 @@
  */
 package StoreOwner;
 
+import Connect_DB.Connect_DB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author jda05
  */
-public class ReviewsModel extends DbConnection {
+public class ReviewsModel extends Connect_DB {
    private static ReviewsModel rModel;
     private ReviewsModel(){
         super();

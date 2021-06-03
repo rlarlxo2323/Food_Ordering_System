@@ -5,6 +5,7 @@
  */
 package SystemAdministrator;
 
+import Connect_DB.Connect_DB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author jda05
  */
-public class ApproveRefuseModel extends StoreOwner.DbConnection {
+public class ApproveRefuseModel extends Connect_DB {
     private static ApproveRefuseModel arModel;
     private ApproveRefuseModel(){
         super();
