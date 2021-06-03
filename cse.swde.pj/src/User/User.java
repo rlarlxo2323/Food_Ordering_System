@@ -5,7 +5,8 @@
  */
 package User;
 
-import static User.StoreNum.storeList;
+import GetSet.StoreCategory;
+import static GetSet.StoreNum.storeList;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -43,8 +44,8 @@ public class User extends javax.swing.JFrame {
 
         카페_jButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        치킨피자_jButton = new javax.swing.JButton();
-        야식_jButton = new javax.swing.JButton();
+        치킨 = new javax.swing.JButton();
+        피자 = new javax.swing.JButton();
         분식_jButton = new javax.swing.JButton();
         족발보쌈_jButton = new javax.swing.JButton();
         패스트푸드_jButton = new javax.swing.JButton();
@@ -52,7 +53,7 @@ public class User extends javax.swing.JFrame {
         양식_jButton = new javax.swing.JButton();
         일식회_jButton = new javax.swing.JButton();
         메뉴검색_jButton = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        Hashsearch_jTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,17 +66,17 @@ public class User extends javax.swing.JFrame {
 
         jLabel1.setText("팀프로젝트");
 
-        치킨피자_jButton.setText("치킨/피자");
-        치킨피자_jButton.addActionListener(new java.awt.event.ActionListener() {
+        치킨.setText("치킨");
+        치킨.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                치킨피자_jButtonActionPerformed(evt);
+                치킨ActionPerformed(evt);
             }
         });
 
-        야식_jButton.setText("야식");
-        야식_jButton.addActionListener(new java.awt.event.ActionListener() {
+        피자.setText("피자");
+        피자.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                야식_jButtonActionPerformed(evt);
+                피자ActionPerformed(evt);
             }
         });
 
@@ -87,6 +88,11 @@ public class User extends javax.swing.JFrame {
         });
 
         족발보쌈_jButton.setText("족발/보쌈");
+        족발보쌈_jButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                족발보쌈_jButtonActionPerformed(evt);
+            }
+        });
 
         패스트푸드_jButton.setText("패스트푸드");
         패스트푸드_jButton.addActionListener(new java.awt.event.ActionListener() {
@@ -123,14 +129,14 @@ public class User extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        Hashsearch_jTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                Hashsearch_jTextFieldActionPerformed(evt);
             }
         });
-        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+        Hashsearch_jTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextField1KeyPressed(evt);
+                Hashsearch_jTextFieldKeyPressed(evt);
             }
         });
 
@@ -148,11 +154,10 @@ public class User extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(메뉴검색_jButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(카페_jButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(치킨피자_jButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(야식_jButton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(피자, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
+                                    .addComponent(치킨, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(카페_jButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(패스트푸드_jButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -164,7 +169,7 @@ public class User extends javax.swing.JFrame {
                                     .addComponent(양식_jButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(일식회_jButton, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE))
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jTextField1))))
+                            .addComponent(Hashsearch_jTextField))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -181,14 +186,14 @@ public class User extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(양식_jButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(족발보쌈_jButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(치킨피자_jButton, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))
+                    .addComponent(치킨, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(야식_jButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(피자, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(일식회_jButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(패스트푸드_jButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Hashsearch_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(메뉴검색_jButton)
                 .addContainerGap())
@@ -201,46 +206,46 @@ public class User extends javax.swing.JFrame {
         StoreCategory sc = new StoreCategory();
         String storeCategory = sc.getStoreCategory();
         storeCategory = "카페";
-        sc.setHashSearch(storeCategory);
+        sc.setStoreCategory(storeCategory);
 
-        StoreList cafe = new StoreList();
-        cafe.setVisible(true);
+        StoreList sl = new StoreList();
+        sl.setVisible(true);
         dispose();
 
     }//GEN-LAST:event_카페_jButtonActionPerformed
 
-    private void 치킨피자_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_치킨피자_jButtonActionPerformed
+    private void 치킨ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_치킨ActionPerformed
         // TODO add your handling code here:
         StoreCategory sc = new StoreCategory();
         String storeCategory = sc.getStoreCategory();
-        storeCategory = "치킨/피자";
-        sc.setHashSearch(storeCategory);
+        storeCategory = "치킨";
+        sc.setStoreCategory(storeCategory);
 
         StoreList cafe = new StoreList();
         cafe.setVisible(true);
         dispose();
 
-    }//GEN-LAST:event_치킨피자_jButtonActionPerformed
+    }//GEN-LAST:event_치킨ActionPerformed
 
-    private void 야식_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_야식_jButtonActionPerformed
+    private void 피자ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_피자ActionPerformed
         // TODO add your handling code here:
         StoreCategory sc = new StoreCategory();
         String storeCategory = sc.getStoreCategory();
-        storeCategory = "야식";
-        sc.setHashSearch(storeCategory);
+        storeCategory = "피자";
+        sc.setStoreCategory(storeCategory);
 
         StoreList cafe = new StoreList();
         cafe.setVisible(true);
         dispose();
 
-    }//GEN-LAST:event_야식_jButtonActionPerformed
+    }//GEN-LAST:event_피자ActionPerformed
 
     private void 패스트푸드_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_패스트푸드_jButtonActionPerformed
         // TODO add your handling code here:
         StoreCategory sc = new StoreCategory();
         String storeCategory = sc.getStoreCategory();
         storeCategory = "패스트푸드";
-        sc.setHashSearch(storeCategory);
+        sc.setStoreCategory(storeCategory);
 
         StoreList cafe = new StoreList();
         cafe.setVisible(true);
@@ -252,8 +257,8 @@ public class User extends javax.swing.JFrame {
         // TODO add your handling code here:
         StoreCategory sc = new StoreCategory();
         String storeCategory = sc.getStoreCategory();
-        storeCategory = "일식/회";
-        sc.setHashSearch(storeCategory);
+        storeCategory = "일식";
+        sc.setStoreCategory(storeCategory);
 
         StoreList cafe = new StoreList();
         cafe.setVisible(true);
@@ -266,7 +271,7 @@ public class User extends javax.swing.JFrame {
         StoreCategory sc = new StoreCategory();
         String storeCategory = sc.getStoreCategory();
         storeCategory = "분식";
-        sc.setHashSearch(storeCategory);
+        sc.setStoreCategory(storeCategory);
 
         StoreList cafe = new StoreList();
         cafe.setVisible(true);
@@ -279,7 +284,7 @@ public class User extends javax.swing.JFrame {
         StoreCategory sc = new StoreCategory();
         String storeCategory = sc.getStoreCategory();
         storeCategory = "중국집";
-        sc.setHashSearch(storeCategory);
+        sc.setStoreCategory(storeCategory);
 
         StoreList cafe = new StoreList();
         cafe.setVisible(true);
@@ -293,7 +298,7 @@ public class User extends javax.swing.JFrame {
         StoreCategory sc = new StoreCategory();
         String storeCategory = sc.getStoreCategory();
         storeCategory = "양식";
-        sc.setHashSearch(storeCategory);
+        sc.setStoreCategory(storeCategory);
 
         StoreList cafe = new StoreList();
         cafe.setVisible(true);
@@ -301,17 +306,11 @@ public class User extends javax.swing.JFrame {
 
     }//GEN-LAST:event_양식_jButtonActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void Hashsearch_jTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Hashsearch_jTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_Hashsearch_jTextFieldActionPerformed
 
     private void 메뉴검색_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_메뉴검색_jButtonActionPerformed
-        // TODO add your handling code here:
-        HashSearch hashsearch = new HashSearch();
-        String k = hashsearch.getHashSearch();
-
-        k = jTextField1.getText();
-        hashsearch.setHashSearch(k);
 
         HashtagStore hs = new HashtagStore();
         hs.setVisible(true);
@@ -319,21 +318,26 @@ public class User extends javax.swing.JFrame {
 
     }//GEN-LAST:event_메뉴검색_jButtonActionPerformed
 
-    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
+    private void Hashsearch_jTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Hashsearch_jTextFieldKeyPressed
         // TODO add your handling code here:
-        HashSearch hashsearch = new HashSearch();
-        String k = hashsearch.getHashSearch();
-
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-
-            k = jTextField1.getText();
-            hashsearch.setHashSearch(k);
-
             HashtagStore hs = new HashtagStore();
             hs.setVisible(true);
             dispose();
         }
-    }//GEN-LAST:event_jTextField1KeyPressed
+    }//GEN-LAST:event_Hashsearch_jTextFieldKeyPressed
+
+    private void 족발보쌈_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_족발보쌈_jButtonActionPerformed
+        StoreCategory sc = new StoreCategory();
+        String storeCategory = sc.getStoreCategory();
+        storeCategory = "족발";
+        sc.setStoreCategory(storeCategory);
+
+        StoreList cafe = new StoreList();
+        cafe.setVisible(true);
+        dispose();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_족발보쌈_jButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -371,17 +375,17 @@ public class User extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JTextField Hashsearch_jTextField;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton 메뉴검색_jButton;
     private javax.swing.JButton 분식_jButton;
-    private javax.swing.JButton 야식_jButton;
     private javax.swing.JButton 양식_jButton;
     private javax.swing.JButton 일식회_jButton;
     private javax.swing.JButton 족발보쌈_jButton;
     private javax.swing.JButton 중국집_jButton;
-    private javax.swing.JButton 치킨피자_jButton;
+    private javax.swing.JButton 치킨;
     private javax.swing.JButton 카페_jButton;
     private javax.swing.JButton 패스트푸드_jButton;
+    private javax.swing.JButton 피자;
     // End of variables declaration//GEN-END:variables
 }

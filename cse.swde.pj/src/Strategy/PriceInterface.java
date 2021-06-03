@@ -3,12 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package User;
+package Strategy;
 
-/**
- *
- * @author 김두현
- */
-public interface Strategy_OptionPrice {
-    public void action();
+interface PriceInterface {
+    void fly();
 }

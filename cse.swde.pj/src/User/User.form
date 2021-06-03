@@ -34,12 +34,10 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="메뉴검색_jButton" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="카페_jButton" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="치킨피자_jButton" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Component id="야식_jButton" min="-2" pref="87" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="피자" pref="87" max="32767" attributes="0"/>
+                                  <Component id="치킨" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="카페_jButton" alignment="1" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -55,7 +53,7 @@
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jTextField1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="Hashsearch_jTextField" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -78,16 +76,16 @@
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="양식_jButton" max="32767" attributes="0"/>
                   <Component id="족발보쌈_jButton" max="32767" attributes="0"/>
-                  <Component id="치킨피자_jButton" pref="50" max="32767" attributes="0"/>
+                  <Component id="치킨" pref="50" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="야식_jButton" min="-2" pref="50" max="-2" attributes="0"/>
+                  <Component id="피자" min="-2" pref="50" max="-2" attributes="0"/>
                   <Component id="일식회_jButton" max="32767" attributes="0"/>
                   <Component id="패스트푸드_jButton" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
+              <Component id="Hashsearch_jTextField" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="10" max="32767" attributes="0"/>
               <Component id="메뉴검색_jButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -109,20 +107,20 @@
         <Property name="text" type="java.lang.String" value="&#xd300;&#xd504;&#xb85c;&#xc81d;&#xd2b8;"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="&#xce58;&#xd0a8;&#xd53c;&#xc790;_jButton">
+    <Component class="javax.swing.JButton" name="&#xce58;&#xd0a8;">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&#xce58;&#xd0a8;/&#xd53c;&#xc790;"/>
+        <Property name="text" type="java.lang.String" value="&#xce58;&#xd0a8;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="&#xce58;&#xd0a8;&#xd53c;&#xc790;_jButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="&#xce58;&#xd0a8;ActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="&#xc57c;&#xc2dd;_jButton">
+    <Component class="javax.swing.JButton" name="&#xd53c;&#xc790;">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&#xc57c;&#xc2dd;"/>
+        <Property name="text" type="java.lang.String" value="&#xd53c;&#xc790;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="&#xc57c;&#xc2dd;_jButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="&#xd53c;&#xc790;ActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="&#xbd84;&#xc2dd;_jButton">
@@ -137,6 +135,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="&#xc871;&#xbc1c;/&#xbcf4;&#xc308;"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="&#xc871;&#xbc1c;&#xbcf4;&#xc308;_jButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="&#xd328;&#xc2a4;&#xd2b8;&#xd478;&#xb4dc;_jButton">
       <Properties>
@@ -178,11 +179,16 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="&#xba54;&#xb274;&#xac80;&#xc0c9;_jButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="Hashsearch_jTextField">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
-        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextField1KeyPressed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Hashsearch_jTextFieldActionPerformed"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="Hashsearch_jTextFieldKeyPressed"/>
       </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="User_Hashsearch_jTextField"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

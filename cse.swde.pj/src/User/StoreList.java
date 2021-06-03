@@ -5,6 +5,8 @@
  */
 package User;
 
+import GetSet.StoreCategory;
+import GetSet.StoreNum;
 import static User.Store.Menu_jLabel;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -37,6 +39,7 @@ public class StoreList extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -73,9 +76,21 @@ public class StoreList extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTable1);
 
-        jRadioButton1.setText("jRadioButton1");
+        buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setText("이름순");
+        jRadioButton1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButton1ItemStateChanged(evt);
+            }
+        });
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
 
-        jRadioButton2.setText("jRadioButton2");
+        buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setText("리뷰순");
 
         jLabel1.setText("jLabel1");
 
@@ -93,7 +108,7 @@ public class StoreList extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(91, 91, 91)
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
                         .addComponent(jRadioButton1)))
                 .addContainerGap())
         );
@@ -130,21 +145,32 @@ public class StoreList extends javax.swing.JFrame {
         Connection con = null;
         PreparedStatement st = null;
         ResultSet rs = null;
-        String menuSql = "select store_name ,avg(rating) from store_list join reviews using (store_number) where store_list.store_category=";
+        String storeSql = "select store_name ,avg(rating) from store_list join reviews using (store_number) where store_list.store_category=";
+        String storeSql2 = "select * from store_list where store_list.store_category=";
 
         StoreCategory sc = new StoreCategory();
         String storeCategory = sc.getStoreCategory();
+        jLabel1.setText(storeCategory);
 
         try {
             con = DriverManager.getConnection("jdbc:mysql://115.85.182.30:3306/cse_swde_DB?zeroDateTimeBehavior=CONVERT_TO_NULL&characterEncoding=UTF-8&serverTimezone=UTC", "cse_swde", "password");
-            st = con.prepareStatement(menuSql + "'" + storeCategory + "'" + "group by store_name");
+            st = con.prepareStatement(storeSql + storeCategory);
             rs = st.executeQuery();
             while (rs.next()) {
                 String name = rs.getString("store_name");
-                String rating = rs.getString("avg(rating)");
-
-                Object data[] = {name, rating};
-                model.addRow(data);
+                if (name.equals(null)) {
+                    st = con.prepareStatement(storeSql2 + storeCategory);
+                    rs = st.executeQuery();
+                    while (rs.next()) {
+                        String name2 = rs.getString("store_name");
+                        Object data[] = {name2, "평점이 없습니다."};
+                        model.addRow(data);
+                    }
+                } else {
+                    String rating = rs.getString("avg(rating)");
+                    Object data[] = {name, rating};
+                    model.addRow(data);
+                }
 
             }
         } catch (SQLException ex) {
@@ -157,23 +183,71 @@ public class StoreList extends javax.swing.JFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        int i = jTable1.getSelectedRow();
 
-        jLabel1.setText(model.getValueAt(i, 0).toString());
+        int row = jTable1.getSelectedRow();
+        int col = jTable1.getSelectedColumn();
+        jTable1.isCellEditable(row, col);
+        jLabel1.setText(model.getValueAt(row, 0).toString());
 
-        
-            StoreNum storelist = new StoreNum();
-            String sl = storelist.getStoreList();
+        StoreNum storelist = new StoreNum();
+        String sl = storelist.getStoreList();
 
-            sl = jLabel1.getText();
-            storelist.setStoreList(sl);
-            
-            Store store = new Store();
-            store.setVisible(true);
-            dispose();
+        sl = jLabel1.getText();
+        storelist.setStoreList(sl);
 
-       
+        Store store = new Store();
+        store.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jRadioButton1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton1ItemStateChanged
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        Connection con = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        String menuSql = "select store_name ,avg(rating) from store_list join reviews using (store_number) where store_list.store_category=";
+
+        StoreCategory sc = new StoreCategory();
+        String storeCategory = sc.getStoreCategory();
+        jLabel1.setText(storeCategory);
+
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://115.85.182.30:3306/cse_swde_DB?zeroDateTimeBehavior=CONVERT_TO_NULL&characterEncoding=UTF-8&serverTimezone=UTC", "cse_swde", "password");
+
+            if (jRadioButton1.isSelected()) {
+                st = con.prepareStatement(menuSql + "'" + storeCategory + "'" + "group by store_name order by store_name desc");
+                rs = st.executeQuery();
+
+                while (rs.next()) {
+                    String name = rs.getString("store_name");
+                    String rating = rs.getString("avg(rating)");
+
+                    model.setNumRows(0);
+                    Object data[] = {name, rating};
+                    model.addRow(data);
+                }
+            } else {
+                st = con.prepareStatement(menuSql + "'" + storeCategory + "'" + "group by avg(rating) order by avg(rating) desc");
+                rs = st.executeQuery();
+
+                while (rs.next()) {
+                    String name = rs.getString("store_name");
+                    String rating = rs.getString("avg(rating)");
+
+                    model.setNumRows(0);
+                    Object data[] = {name, rating};
+                    model.addRow(data);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(StoreList.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jRadioButton1ItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -214,6 +288,7 @@ public class StoreList extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JRadioButton jRadioButton1;
