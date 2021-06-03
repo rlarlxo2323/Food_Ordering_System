@@ -5,8 +5,10 @@
  */
 package StoreOwner;
 
+import Connect_DB.Connect_DB;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.*;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -42,7 +44,6 @@ public class StoreOwnerController implements ActionListener{
         storeInfoModelSingleton = StoreInfoModel.getInstance();
         menuInfoModelSingleton = MenuInfoModel.getInstance();
         reviewsModelSingleton = ReviewsModel.getInstance();
-        
         storeInfoRegisterBtn = storeOwnerView.jButton1;
         storeInfoRegisterBtn.addActionListener(this);
         
