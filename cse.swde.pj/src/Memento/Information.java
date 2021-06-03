@@ -59,4 +59,8 @@ public class Information {
         return this.pPrice;
     }
 
+    public void set_Data1(Object name) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

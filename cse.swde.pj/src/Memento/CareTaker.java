@@ -13,7 +13,7 @@ import java.util.Stack;
  */
 public class CareTaker {
 
-    Stack<Memento> mementos = new Stack<>();    //Memento 관리를 위한 Stack
+    public static Stack<Memento> mementos = new Stack<>();    //Memento 관리를 위한 Stack
 
     public void push(Memento memento) //특정 시점에 생성된 Memento를 Push
     {
