@@ -33,10 +33,19 @@ import javax.swing.table.DefaultTableModel;
  * @author 김두현
  */
 public class Store extends javax.swing.JFrame {
+<<<<<<< Updated upstream
     //Stack<Memento> mementos = new Stack<>();
 
+<<<<<<< HEAD
     Information info = new Information(null, null, null, 0);
+=======
+    Information info = new Information("장바구니가 없습니다", "장바구니가 없습니다", 0);
+=======
+    Information info = new Information(null, null, null, 0);
+>>>>>>> Stashed changes
+>>>>>>> feature/user
     CareTaker caretaker = new CareTaker();
+
 
     public Store() {
         initComponents();
@@ -318,6 +327,14 @@ public class Store extends javax.swing.JFrame {
         int price = ov.getMenuPrice();
         price = Integer.parseInt(model.getValueAt(i, 2).toString());
         ov.setMenuPrice(price);
+
+        String myOption = ov.getMyOption();
+        myOption = (String) model.getValueAt(i, 1);
+        ov.setMyOption(myOption);
+        System.out.println(myOption);
+        Price option2 = new OptionPrice();
+        option2.performFly();
+
     }//GEN-LAST:event_Menu_jTableMouseClicked
 
     private void Basket_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Basket_jButtonActionPerformed
@@ -325,7 +342,16 @@ public class Store extends javax.swing.JFrame {
         String store = Storename_jLabel.getText();
         String menu = Menu_jLabel.getText();
         String sizeBox = (String) Size_jComboBox.getSelectedItem();
+<<<<<<< HEAD
         int sum = 0;
+=======
+<<<<<<< Updated upstream
+
+=======
+        
+        int sum = 0;
+>>>>>>> Stashed changes
+>>>>>>> feature/user
         if (menu.equals("-")) {
             JOptionPane.showMessageDialog(null, "메뉴를 선택해 주세요.");
         } else {
@@ -333,8 +359,8 @@ public class Store extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "옵션을 선택해 주세요.");
             } else {
                 Menu m = new Basic();
-                Price option = new OptionPrice();
-                int price = option.display(); //비교가 되
+                Price option2 = new OptionPrice();
+                int price = option2.display();
 
                 DefaultTableModel model = (DefaultTableModel) Basket_jTable.getModel();
 
@@ -346,7 +372,13 @@ public class Store extends javax.swing.JFrame {
                 model.addRow(row);
             }
         }
+<<<<<<< HEAD
         
+=======
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> feature/user
         for (int i = 0; i < Basket_jTable.getRowCount(); i++) {
             String pocket = Basket_jTable.getValueAt(i, 3).toString();
             int s = Integer.parseInt(pocket);
@@ -355,6 +387,10 @@ public class Store extends javax.swing.JFrame {
             Price_jLabel.setText(money);
         }
 
+<<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
+>>>>>>> feature/user
         Size_jComboBox.setSelectedItem("-");
         Menu_jLabel.setText("-");
     }//GEN-LAST:event_Basket_jButtonActionPerformed
@@ -400,7 +436,7 @@ public class Store extends javax.swing.JFrame {
                 Object data[] = {menu, option, price};
                 model1.addRow(data);
             }
-
+            /*
             //리뷰
             st = con.prepareStatement(reviewSql + "'" + s + "'");
             rs = st.executeQuery();
@@ -414,8 +450,8 @@ public class Store extends javax.swing.JFrame {
 
                 Object data2[] = {id, menuName, review, storeRating, nowTime};
                 model2.addRow(data2);
-            }
-
+            }*/
+ 
             //장바구니
             if (mementos.isEmpty()) {
                 System.out.println(info.getData1());
@@ -438,7 +474,6 @@ public class Store extends javax.swing.JFrame {
 
     private void Back_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Back_jButtonActionPerformed
         // TODO add your handling code here:
-
         DefaultTableModel model = (DefaultTableModel) Basket_jTable.getModel();
         int row = model.getRowCount();
         System.out.println(row);

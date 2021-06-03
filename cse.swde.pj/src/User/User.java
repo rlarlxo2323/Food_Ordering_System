@@ -5,6 +5,7 @@
  */
 package User;
 
+import GetSet.OptionValue;
 import GetSet.StoreCategory;
 import static GetSet.StoreNum.storeList;
 import java.awt.event.KeyEvent;
@@ -56,6 +57,11 @@ public class User extends javax.swing.JFrame {
         Hashsearch_jTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         카페_jButton.setText("카페");
         카페_jButton.addActionListener(new java.awt.event.ActionListener() {
@@ -338,6 +344,14 @@ public class User extends javax.swing.JFrame {
         dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_족발보쌈_jButtonActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        OptionValue ov = new OptionValue();
+        String myOption = ov.getMyOption();
+        ov.setMyOption("카페");
+
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

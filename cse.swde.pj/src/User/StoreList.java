@@ -5,6 +5,7 @@
  */
 package User;
 
+import GetSet.OptionValue;
 import GetSet.StoreCategory;
 import GetSet.StoreNum;
 import static User.Store.Menu_jLabel;
@@ -180,7 +181,6 @@ public class StoreList extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
-        
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
 
         int row = jTable1.getSelectedRow();
