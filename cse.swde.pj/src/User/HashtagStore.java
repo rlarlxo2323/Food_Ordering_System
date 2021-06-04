@@ -42,6 +42,7 @@ public class HashtagStore extends javax.swing.JFrame {
 
     Information info = new Information("장바구니가 없습니다", "장바구니가 없습니다", "", 0);
     CareTaker caretaker = new CareTaker();
+    int sum;
 
     public HashtagStore() {
         initComponents();
@@ -71,6 +72,7 @@ public class HashtagStore extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        BasketB_jButton = new javax.swing.JButton();
         Storename_jLabel = new javax.swing.JLabel();
         Back_jButton = new javax.swing.JButton();
 
@@ -134,6 +136,13 @@ public class HashtagStore extends javax.swing.JFrame {
 
         jLabel3.setText("메뉴");
 
+        BasketB_jButton.setText("장바구니 빼기");
+        BasketB_jButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BasketB_jButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout Menu_PanelLayout = new javax.swing.GroupLayout(Menu_Panel);
         Menu_Panel.setLayout(Menu_PanelLayout);
         Menu_PanelLayout.setHorizontalGroup(
@@ -146,12 +155,13 @@ public class HashtagStore extends javax.swing.JFrame {
                             .addComponent(Basket_jTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
                             .addComponent(Menu_jScrollPane))
                         .addGap(30, 30, 30)
-                        .addGroup(Menu_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Basket_jButton)
+                        .addGroup(Menu_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Basket_jButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(Menu_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Size_jComboBoxH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BasketB_jButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Menu_PanelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(Menu_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,7 +192,8 @@ public class HashtagStore extends javax.swing.JFrame {
                 .addGroup(Menu_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Basket_jTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
                     .addGroup(Menu_PanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(BasketB_jButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Price_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -266,13 +277,15 @@ public class HashtagStore extends javax.swing.JFrame {
                     info.RestorMemento(caretaker.pop());
                     Object data3[] = {info.getData0(), info.getData1(), info.getData2(), info.getData3()};
                     model2.addRow(data3);
+                    sum += (int) data3[3];
                 }
             }
         } catch (SQLException ex) {
             Logger.getLogger(StoreList.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-
+        String money = Integer.toString(sum);
+        Price_jLabel.setText(money);
     }//GEN-LAST:event_formWindowOpened
 
     private void Back_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Back_jButtonActionPerformed
@@ -305,7 +318,7 @@ public class HashtagStore extends javax.swing.JFrame {
 
         DefaultTableModel model = (DefaultTableModel) Menu_jTable.getModel();
         int i = Menu_jTable.getSelectedRow();
-        
+
         Storename_jLabel.setText(model.getValueAt(i, 0).toString());
 
         Menu_jLabel.setText(model.getValueAt(i, 1).toString());
@@ -331,7 +344,6 @@ public class HashtagStore extends javax.swing.JFrame {
         String menu = Menu_jLabel.getText();
         String sizeBox = (String) Size_jComboBoxH.getSelectedItem();
 
-        int sum = 0;
         if (menu.equals("-")) {
             JOptionPane.showMessageDialog(null, "메뉴를 선택해 주세요.");
         } else {
@@ -350,23 +362,49 @@ public class HashtagStore extends javax.swing.JFrame {
                 row[2] = sizeBox;
                 row[3] = price;
                 model.addRow(row);
+                sum += price;
+                String money = Integer.toString(sum);
+                Price_jLabel.setText(money);
             }
-        }
-        Size_jComboBoxH.setSelectedItem("-");
-        for (int i = 0; i < Basket_jTable.getRowCount(); i++) {
-            String pocket = Basket_jTable.getValueAt(i, 3).toString();
-            int s = Integer.parseInt(pocket);
-            sum += s;
-            String money = Integer.toString(sum);
-            Price_jLabel.setText(money);
         }
         Size_jComboBoxH.setSelectedItem("-");
         Menu_jLabel.setText("-");
     }//GEN-LAST:event_Basket_jButtonActionPerformed
 
     private void Pay_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Pay_jButtonActionPerformed
-        
+        DefaultTableModel model = (DefaultTableModel) Basket_jTable.getModel();
+        int row = model.getRowCount();
+        System.out.println(row);
+        int col = model.getColumnCount();
+        for (int i = 0; i < row; i++) {
+            String store = (String) model.getValueAt(i, 0);
+            String name = (String) model.getValueAt(i, 1);
+            String option = (String) model.getValueAt(i, 2);
+            int price = (int) model.getValueAt(i, 3);
+            info.setData0(store);
+            info.setData1(name);
+            info.setData2(option);
+            info.setData3(price);
+            caretaker.push(info.CreateMemento());
+        }
+
+        Payment_Frame pf = new Payment_Frame();
+        pf.setVisible(true);
+        dispose();
     }//GEN-LAST:event_Pay_jButtonActionPerformed
+
+    private void BasketB_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BasketB_jButtonActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) Basket_jTable.getModel();
+        int row = Basket_jTable.getSelectedRow();
+
+        String pocket = Basket_jTable.getValueAt(row, 3).toString();
+        int s = Integer.parseInt(pocket);
+        sum -= s;
+        String money = Integer.toString(sum);
+        Price_jLabel.setText(money);
+        model.removeRow(row);
+    }//GEN-LAST:event_BasketB_jButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -409,6 +447,7 @@ public class HashtagStore extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back_jButton;
+    private javax.swing.JButton BasketB_jButton;
     public javax.swing.JButton Basket_jButton;
     public javax.swing.JScrollPane Basket_jScrollPane;
     public javax.swing.JTabbedPane Basket_jTabbedPane;

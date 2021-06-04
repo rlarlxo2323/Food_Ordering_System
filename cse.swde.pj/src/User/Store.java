@@ -38,6 +38,7 @@ public class Store extends javax.swing.JFrame {
 
     Information info = new Information(null, null, null, 0);
     CareTaker caretaker = new CareTaker();
+    int sum;
 
     public Store() {
         initComponents();
@@ -67,6 +68,7 @@ public class Store extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        BasketB_jButton = new javax.swing.JButton();
         Storeinfo_jPanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -158,6 +160,13 @@ public class Store extends javax.swing.JFrame {
 
         jLabel3.setText("결제 가격");
 
+        BasketB_jButton.setText("장바구니 빼기");
+        BasketB_jButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BasketB_jButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout Menu_PanelLayout = new javax.swing.GroupLayout(Menu_Panel);
         Menu_Panel.setLayout(Menu_PanelLayout);
         Menu_PanelLayout.setHorizontalGroup(
@@ -185,7 +194,8 @@ public class Store extends javax.swing.JFrame {
                             .addComponent(Menu_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
+                            .addComponent(jLabel3)
+                            .addComponent(BasketB_jButton, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addContainerGap())))
         );
         Menu_PanelLayout.setVerticalGroup(
@@ -204,8 +214,10 @@ public class Store extends javax.swing.JFrame {
                         .addComponent(Size_jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Basket_jButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(Menu_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Menu_PanelLayout.createSequentialGroup()
+                        .addComponent(BasketB_jButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -213,9 +225,7 @@ public class Store extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(Pay_jButton)
                         .addContainerGap())
-                    .addGroup(Menu_PanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Basket_jTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))))
+                    .addComponent(Basket_jTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)))
         );
 
         jTabbedPane.addTab("메뉴 확인", Menu_Panel);
@@ -256,30 +266,23 @@ public class Store extends javax.swing.JFrame {
             .addGroup(Storeinfo_jPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(Storeinfo_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Storeinfo_jPanelLayout.createSequentialGroup()
-                        .addGroup(Storeinfo_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 655, Short.MAX_VALUE)
-                            .addComponent(jSeparator1)
-                            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(Storeinfo_jPanelLayout.createSequentialGroup()
-                                .addGroup(Storeinfo_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5)
-                                    .addGroup(Storeinfo_jPanelLayout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addGroup(Storeinfo_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel6)
-                                            .addComponent(jLabel7))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(Storeinfo_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(day_Label, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
-                                            .addComponent(time_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                    .addComponent(jLabel8))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 655, Short.MAX_VALUE)
+                    .addComponent(jSeparator1)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel8)
                     .addGroup(Storeinfo_jPanelLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(Storeinfo_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(Storeinfo_jPanelLayout.createSequentialGroup()
+                                .addGroup(Storeinfo_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel7))
+                                .addGap(18, 18, 18)
+                                .addGroup(Storeinfo_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(day_Label, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
+                                    .addComponent(time_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(Storeinfo_jPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addGap(18, 18, 18)
@@ -293,8 +296,8 @@ public class Store extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(Storeinfo_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(detail_Label, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE)
-                                    .addComponent(add_Label, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(add_Label, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE))))))
+                .addContainerGap())
         );
         Storeinfo_jPanelLayout.setVerticalGroup(
             Storeinfo_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -481,8 +484,6 @@ public class Store extends javax.swing.JFrame {
         String menu = Menu_jLabel.getText();
         String sizeBox = (String) Size_jComboBox.getSelectedItem();
 
-        int sum = 0;
-
         if (menu.equals("-")) {
             JOptionPane.showMessageDialog(null, "메뉴를 선택해 주세요.");
         } else {
@@ -501,15 +502,11 @@ public class Store extends javax.swing.JFrame {
                 row[2] = sizeBox;
                 row[3] = price;
                 model.addRow(row);
+
+                sum += price;
+                String money = Integer.toString(sum);
+                Price_jLabel.setText(money);
             }
-        }
-        Size_jComboBox.setSelectedItem("-");
-        for (int i = 0; i < Basket_jTable.getRowCount(); i++) {
-            String pocket = Basket_jTable.getValueAt(i, 3).toString();
-            int s = Integer.parseInt(pocket);
-            sum += s;
-            String money = Integer.toString(sum);
-            Price_jLabel.setText(money);
         }
 
         Size_jComboBox.setSelectedItem("-");
@@ -596,13 +593,15 @@ public class Store extends javax.swing.JFrame {
                     info.RestorMemento(caretaker.pop());
                     Object data3[] = {info.getData0(), info.getData1(), info.getData2(), info.getData3()};
                     model3.addRow(data3);
+                    sum += (int) data3[3];
                 }
             }
             con.close();
         } catch (SQLException ex) {
             Logger.getLogger(StoreList.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        String money = Integer.toString(sum);
+        Price_jLabel.setText(money);
     }//GEN-LAST:event_formWindowOpened
 
     private void Pay_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Pay_jButtonActionPerformed
@@ -707,6 +706,21 @@ public class Store extends javax.swing.JFrame {
 
     }//GEN-LAST:event_Review_jButtonActionPerformed
 
+    private void BasketB_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BasketB_jButtonActionPerformed
+        // TODO add your handling code here:
+
+        DefaultTableModel model = (DefaultTableModel) Basket_jTable.getModel();
+        int row = Basket_jTable.getSelectedRow();
+
+        String pocket = Basket_jTable.getValueAt(row, 3).toString();
+        int s = Integer.parseInt(pocket);
+        sum -= s;
+        String money = Integer.toString(sum);
+        Price_jLabel.setText(money);
+
+        model.removeRow(row);
+    }//GEN-LAST:event_BasketB_jButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -747,6 +761,7 @@ public class Store extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back_jButton;
+    private javax.swing.JButton BasketB_jButton;
     public javax.swing.JButton Basket_jButton;
     public javax.swing.JScrollPane Basket_jScrollPane;
     public javax.swing.JTabbedPane Basket_jTabbedPane;
