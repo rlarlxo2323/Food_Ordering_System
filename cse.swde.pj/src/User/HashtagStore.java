@@ -5,9 +5,11 @@
  */
 package User;
 
+import Connect_DB.Connect_DB;
 import Decorator.Basic;
 import Decorator.Menu;
 import GetSet.OptionValue;
+import GetSet.StoreNum;
 import Memento.CareTaker;
 import static Memento.CareTaker.mementos;
 import Memento.Information;
@@ -66,6 +68,9 @@ public class HashtagStore extends javax.swing.JFrame {
         Size_jComboBoxH = new javax.swing.JComboBox<>();
         Price_jLabel = new javax.swing.JLabel();
         Pay_jButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         Storename_jLabel = new javax.swing.JLabel();
         Back_jButton = new javax.swing.JButton();
 
@@ -81,7 +86,7 @@ public class HashtagStore extends javax.swing.JFrame {
 
             },
             new String [] {
-                "MENU", "SIZE", "PRICE"
+                "STORE", "MENU", "SIZE", "PRICE"
             }
         ));
         Menu_jTable.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -113,13 +118,8 @@ public class HashtagStore extends javax.swing.JFrame {
         Menu_jLabel.setText("-");
 
         Size_jComboBoxH.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Small", "Medium", "Large" }));
-        Size_jComboBoxH.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Size_jComboBoxHActionPerformed(evt);
-            }
-        });
 
-        Price_jLabel.setText("jLabel3");
+        Price_jLabel.setFont(new java.awt.Font("굴림", 1, 14)); // NOI18N
 
         Pay_jButton.setText("결제하기");
         Pay_jButton.addActionListener(new java.awt.event.ActionListener() {
@@ -127,6 +127,12 @@ public class HashtagStore extends javax.swing.JFrame {
                 Pay_jButtonActionPerformed(evt);
             }
         });
+
+        jLabel1.setText("결제 가격");
+
+        jLabel2.setText("옵션");
+
+        jLabel3.setText("메뉴");
 
         javax.swing.GroupLayout Menu_PanelLayout = new javax.swing.GroupLayout(Menu_Panel);
         Menu_Panel.setLayout(Menu_PanelLayout);
@@ -143,12 +149,18 @@ public class HashtagStore extends javax.swing.JFrame {
                         .addGroup(Menu_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Basket_jButton)
                             .addComponent(Menu_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Size_jComboBoxH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(Menu_PanelLayout.createSequentialGroup()
+                            .addComponent(Size_jComboBoxH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Menu_PanelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(Menu_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Price_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Pay_jButton)))))
+                            .addComponent(Pay_jButton, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Menu_PanelLayout.createSequentialGroup()
+                                .addGroup(Menu_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Price_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(22, 22, 22))))))
         );
         Menu_PanelLayout.setVerticalGroup(
             Menu_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,16 +169,22 @@ public class HashtagStore extends javax.swing.JFrame {
                 .addGroup(Menu_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(Menu_jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(Menu_PanelLayout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Menu_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(5, 5, 5)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Size_jComboBoxH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Basket_jButton)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(Menu_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Basket_jTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
                     .addGroup(Menu_PanelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Price_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(Pay_jButton))))
@@ -224,24 +242,20 @@ public class HashtagStore extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) Menu_jTable.getModel();
         DefaultTableModel model2 = (DefaultTableModel) Basket_jTable.getModel();
 
-        Connection con = null;
-        PreparedStatement st = null;
-        ResultSet rs = null;
-
-        String sql = "select * from menu_info join store_info using (store_number) where menu_info.menu_hashtag = ";
-
+        String sql = "select * from menu_info join store_list using (store_number) where menu_info.menu_hashtag = '" + hash + "'";
+        Connect_DB db = new Connect_DB();
         try {
-            con = DriverManager.getConnection("jdbc:mysql://115.85.182.30:3306/cse_swde_DB?zeroDateTimeBehavior=CONVERT_TO_NULL&characterEncoding=UTF-8&serverTimezone=UTC", "cse_swde", "password");
-            st = con.prepareStatement(sql + "'" + hash + "'");
-            JOptionPane.showMessageDialog(null, "연결성공");
-
-            rs = st.executeQuery();
+            Connection con = db.getConnection();
+            PreparedStatement preparedStatement;
+            preparedStatement = con.prepareStatement(sql);
+            ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
+                String store = rs.getString("store_name");
                 String menu = rs.getString("menu_name");
                 String size = rs.getString("menu_option");
                 String price = rs.getString("menu_price");
 
-                Object data[] = {menu, size, price};
+                Object data[] = {store, menu, size, price};
                 model.addRow(data);
             }
 
@@ -289,25 +303,24 @@ public class HashtagStore extends javax.swing.JFrame {
     private void Menu_jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_jTableMouseClicked
         // TODO add your handling code here:
 
-
         DefaultTableModel model = (DefaultTableModel) Menu_jTable.getModel();
         int i = Menu_jTable.getSelectedRow();
+        
+        Storename_jLabel.setText(model.getValueAt(i, 0).toString());
 
-        Menu_jLabel.setText(model.getValueAt(i, 0).toString());
+        Menu_jLabel.setText(model.getValueAt(i, 1).toString());
 
         OptionValue ov = new OptionValue();
         int price = ov.getMenuPrice();
-        price = Integer.parseInt(model.getValueAt(i, 2).toString());
+        price = Integer.parseInt(model.getValueAt(i, 3).toString());
         ov.setMenuPrice(price);
 
-
         String myOption = ov.getMyOption();
-        myOption = (String) model.getValueAt(i, 1);
+        myOption = (String) model.getValueAt(i, 2);
         ov.setMyOption(myOption);
         System.out.println(myOption);
         Price option2 = new OptionPrice_H();
         option2.performFly();
-
 
 
     }//GEN-LAST:event_Menu_jTableMouseClicked
@@ -339,7 +352,7 @@ public class HashtagStore extends javax.swing.JFrame {
                 model.addRow(row);
             }
         }
-        Size_jComboBox.setSelectedItem("-");
+        Size_jComboBoxH.setSelectedItem("-");
         for (int i = 0; i < Basket_jTable.getRowCount(); i++) {
             String pocket = Basket_jTable.getValueAt(i, 3).toString();
             int s = Integer.parseInt(pocket);
@@ -351,12 +364,8 @@ public class HashtagStore extends javax.swing.JFrame {
         Menu_jLabel.setText("-");
     }//GEN-LAST:event_Basket_jButtonActionPerformed
 
-    private void Size_jComboBoxHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Size_jComboBoxHActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Size_jComboBoxHActionPerformed
-
     private void Pay_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Pay_jButtonActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_Pay_jButtonActionPerformed
 
     /**
@@ -412,6 +421,9 @@ public class HashtagStore extends javax.swing.JFrame {
     public javax.swing.JLabel Price_jLabel;
     public static javax.swing.JComboBox<String> Size_jComboBoxH;
     private javax.swing.JLabel Storename_jLabel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JTabbedPane jTabbedPane;
     // End of variables declaration//GEN-END:variables
 }
