@@ -5,6 +5,7 @@
  */
 package User;
 
+import Connect_DB.Connect_DB;
 import GetSet.StoreNum;
 import GetSet.OptionValue;
 import Decorator.Basic;
@@ -15,6 +16,7 @@ import Memento.Information;
 import Memento.Memento;
 import Strategy.Price;
 import Strategy.OptionPrice;
+import static java.lang.Math.round;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -33,9 +35,9 @@ import javax.swing.table.DefaultTableModel;
  * @author 김두현
  */
 public class Store extends javax.swing.JFrame {
+
     Information info = new Information(null, null, null, 0);
     CareTaker caretaker = new CareTaker();
-
 
     public Store() {
         initComponents();
@@ -62,7 +64,28 @@ public class Store extends javax.swing.JFrame {
         Size_jComboBox = new javax.swing.JComboBox<>();
         Price_jLabel = new javax.swing.JLabel();
         Pay_jButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         Storeinfo_jPanel = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        time_Label = new javax.swing.JLabel();
+        day_Label = new javax.swing.JLabel();
+        add_Label = new javax.swing.JLabel();
+        phone_Label = new javax.swing.JLabel();
+        tip_Label = new javax.swing.JLabel();
+        detail_Label = new javax.swing.JLabel();
         Review_jPanel = new javax.swing.JPanel();
         Review_jTextField = new javax.swing.JTextField();
         Review_jScrollPane = new javax.swing.JScrollPane();
@@ -119,7 +142,8 @@ public class Store extends javax.swing.JFrame {
 
         Size_jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Small", "Medium", "Large" }));
 
-        Price_jLabel.setText("jLabel3");
+        Price_jLabel.setFont(new java.awt.Font("굴림", 1, 14)); // NOI18N
+        Price_jLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         Pay_jButton.setText("결제하기");
         Pay_jButton.addActionListener(new java.awt.event.ActionListener() {
@@ -128,6 +152,12 @@ public class Store extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("메뉴");
+
+        jLabel2.setText("옵션");
+
+        jLabel3.setText("결제 가격");
+
         javax.swing.GroupLayout Menu_PanelLayout = new javax.swing.GroupLayout(Menu_Panel);
         Menu_Panel.setLayout(Menu_PanelLayout);
         Menu_PanelLayout.setHorizontalGroup(
@@ -135,21 +165,28 @@ public class Store extends javax.swing.JFrame {
             .addGroup(Menu_PanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(Menu_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Basket_jTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
+                    .addComponent(Basket_jTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE)
                     .addComponent(Menu_jScrollPane))
                 .addGap(18, 18, 18)
                 .addGroup(Menu_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Menu_PanelLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(Price_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(Menu_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Menu_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(Menu_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(Menu_PanelLayout.createSequentialGroup()
+                                .addGroup(Menu_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Basket_jButton)
+                                    .addComponent(Size_jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap())
+                            .addComponent(Pay_jButton, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGroup(Menu_PanelLayout.createSequentialGroup()
-                            .addGroup(Menu_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(Basket_jButton)
-                                .addComponent(Menu_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(Size_jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addContainerGap())
-                        .addComponent(Pay_jButton, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addComponent(Price_jLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGap(20, 20, 20)))
+                    .addGroup(Menu_PanelLayout.createSequentialGroup()
+                        .addGroup(Menu_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Menu_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addContainerGap())))
         );
         Menu_PanelLayout.setVerticalGroup(
             Menu_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,14 +195,20 @@ public class Store extends javax.swing.JFrame {
                 .addGroup(Menu_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(Menu_jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(Menu_PanelLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Menu_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2)
+                        .addGap(5, 5, 5)
                         .addComponent(Size_jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Basket_jButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(Menu_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Menu_PanelLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Price_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(Pay_jButton)
@@ -177,15 +220,120 @@ public class Store extends javax.swing.JFrame {
 
         jTabbedPane.addTab("메뉴 확인", Menu_Panel);
 
+        jLabel4.setFont(new java.awt.Font("굴림", 1, 18)); // NOI18N
+        jLabel4.setText("가게 소개");
+
+        jTextArea1.setEditable(false);
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jLabel5.setFont(new java.awt.Font("굴림", 1, 18)); // NOI18N
+        jLabel5.setText("운영 정보");
+
+        jLabel6.setFont(new java.awt.Font("굴림", 1, 13)); // NOI18N
+        jLabel6.setText("운영 시간");
+
+        jLabel7.setFont(new java.awt.Font("굴림", 1, 13)); // NOI18N
+        jLabel7.setText("휴  무  일");
+
+        jLabel8.setFont(new java.awt.Font("굴림", 1, 18)); // NOI18N
+        jLabel8.setText("가게 정보");
+
+        jLabel9.setFont(new java.awt.Font("굴림", 1, 13)); // NOI18N
+        jLabel9.setText("가게 주소");
+
+        jLabel10.setFont(new java.awt.Font("굴림", 1, 13)); // NOI18N
+        jLabel10.setText("가게 번호");
+
+        jLabel11.setFont(new java.awt.Font("굴림", 1, 13)); // NOI18N
+        jLabel11.setText("배  달  팁");
+
         javax.swing.GroupLayout Storeinfo_jPanelLayout = new javax.swing.GroupLayout(Storeinfo_jPanel);
         Storeinfo_jPanel.setLayout(Storeinfo_jPanelLayout);
         Storeinfo_jPanelLayout.setHorizontalGroup(
             Storeinfo_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 679, Short.MAX_VALUE)
+            .addGroup(Storeinfo_jPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(Storeinfo_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Storeinfo_jPanelLayout.createSequentialGroup()
+                        .addGroup(Storeinfo_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 655, Short.MAX_VALUE)
+                            .addComponent(jSeparator1)
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(Storeinfo_jPanelLayout.createSequentialGroup()
+                                .addGroup(Storeinfo_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)
+                                    .addGroup(Storeinfo_jPanelLayout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addGroup(Storeinfo_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel6)
+                                            .addComponent(jLabel7))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(Storeinfo_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(day_Label, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
+                                            .addComponent(time_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(jLabel8))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(Storeinfo_jPanelLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(Storeinfo_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(Storeinfo_jPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addGap(18, 18, 18)
+                                .addComponent(phone_Label, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE))
+                            .addGroup(Storeinfo_jPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addGap(18, 18, 18)
+                                .addComponent(tip_Label, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE))
+                            .addGroup(Storeinfo_jPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(18, 18, 18)
+                                .addGroup(Storeinfo_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(detail_Label, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE)
+                                    .addComponent(add_Label, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         Storeinfo_jPanelLayout.setVerticalGroup(
             Storeinfo_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 463, Short.MAX_VALUE)
+            .addGroup(Storeinfo_jPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(Storeinfo_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(time_Label, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(Storeinfo_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(day_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(Storeinfo_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
+                    .addComponent(add_Label, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(detail_Label, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(Storeinfo_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(phone_Label, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(Storeinfo_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(tip_Label, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         jTabbedPane.addTab("가맹점 정보", Storeinfo_jPanel);
@@ -202,7 +350,7 @@ public class Store extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "메뉴 이름", "리뷰", "평점", "작성일"
+                "ID", "리뷰", "평점", "작성일"
             }
         ));
         Review_jScrollPane.setViewportView(Review_jTable);
@@ -355,7 +503,7 @@ public class Store extends javax.swing.JFrame {
                 model.addRow(row);
             }
         }
-
+        Size_jComboBox.setSelectedItem("-");
         for (int i = 0; i < Basket_jTable.getRowCount(); i++) {
             String pocket = Basket_jTable.getValueAt(i, 3).toString();
             int s = Integer.parseInt(pocket);
@@ -382,52 +530,67 @@ public class Store extends javax.swing.JFrame {
         DefaultTableModel model2 = (DefaultTableModel) Review_jTable.getModel();
         DefaultTableModel model3 = (DefaultTableModel) Basket_jTable.getModel();
 
-        Connection con = null;
-        PreparedStatement st = null;
-        ResultSet rs = null;
-        String menuSql = "select * from menu_info where menu_info.store_number = ";
-        String myRating = "select avg(rating) from menu_info join reviews using (store_number) where reviews.store_number =";
-        String reviewSql = "select * from menu_info join reviews using (store_number) where reviews.store_number =";
-
+        String menuSql = "select * from menu_info where menu_info.store_number = '" + s + "'";
+        String myRating = "select avg(rating) from reviews where reviews.store_number = '" + s + "'";
+        String reviewSql = "select * from reviews where store_number = '" + s + "'";
+        String storeSql = "select * from store_info where store_number = '" + s + "'";
+        Connect_DB db = new Connect_DB();
         try {
-            con = DriverManager.getConnection("jdbc:mysql://115.85.182.30:3306/cse_swde_DB?zeroDateTimeBehavior=CONVERT_TO_NULL&characterEncoding=UTF-8&serverTimezone=UTC", "cse_swde", "password");
-            st = con.prepareStatement(myRating + "'" + s + "'");
-            rs = st.executeQuery();
+            Connection con = db.getConnection();
+            PreparedStatement preparedStatement = null;
+            preparedStatement = con.prepareStatement(myRating);
+            ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 String myRating2 = rs.getString("avg(rating)");
                 Totalreview_jLabel.setText(myRating2);
             }
             //메뉴
-            st = con.prepareStatement(menuSql + "'" + s + "'");
-            rs = st.executeQuery();
-
+            preparedStatement = con.prepareStatement(menuSql);
+            rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 String menu = rs.getString("menu_name");
                 String option = rs.getString("menu_option");
                 String price = rs.getString("menu_price");
-
                 Object data[] = {menu, option, price};
                 model1.addRow(data);
             }
-            /*
+
             //리뷰
-            st = con.prepareStatement(reviewSql + "'" + s + "'");
-            rs = st.executeQuery();
+            preparedStatement = con.prepareStatement(reviewSql);
+            ResultSet rss = preparedStatement.executeQuery();
 
-            while (rs.next()) {
-                String id = rs.getString("id");
-                String menuName = rs.getString("menu_name");
-                String review = rs.getString("review");
-                String storeRating = rs.getString("rating");
-                String nowTime = rs.getString("time");
-
-                Object data2[] = {id, menuName, review, storeRating, nowTime};
+            while (rss.next()) {
+                String id = rss.getString("id");
+                String review = rss.getString("review");
+                String storeRating = rss.getString("rating");
+                String nowTime = rss.getString("time");
+                Object data2[] = {id, review, storeRating, nowTime};
                 model2.addRow(data2);
-            }*/
- 
+            }
+
+            //가게 정보
+            preparedStatement = con.prepareStatement(storeSql);
+            rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                String intro = rs.getString("store_introduction");
+                String time = rs.getString("store_operatingtime");
+                String day = rs.getString("store_closeddays");
+                String phone = rs.getString("store_phone");
+                String add[] = rs.getString("store_address").split("/");
+                String tip = rs.getString("store_deliverycost");
+
+                jTextArea1.setText(intro);
+                time_Label.setText(time);
+                day_Label.setText(day);
+                phone_Label.setText(phone);
+                add_Label.setText(add[0]);
+                detail_Label.setText(add[1]);
+                tip_Label.setText(tip);
+            }
+
             //장바구니
             if (mementos.isEmpty()) {
-                System.out.println(info.getData1());
+                JOptionPane.showMessageDialog(null, "장바구니 내용이 비어있습니다");
             } else {
                 while (!mementos.isEmpty()) {
                     info.RestorMemento(caretaker.pop());
@@ -435,6 +598,7 @@ public class Store extends javax.swing.JFrame {
                     model3.addRow(data3);
                 }
             }
+            con.close();
         } catch (SQLException ex) {
             Logger.getLogger(StoreList.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -443,6 +607,25 @@ public class Store extends javax.swing.JFrame {
 
     private void Pay_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Pay_jButtonActionPerformed
         // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) Basket_jTable.getModel();
+        int row = model.getRowCount();
+        System.out.println(row);
+        int col = model.getColumnCount();
+        for (int i = 0; i < row; i++) {
+            String store = (String) model.getValueAt(i, 0);
+            String name = (String) model.getValueAt(i, 1);
+            String option = (String) model.getValueAt(i, 2);
+            int price = (int) model.getValueAt(i, 3);
+            info.setData0(store);
+            info.setData1(name);
+            info.setData2(option);
+            info.setData3(price);
+            caretaker.push(info.CreateMemento());
+        }
+
+        Payment_Frame pf = new Payment_Frame();
+        pf.setVisible(true);
+        dispose();
     }//GEN-LAST:event_Pay_jButtonActionPerformed
 
     private void Back_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Back_jButtonActionPerformed
@@ -488,34 +671,33 @@ public class Store extends javax.swing.JFrame {
         String now = date.format(time);
 
         DefaultTableModel model = (DefaultTableModel) Review_jTable.getModel();
-        String reviewText = "insert into reviews (id, menu_name, review, store_number, rating, time) values ('id', '치즈 핫도그',";
-        String reviewSql = "select * from menu_info join reviews using (store_number) where menu_info.menu_name = reviews.menu_name and reviews.store_number =";
+        String reviewText = "insert into reviews (id, store_number, review, rating, time) values (?, ?, ?, ?, ?)";
         String reviewInput = Review_jTextField.getText();
-
-        Connection con = null;
-        PreparedStatement st = null;
-        ResultSet rs = null;
-        int num;
-
+        Connect_DB db = new Connect_DB();
         try {
-            con = DriverManager.getConnection("jdbc:mysql://115.85.182.30:3306/cse_swde_DB?zeroDateTimeBehavior=CONVERT_TO_NULL&characterEncoding=UTF-8&serverTimezone=UTC", "cse_swde", "password");
-            st = con.prepareStatement(reviewText + "'" + reviewInput + "'," + "'" + s + "'," + "'" + rating + "'," + "'" + now + "')");
-            num = st.executeUpdate();
+            Connection con = db.getConnection();
+            PreparedStatement preparedStatement = null;
+            preparedStatement = con.prepareStatement(reviewText);
+            preparedStatement.setString(1, Login.Login_Frame.Login_Session);
+            preparedStatement.setString(2, s);
+            preparedStatement.setString(3, reviewInput);
+            preparedStatement.setInt(4, rating);
+            preparedStatement.setString(5, now);
+            int num = preparedStatement.executeUpdate();
 
-            Object review[] = new Object[5];
-            review[0] = "id";
-            review[1] = "메뉴이름";
-            review[2] = reviewInput;
-            review[3] = rating;
-            review[4] = now;
+            Object review[] = new Object[4];
+            review[0] = Login.Login_Frame.Login_Session;
+            review[1] = reviewInput;
+            review[2] = rating;
+            review[3] = now;
 
             model.addRow(review);
 
-            String myRating = "select avg(rating) from menu_info join reviews using (store_number) where reviews.store_number =";
-            st = con.prepareStatement(myRating + s);
-            rs = st.executeQuery();
+            String myRating = "select round(avg(rating),2) from reviews where store_number = '" + s + "'";
+            preparedStatement = con.prepareStatement(myRating);
+            ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                String myRating2 = rs.getString("avg(rating)");
+                String myRating2 = rs.getString("round(avg(rating),2)");
                 Totalreview_jLabel.setText(myRating2);
             }
         } catch (SQLException ex) {
@@ -586,6 +768,27 @@ public class Store extends javax.swing.JFrame {
     private javax.swing.JPanel Storeinfo_jPanel;
     private javax.swing.JLabel Storename_jLabel;
     private javax.swing.JLabel Totalreview_jLabel;
+    private javax.swing.JLabel add_Label;
+    private javax.swing.JLabel day_Label;
+    private javax.swing.JLabel detail_Label;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel phone_Label;
+    private javax.swing.JLabel time_Label;
+    private javax.swing.JLabel tip_Label;
     // End of variables declaration//GEN-END:variables
 }

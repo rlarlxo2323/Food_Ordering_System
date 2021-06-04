@@ -6,15 +6,23 @@
 package User;
 
 import Connect_DB.Connect_DB;
+import Memento.CareTaker;
+import static Memento.CareTaker.mementos;
+import Memento.Information;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static javafx.application.Platform.exit;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author rlarl
  */
 public class Payment_Frame extends javax.swing.JFrame {
+
+    int sum = 0;
 
     /**
      * Creates new form test_Frame
@@ -60,15 +68,19 @@ public class Payment_Frame extends javax.swing.JFrame {
         agree_Label = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
         jCheckBox1 = new javax.swing.JCheckBox();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(410, 630));
         setSize(new java.awt.Dimension(410, 630));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         Money_Label.setFont(new java.awt.Font("굴림", 1, 24)); // NOI18N
         Money_Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -194,10 +206,10 @@ public class Payment_Frame extends javax.swing.JFrame {
                     .addComponent(Label_1)
                     .addComponent(Label_2)
                     .addComponent(Label_3, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFormattedTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(Card_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Period_Label)
@@ -218,14 +230,18 @@ public class Payment_Frame extends javax.swing.JFrame {
         jTextArea2.setText("필수적인 개인정보의 수집·이용에 관한 사항\n\n ① 수집ㆍ이용 항목 | 성명,전화번호,주소,신용카드 정보\n ② 수집ㆍ이용 목적 | 예약 서비스 제공\n\n동의가 없을 경우 예약 서비스 제공과 관련된 제반 절차 \n진행이 불가능 할 수 있음을 알려드립니다.");
         jScrollPane3.setViewportView(jTextArea2);
 
-        jTextArea3.setEditable(false);
-        jTextArea3.setColumns(20);
-        jTextArea3.setLineWrap(true);
-        jTextArea3.setRows(5);
-        jScrollPane4.setViewportView(jTextArea3);
-
         jCheckBox1.setFont(new java.awt.Font("굴림", 0, 10)); // NOI18N
         jCheckBox1.setText("개인정보 수집 및 이용에 대해 동의합니다.");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "STORE", "NAME", "OPTION", "PRICE"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -234,13 +250,15 @@ public class Payment_Frame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3)
-                    .addComponent(jScrollPane4)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(agree_Label)
                             .addComponent(jCheckBox1))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -252,14 +270,19 @@ public class Payment_Frame extends javax.swing.JFrame {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jCheckBox1)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         jButton2.setText("이  전");
 
         jButton1.setText("결  제");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -322,12 +345,12 @@ public class Payment_Frame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Set_Address(){
+    private void Set_Address() {
         Connect_DB db = new Connect_DB();
         try {
             Connection con = db.getConnection();
             PreparedStatement preparedStatement = null;
-            String sql = "select address from actor where id='"+ Login.Login_Frame.Login_Session +"'";
+            String sql = "select address from actor where id='" + Login.Login_Frame.Login_Session + "'";
             preparedStatement = con.prepareStatement(sql);
             ResultSet rs = preparedStatement.executeQuery();
             rs.next();
@@ -338,16 +361,62 @@ public class Payment_Frame extends javax.swing.JFrame {
             Logger.getLogger(Payment_Frame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
+    private void Set_Cost() {
+
+    }
+
     private void Card_RButtonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_Card_RButtonItemStateChanged
-        if(Card_RButton.isSelected()){
+        if (Card_RButton.isSelected()) {
             Card_Panel.setVisible(true);
-            this.setSize(410, 630);
-        }else{
+        } else {
             Card_Panel.setVisible(false);
-            this.setSize(410, 500);
         }
     }//GEN-LAST:event_Card_RButtonItemStateChanged
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        Information info = new Information("장바구니가 없습니다", "장바구니가 없습니다", "", 0);
+        CareTaker caretaker = new CareTaker();
+        if (mementos.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "장바구니 내용이 비어있습니다");
+        } else {
+
+            int i = 0;
+            while (!mementos.isEmpty()) {
+                info.RestorMemento(caretaker.pop());
+                Object data[] = {info.getData0(), info.getData1(), info.getData2(), info.getData3()};
+                model.addRow(data);
+                sum += (int) model.getValueAt(i, 3);
+                i++;
+            }
+            Money_Label.setText("결제 금액: " + sum);
+        }
+    }//GEN-LAST:event_formWindowOpened
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        if (Card_RButton.isSelected()) {
+            if (Choose_Combo.getSelectedItem().toString().equals("선택")) {
+                JOptionPane.showMessageDialog(null, "카드를 선택해 주세요.");
+            } else {
+                if (jFormattedTextField1.getText().equals("    ")
+                        || jFormattedTextField2.getText().equals("    ")
+                        || jFormattedTextField3.getText().equals("    ")
+                        || jFormattedTextField4.getText().equals("    ")
+                        || jFormattedTextField5.getText().equals("  ")
+                        || jFormattedTextField6.getText().equals("  ")) {
+                    JOptionPane.showMessageDialog(null, "카드 정보를 입력해 주세요.");
+                }
+            }
+        }
+        if (!jCheckBox1.isSelected()) {
+            JOptionPane.showMessageDialog(null, "개인정보 수집 및 이용에 대해 동의완료 해주세요.");
+        } else {
+            JOptionPane.showMessageDialog(null, "총" + sum + "원이 결제 완료되었습니다.");
+            dispose();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -381,7 +450,7 @@ public class Payment_Frame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Payment_Frame().setVisible(true);
-                
+
             }
         });
     }
@@ -415,9 +484,9 @@ public class Payment_Frame extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jFormattedTextField5;
     private javax.swing.JFormattedTextField jFormattedTextField6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextArea jTextArea3;
     // End of variables declaration//GEN-END:variables
 }
