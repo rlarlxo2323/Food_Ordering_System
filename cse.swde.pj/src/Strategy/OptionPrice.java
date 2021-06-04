@@ -38,10 +38,20 @@ import static User.HashtagStore.Size_jComboBoxH;
  */
 public class OptionPrice extends Price {
 
+<<<<<<< HEAD
+
     String optionBox = (String)Size_jComboBox.getSelectedItem();
-    //String optionBox2 = (String)Size_jComboBoxH.getSelectedItem();
+    String optionBox2 = (String)Size_jComboBoxH.getSelectedItem();
+=======
+<<<<<<< Updated upstream
+    //OptionValue ov = new OptionValue();
+    //String optionBox = ov.getSizeComboBox();
+    String optionBox = (String)Size_jComboBox.getSelectedItem();
+=======
+    String optionBox = (String) Size_jComboBox.getSelectedItem();
 
-
+>>>>>>> Stashed changes
+>>>>>>> feature/user
     public OptionPrice() {
         flyBehavior = new CategoyBox();
     }

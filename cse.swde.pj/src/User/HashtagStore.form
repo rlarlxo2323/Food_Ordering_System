@@ -90,7 +90,10 @@
                                   <Component id="Size_jComboBoxH" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel2" min="-2" pref="40" max="-2" attributes="0"/>
                                   <Component id="jLabel3" min="-2" pref="40" max="-2" attributes="0"/>
+<<<<<<< HEAD
                                   <Component id="BasketB_jButton" alignment="0" max="32767" attributes="0"/>
+=======
+>>>>>>> 18b3c4f13f1aff58528c823786141e45d8d20b88
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -132,8 +135,12 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="Basket_jTabbedPane" pref="158" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
+<<<<<<< HEAD
                               <Component id="BasketB_jButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
+=======
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+>>>>>>> 18b3c4f13f1aff58528c823786141e45d8d20b88
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="Price_jLabel" min="-2" pref="23" max="-2" attributes="0"/>
@@ -337,6 +344,7 @@
                 <Property name="text" type="java.lang.String" value="&#xba54;&#xb274;"/>
               </Properties>
             </Component>
+<<<<<<< HEAD
             <Component class="javax.swing.JButton" name="BasketB_jButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#xc7a5;&#xbc14;&#xad6c;&#xb2c8; &#xbe7c;&#xae30;"/>
@@ -345,6 +353,8 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BasketB_jButtonActionPerformed"/>
               </Events>
             </Component>
+=======
+>>>>>>> 18b3c4f13f1aff58528c823786141e45d8d20b88
           </SubComponents>
         </Container>
       </SubComponents>

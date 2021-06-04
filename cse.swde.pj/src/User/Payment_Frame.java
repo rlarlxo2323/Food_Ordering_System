@@ -235,10 +235,20 @@ public class Payment_Frame extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+<<<<<<< HEAD
 
             },
             new String [] {
                 "STORE", "NAME", "OPTION", "PRICE"
+=======
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+>>>>>>> 18b3c4f13f1aff58528c823786141e45d8d20b88
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -361,11 +371,20 @@ public class Payment_Frame extends javax.swing.JFrame {
             Logger.getLogger(Payment_Frame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+<<<<<<< HEAD
 
     private void Set_Cost() {
 
     }
 
+=======
+    
+    private void Set_Cost(){
+        
+        
+    }
+    
+>>>>>>> 18b3c4f13f1aff58528c823786141e45d8d20b88
     private void Card_RButtonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_Card_RButtonItemStateChanged
         if (Card_RButton.isSelected()) {
             Card_Panel.setVisible(true);
