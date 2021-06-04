@@ -12,7 +12,6 @@ import Memento.Information;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static javafx.application.Platform.exit;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -123,7 +122,7 @@ public class Payment_Frame extends javax.swing.JFrame {
         Label_4.setText("/");
 
         try {
-            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("")));
+            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -362,15 +361,13 @@ public class Payment_Frame extends javax.swing.JFrame {
         }
     }
 
-    private void Set_Cost() {
-
-    }
-
     private void Card_RButtonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_Card_RButtonItemStateChanged
         if (Card_RButton.isSelected()) {
             Card_Panel.setVisible(true);
+            this.setSize(410, 630);
         } else {
             Card_Panel.setVisible(false);
+            this.setSize(410, 510);
         }
     }//GEN-LAST:event_Card_RButtonItemStateChanged
 
@@ -414,7 +411,6 @@ public class Payment_Frame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "개인정보 수집 및 이용에 대해 동의완료 해주세요.");
         } else {
             JOptionPane.showMessageDialog(null, "총" + sum + "원이 결제 완료되었습니다.");
-            dispose();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
