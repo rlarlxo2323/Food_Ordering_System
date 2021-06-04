@@ -102,7 +102,6 @@
                               <Group type="102" attributes="0">
                                   <Component id="Price_jLabel" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-<<<<<<< HEAD
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
@@ -113,17 +112,6 @@
                                   <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="BasketB_jButton" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
-=======
-                              </Group>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="Menu_jLabel" alignment="0" min="-2" pref="81" max="-2" attributes="0"/>
-                                  <Component id="jLabel1" min="-2" pref="40" max="-2" attributes="0"/>
-                                  <Component id="jLabel2" min="-2" pref="40" max="-2" attributes="0"/>
-                                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
->>>>>>> 18b3c4f13f1aff58528c823786141e45d8d20b88
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -353,7 +341,6 @@
                 <Property name="text" type="java.lang.String" value="&#xacb0;&#xc81c; &#xac00;&#xaca9;"/>
               </Properties>
             </Component>
-<<<<<<< HEAD
             <Component class="javax.swing.JButton" name="BasketB_jButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#xc7a5;&#xbc14;&#xad6c;&#xb2c8; &#xbe7c;&#xae30;"/>
@@ -362,8 +349,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BasketB_jButtonActionPerformed"/>
               </Events>
             </Component>
-=======
->>>>>>> 18b3c4f13f1aff58528c823786141e45d8d20b88
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="Storeinfo_jPanel">
@@ -381,7 +366,6 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-<<<<<<< HEAD
                           <Component id="jScrollPane1" pref="655" max="32767" attributes="0"/>
                           <Component id="jSeparator1" max="32767" attributes="0"/>
                           <Component id="jSeparator2" alignment="1" max="32767" attributes="0"/>
@@ -402,39 +386,6 @@
                                           <Component id="time_Label" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
-=======
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane1" pref="655" max="32767" attributes="0"/>
-                                  <Component id="jSeparator1" max="32767" attributes="0"/>
-                                  <Component id="jSeparator2" alignment="1" max="32767" attributes="0"/>
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="day_Label" pref="567" max="32767" attributes="0"/>
-                                                  <Component id="time_Label" max="32767" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
->>>>>>> 18b3c4f13f1aff58528c823786141e45d8d20b88
                                   <Group type="102" attributes="0">
                                       <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -454,15 +405,9 @@
                                       </Group>
                                   </Group>
                               </Group>
-<<<<<<< HEAD
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-=======
-                              <EmptySpace max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
->>>>>>> 18b3c4f13f1aff58528c823786141e45d8d20b88
                   </Group>
               </Group>
             </DimensionLayout>

@@ -72,10 +72,7 @@ public class HashtagStore extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-<<<<<<< HEAD
         BasketB_jButton = new javax.swing.JButton();
-=======
->>>>>>> 18b3c4f13f1aff58528c823786141e45d8d20b88
         Storename_jLabel = new javax.swing.JLabel();
         Back_jButton = new javax.swing.JButton();
 
@@ -139,7 +136,6 @@ public class HashtagStore extends javax.swing.JFrame {
 
         jLabel3.setText("메뉴");
 
-<<<<<<< HEAD
         BasketB_jButton.setText("장바구니 빼기");
         BasketB_jButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,8 +143,6 @@ public class HashtagStore extends javax.swing.JFrame {
             }
         });
 
-=======
->>>>>>> 18b3c4f13f1aff58528c823786141e45d8d20b88
         javax.swing.GroupLayout Menu_PanelLayout = new javax.swing.GroupLayout(Menu_Panel);
         Menu_Panel.setLayout(Menu_PanelLayout);
         Menu_PanelLayout.setHorizontalGroup(
@@ -166,12 +160,8 @@ public class HashtagStore extends javax.swing.JFrame {
                             .addComponent(Menu_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Size_jComboBoxH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-<<<<<<< HEAD
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(BasketB_jButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-=======
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
->>>>>>> 18b3c4f13f1aff58528c823786141e45d8d20b88
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Menu_PanelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(Menu_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,12 +192,8 @@ public class HashtagStore extends javax.swing.JFrame {
                 .addGroup(Menu_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Basket_jTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
                     .addGroup(Menu_PanelLayout.createSequentialGroup()
-<<<<<<< HEAD
                         .addComponent(BasketB_jButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-=======
-                        .addGap(0, 0, Short.MAX_VALUE)
->>>>>>> 18b3c4f13f1aff58528c823786141e45d8d20b88
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Price_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -332,14 +318,9 @@ public class HashtagStore extends javax.swing.JFrame {
 
         DefaultTableModel model = (DefaultTableModel) Menu_jTable.getModel();
         int i = Menu_jTable.getSelectedRow();
-        
+
         Storename_jLabel.setText(model.getValueAt(i, 0).toString());
 
-<<<<<<< HEAD
-        Storename_jLabel.setText(model.getValueAt(i, 0).toString());
-
-=======
->>>>>>> 18b3c4f13f1aff58528c823786141e45d8d20b88
         Menu_jLabel.setText(model.getValueAt(i, 1).toString());
 
         OptionValue ov = new OptionValue();
@@ -386,23 +367,11 @@ public class HashtagStore extends javax.swing.JFrame {
                 Price_jLabel.setText(money);
             }
         }
-<<<<<<< HEAD
-=======
-        Size_jComboBoxH.setSelectedItem("-");
-        for (int i = 0; i < Basket_jTable.getRowCount(); i++) {
-            String pocket = Basket_jTable.getValueAt(i, 3).toString();
-            int s = Integer.parseInt(pocket);
-            sum += s;
-            String money = Integer.toString(sum);
-            Price_jLabel.setText(money);
-        }
->>>>>>> 18b3c4f13f1aff58528c823786141e45d8d20b88
         Size_jComboBoxH.setSelectedItem("-");
         Menu_jLabel.setText("-");
     }//GEN-LAST:event_Basket_jButtonActionPerformed
 
     private void Pay_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Pay_jButtonActionPerformed
-<<<<<<< HEAD
         DefaultTableModel model = (DefaultTableModel) Basket_jTable.getModel();
         int row = model.getRowCount();
         System.out.println(row);
@@ -422,9 +391,6 @@ public class HashtagStore extends javax.swing.JFrame {
         Payment_Frame pf = new Payment_Frame();
         pf.setVisible(true);
         dispose();
-=======
-        
->>>>>>> 18b3c4f13f1aff58528c823786141e45d8d20b88
     }//GEN-LAST:event_Pay_jButtonActionPerformed
 
     private void BasketB_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BasketB_jButtonActionPerformed

@@ -68,10 +68,7 @@ public class Store extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-<<<<<<< HEAD
         BasketB_jButton = new javax.swing.JButton();
-=======
->>>>>>> 18b3c4f13f1aff58528c823786141e45d8d20b88
         Storeinfo_jPanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -163,7 +160,6 @@ public class Store extends javax.swing.JFrame {
 
         jLabel3.setText("결제 가격");
 
-<<<<<<< HEAD
         BasketB_jButton.setText("장바구니 빼기");
         BasketB_jButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -171,8 +167,6 @@ public class Store extends javax.swing.JFrame {
             }
         });
 
-=======
->>>>>>> 18b3c4f13f1aff58528c823786141e45d8d20b88
         javax.swing.GroupLayout Menu_PanelLayout = new javax.swing.GroupLayout(Menu_Panel);
         Menu_Panel.setLayout(Menu_PanelLayout);
         Menu_PanelLayout.setHorizontalGroup(
@@ -200,12 +194,8 @@ public class Store extends javax.swing.JFrame {
                             .addComponent(Menu_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-<<<<<<< HEAD
                             .addComponent(jLabel3)
                             .addComponent(BasketB_jButton, javax.swing.GroupLayout.Alignment.TRAILING))
-=======
-                            .addComponent(jLabel3))
->>>>>>> 18b3c4f13f1aff58528c823786141e45d8d20b88
                         .addContainerGap())))
         );
         Menu_PanelLayout.setVerticalGroup(
@@ -276,7 +266,6 @@ public class Store extends javax.swing.JFrame {
             .addGroup(Storeinfo_jPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(Storeinfo_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-<<<<<<< HEAD
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 655, Short.MAX_VALUE)
                     .addComponent(jSeparator1)
                     .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -294,32 +283,6 @@ public class Store extends javax.swing.JFrame {
                                 .addGroup(Storeinfo_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(day_Label, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
                                     .addComponent(time_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-=======
-                    .addGroup(Storeinfo_jPanelLayout.createSequentialGroup()
-                        .addGroup(Storeinfo_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 655, Short.MAX_VALUE)
-                            .addComponent(jSeparator1)
-                            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(Storeinfo_jPanelLayout.createSequentialGroup()
-                                .addGroup(Storeinfo_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5)
-                                    .addGroup(Storeinfo_jPanelLayout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addGroup(Storeinfo_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel6)
-                                            .addComponent(jLabel7))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(Storeinfo_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(day_Label, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
-                                            .addComponent(time_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                    .addComponent(jLabel8))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(Storeinfo_jPanelLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(Storeinfo_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
->>>>>>> 18b3c4f13f1aff58528c823786141e45d8d20b88
                             .addGroup(Storeinfo_jPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addGap(18, 18, 18)
@@ -333,13 +296,8 @@ public class Store extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(Storeinfo_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(detail_Label, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE)
-<<<<<<< HEAD
                                     .addComponent(add_Label, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE))))))
                 .addContainerGap())
-=======
-                                    .addComponent(add_Label, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
->>>>>>> 18b3c4f13f1aff58528c823786141e45d8d20b88
         );
         Storeinfo_jPanelLayout.setVerticalGroup(
             Storeinfo_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -544,23 +502,11 @@ public class Store extends javax.swing.JFrame {
                 row[2] = sizeBox;
                 row[3] = price;
                 model.addRow(row);
-<<<<<<< HEAD
 
                 sum += price;
                 String money = Integer.toString(sum);
                 Price_jLabel.setText(money);
             }
-=======
-            }
-        }
-        Size_jComboBox.setSelectedItem("-");
-        for (int i = 0; i < Basket_jTable.getRowCount(); i++) {
-            String pocket = Basket_jTable.getValueAt(i, 3).toString();
-            int s = Integer.parseInt(pocket);
-            sum += s;
-            String money = Integer.toString(sum);
-            Price_jLabel.setText(money);
->>>>>>> 18b3c4f13f1aff58528c823786141e45d8d20b88
         }
 
         Size_jComboBox.setSelectedItem("-");
@@ -581,17 +527,10 @@ public class Store extends javax.swing.JFrame {
         DefaultTableModel model2 = (DefaultTableModel) Review_jTable.getModel();
         DefaultTableModel model3 = (DefaultTableModel) Basket_jTable.getModel();
 
-<<<<<<< HEAD
         String menuSql = "select * from menu_info where menu_info.store_number = '" + s + "'";
         String myRating = "select avg(rating) from reviews where reviews.store_number = '" + s + "'";
         String reviewSql = "select * from reviews where store_number = '" + s + "'";
         String storeSql = "select * from store_info where store_number = '" + s + "'";
-=======
-        String menuSql = "select * from menu_info where menu_info.store_number = '"+s+"'";
-        String myRating = "select avg(rating) from reviews where reviews.store_number = '"+s+"'";
-        String reviewSql = "select * from reviews where store_number = '"+s+"'";
-        String storeSql = "select * from store_info where store_number = '"+s+"'";
->>>>>>> 18b3c4f13f1aff58528c823786141e45d8d20b88
         Connect_DB db = new Connect_DB();
         try {
             Connection con = db.getConnection();
@@ -609,7 +548,6 @@ public class Store extends javax.swing.JFrame {
                 String menu = rs.getString("menu_name");
                 String option = rs.getString("menu_option");
                 String price = rs.getString("menu_price");
-<<<<<<< HEAD
                 Object data[] = {menu, option, price};
                 model1.addRow(data);
             }
@@ -618,23 +556,11 @@ public class Store extends javax.swing.JFrame {
             preparedStatement = con.prepareStatement(reviewSql);
             ResultSet rss = preparedStatement.executeQuery();
 
-=======
-                System.out.println("ttaa");
-                Object data[] = {menu, option, price};
-                model1.addRow(data);
-            }
-   
-            //리뷰
-            preparedStatement = con.prepareStatement(reviewSql);
-            ResultSet rss = preparedStatement.executeQuery();
-            System.out.println("ttttt");
->>>>>>> 18b3c4f13f1aff58528c823786141e45d8d20b88
             while (rss.next()) {
                 String id = rss.getString("id");
                 String review = rss.getString("review");
                 String storeRating = rss.getString("rating");
                 String nowTime = rss.getString("time");
-<<<<<<< HEAD
                 Object data2[] = {id, review, storeRating, nowTime};
                 model2.addRow(data2);
             }
@@ -643,29 +569,13 @@ public class Store extends javax.swing.JFrame {
             preparedStatement = con.prepareStatement(storeSql);
             rs = preparedStatement.executeQuery();
             if (rs.next()) {
-=======
-                System.out.println("txxxt");
-                Object data2[] = {id, review, storeRating, nowTime};
-                model2.addRow(data2);
-            }
- 
-            
-            //가게 정보
-            preparedStatement = con.prepareStatement(storeSql);
-            rs = preparedStatement.executeQuery();
-            if(rs.next()){
->>>>>>> 18b3c4f13f1aff58528c823786141e45d8d20b88
                 String intro = rs.getString("store_introduction");
                 String time = rs.getString("store_operatingtime");
                 String day = rs.getString("store_closeddays");
                 String phone = rs.getString("store_phone");
                 String add[] = rs.getString("store_address").split("/");
                 String tip = rs.getString("store_deliverycost");
-<<<<<<< HEAD
 
-=======
-                
->>>>>>> 18b3c4f13f1aff58528c823786141e45d8d20b88
                 jTextArea1.setText(intro);
                 time_Label.setText(time);
                 day_Label.setText(day);
@@ -674,11 +584,7 @@ public class Store extends javax.swing.JFrame {
                 detail_Label.setText(add[1]);
                 tip_Label.setText(tip);
             }
-<<<<<<< HEAD
 
-=======
-            
->>>>>>> 18b3c4f13f1aff58528c823786141e45d8d20b88
             //장바구니
             if (mementos.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "장바구니 내용이 비어있습니다");
@@ -689,12 +595,8 @@ public class Store extends javax.swing.JFrame {
                     model3.addRow(data3);
                     sum += (int) data3[3];
                 }
-<<<<<<< HEAD
             }
             con.close();
-=======
-            } con.close();
->>>>>>> 18b3c4f13f1aff58528c823786141e45d8d20b88
         } catch (SQLException ex) {
             Logger.getLogger(StoreList.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -790,11 +692,7 @@ public class Store extends javax.swing.JFrame {
 
             model.addRow(review);
 
-<<<<<<< HEAD
             String myRating = "select round(avg(rating),2) from reviews where store_number = '" + s + "'";
-=======
-            String myRating = "select round(avg(rating),2) from reviews where store_number = '"+s+"'";
->>>>>>> 18b3c4f13f1aff58528c823786141e45d8d20b88
             preparedStatement = con.prepareStatement(myRating);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
