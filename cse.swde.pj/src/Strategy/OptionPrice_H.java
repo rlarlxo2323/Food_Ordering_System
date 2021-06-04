@@ -28,8 +28,6 @@ import Decorator_Option.PizzaregularOption;
 import Decorator_Option.WestlargeOption;
 import Decorator_Option.WestmediumOption;
 import Decorator_Option.WestsmallOption;
-import GetSet.OptionValue;
-import static User.Store.Size_jComboBox;
 import static User.HashtagStore.Size_jComboBoxH;
 
 /**
@@ -46,7 +44,9 @@ public class OptionPrice_H extends Price {
 
     public int display() {
         Menu m = new Basic();
-        if (optionBox2.equals("소")) {
+        if (optionBox2.equals("기본")) {
+            m.price();
+        } else if (optionBox2.equals("소")) {
             m = new CafesmallOption(m);
         } else if (optionBox2.equals("중")) {
             m = new CafemediumOption(m);

@@ -5,20 +5,16 @@
  */
 package User;
 
-import GetSet.OptionValue;
+import Connect_DB.Connect_DB;
 import GetSet.StoreCategory;
 import GetSet.StoreNum;
-import static User.Store.Menu_jLabel;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -143,23 +139,23 @@ public class StoreList extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        Connection con = null;
-        PreparedStatement st = null;
-        ResultSet rs = null;
-        String storeSql = "select store_name ,avg(rating) from store_list join reviews using (store_number) where store_list.store_category=";
-        String storeSql2 = "select * from store_list where store_list.store_category=";
+        String storeSql = "select store_name ,avg(rating) from store_list join reviews using (store_number) where store_list.store_category=? group by store_name";
+        String storeSql2 = "select * from store_list where store_list.store_category=? and store_state = 'y'";
 
         StoreCategory sc = new StoreCategory();
         String storeCategory = sc.getStoreCategory();
         jLabel1.setText(storeCategory);
-
+        Connect_DB db = new Connect_DB();
         try {
-            con = DriverManager.getConnection("jdbc:mysql://115.85.182.30:3306/cse_swde_DB?zeroDateTimeBehavior=CONVERT_TO_NULL&characterEncoding=UTF-8&serverTimezone=UTC", "cse_swde", "password");
-            st = con.prepareStatement(storeSql + "'" + storeCategory + "'group by store_name");
-            rs = st.executeQuery();
+            Connection con = db.getConnection();
+            PreparedStatement preparedStatement = con.prepareStatement(storeSql);
+            preparedStatement.setString(1, storeCategory);
+            ResultSet rs = preparedStatement.executeQuery();
+            rs = preparedStatement.executeQuery();
             if (!rs.isBeforeFirst()) {
-                st = con.prepareStatement(storeSql2 + "'" + storeCategory + "' and store_state = 'y'");
-                rs = st.executeQuery();
+                preparedStatement = con.prepareStatement(storeSql2);
+                preparedStatement.setString(1, storeCategory);
+                rs = preparedStatement.executeQuery();
                 while (rs.next()) {
                     String name = rs.getString("store_name");
                     Object data[] = {name, "평점이 없습니다."};
@@ -206,22 +202,20 @@ public class StoreList extends javax.swing.JFrame {
     private void jRadioButton1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton1ItemStateChanged
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        Connection con = null;
-        PreparedStatement st = null;
-        ResultSet rs = null;
-        String menuSql = "select store_name ,avg(rating) from store_list join reviews using (store_number) where store_list.store_category=";
+        String menuSql = "select store_name ,avg(rating) from store_list join reviews using (store_number) where store_list.store_category=? group by store_name order by";
 
         StoreCategory sc = new StoreCategory();
         String storeCategory = sc.getStoreCategory();
         jLabel1.setText(storeCategory);
-
+        Connect_DB db = new Connect_DB();
         try {
-            con = DriverManager.getConnection("jdbc:mysql://115.85.182.30:3306/cse_swde_DB?zeroDateTimeBehavior=CONVERT_TO_NULL&characterEncoding=UTF-8&serverTimezone=UTC", "cse_swde", "password");
+            Connection con = db.getConnection();
+            
 
             if (jRadioButton1.isSelected()) {
-                st = con.prepareStatement(menuSql + "'" + storeCategory + "'" + "group by store_name order by store_name desc");
-                rs = st.executeQuery();
-
+                PreparedStatement preparedStatement = con.prepareStatement(menuSql + "store_name desc");
+                preparedStatement.setString(1, storeCategory);
+                ResultSet rs = preparedStatement.executeQuery();
                 while (rs.next()) {
                     String name = rs.getString("store_name");
                     String rating = rs.getString("avg(rating)");
@@ -231,8 +225,9 @@ public class StoreList extends javax.swing.JFrame {
                     model.addRow(data);
                 }
             } else {
-                st = con.prepareStatement(menuSql + "'" + storeCategory + "'" + "group by store_name order by avg(rating) desc");
-                rs = st.executeQuery();
+                PreparedStatement preparedStatement = con.prepareStatement(menuSql + "avg(rating) desc");
+                preparedStatement.setString(1, storeCategory);
+                ResultSet rs = preparedStatement.executeQuery();
 
                 while (rs.next()) {
                     String name = rs.getString("store_name");

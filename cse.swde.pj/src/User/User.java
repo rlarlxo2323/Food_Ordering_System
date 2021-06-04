@@ -214,6 +214,9 @@ public class User extends javax.swing.JFrame {
         storeCategory = "카페";
         sc.setStoreCategory(storeCategory);
 
+        OptionValue ov = new OptionValue();
+        ov.setMyOption("카페");
+
         StoreList sl = new StoreList();
         sl.setVisible(true);
         dispose();
@@ -226,6 +229,9 @@ public class User extends javax.swing.JFrame {
         String storeCategory = sc.getStoreCategory();
         storeCategory = "치킨";
         sc.setStoreCategory(storeCategory);
+
+        OptionValue ov = new OptionValue();
+        ov.setMyOption("치킨");
 
         StoreList cafe = new StoreList();
         cafe.setVisible(true);
@@ -240,6 +246,9 @@ public class User extends javax.swing.JFrame {
         storeCategory = "피자";
         sc.setStoreCategory(storeCategory);
 
+        OptionValue ov = new OptionValue();
+        ov.setMyOption("피자");
+
         StoreList cafe = new StoreList();
         cafe.setVisible(true);
         dispose();
@@ -252,6 +261,9 @@ public class User extends javax.swing.JFrame {
         String storeCategory = sc.getStoreCategory();
         storeCategory = "패스트푸드";
         sc.setStoreCategory(storeCategory);
+
+        OptionValue ov = new OptionValue();
+        ov.setMyOption("패스트푸드");
 
         StoreList cafe = new StoreList();
         cafe.setVisible(true);
@@ -266,6 +278,9 @@ public class User extends javax.swing.JFrame {
         storeCategory = "일식";
         sc.setStoreCategory(storeCategory);
 
+        OptionValue ov = new OptionValue();
+        ov.setMyOption("일식");
+
         StoreList cafe = new StoreList();
         cafe.setVisible(true);
         dispose();
@@ -279,6 +294,9 @@ public class User extends javax.swing.JFrame {
         storeCategory = "분식";
         sc.setStoreCategory(storeCategory);
 
+        OptionValue ov = new OptionValue();
+        ov.setMyOption("분식");
+
         StoreList cafe = new StoreList();
         cafe.setVisible(true);
         dispose();
@@ -291,6 +309,9 @@ public class User extends javax.swing.JFrame {
         String storeCategory = sc.getStoreCategory();
         storeCategory = "중국집";
         sc.setStoreCategory(storeCategory);
+
+        OptionValue ov = new OptionValue();
+        ov.setMyOption("중국집");
 
         StoreList cafe = new StoreList();
         cafe.setVisible(true);
@@ -306,6 +327,8 @@ public class User extends javax.swing.JFrame {
         storeCategory = "양식";
         sc.setStoreCategory(storeCategory);
 
+        OptionValue ov = new OptionValue();
+        ov.setMyOption("양식");
         StoreList cafe = new StoreList();
         cafe.setVisible(true);
         dispose();
@@ -338,6 +361,9 @@ public class User extends javax.swing.JFrame {
         String storeCategory = sc.getStoreCategory();
         storeCategory = "족발";
         sc.setStoreCategory(storeCategory);
+
+        OptionValue ov = new OptionValue();
+        ov.setMyOption("족발");
 
         StoreList cafe = new StoreList();
         cafe.setVisible(true);

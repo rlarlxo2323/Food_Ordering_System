@@ -28,12 +28,7 @@ public class ModifyDeleteModel extends Connect_DB {
         if(mdModel == null) {mdModel = new ModifyDeleteModel();}
         return mdModel;
     }
-    
-//    public ModifyDeleteModel(){
-//        super();
-//        System.out.println("ModifyDeleteModel 생성자");
-//    }
-    
+
     public DefaultTableModel setTable2() {
         String[] column = {"아이디", "사업자 등록번호", "가게 카테고리","상호명", "대표자명", "사업자주소"}; // jtable의 column 내용
         DefaultTableModel model = new DefaultTableModel(column, 0){

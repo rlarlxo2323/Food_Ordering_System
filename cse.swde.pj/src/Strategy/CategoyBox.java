@@ -6,27 +6,22 @@
 package Strategy;
 
 import GetSet.OptionValue;
-import User.Store;
 import static User.Store.Size_jComboBox;
-import GetSet.StoreCategory;
-import static User.HashtagStore.Size_jComboBoxH;
 import javax.swing.DefaultComboBoxModel;
 
 public class CategoyBox implements PriceInterface {
 
     public void fly() {
         String cafeOption[] = {"소", "중", "대"};
-        String bunsickOption[] = {"치즈추가", "사이즈업"};
-        String chinaOption[] = {"곱배기", "짬뽕국물추가"};
+        String bunsickOption[] = {"기본","치즈추가", "사이즈업"};
+        String chinaOption[] = {"기본","곱배기", "짬뽕국물추가"};
         String chickenOption[] = {"순살", "뼈"};
         String pizzaOption[] = {"R", "L", "F"};
         String jokbalOption[] = {"앞다리살", "뒷다리살"};
         String westernOption[] = {"Small", "Medium", "Large"};
         String fastfoodOption[] = {"단품", "세트"};
-        String japanOption[] = {"미니우동", "주먹밥"};
-        StoreCategory sc = new StoreCategory();
-        String storeCategory = sc.getStoreCategory();
-
+        String japanOption[] = {"기본","미니우동", "주먹밥"};
+   
         OptionValue ov = new OptionValue();
         String myOption = ov.getMyOption();
         if (myOption.equals("카페")) {

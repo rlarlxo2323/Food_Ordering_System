@@ -28,11 +28,6 @@ public class ApproveRefuseModel extends Connect_DB {
         return arModel;
     }
     
-//    public ApproveRefuseModel(){
-//        super();
-//        System.out.println("ApproveRefuseModel 생성자");
-//    }
-    
     public DefaultTableModel setTable1() {
         String[] column = {"아이디", "사업자 등록번호", "가게 카테고리","상호명", "대표자명", "사업자주소"}; // jtable의 column 내용
         DefaultTableModel model = new DefaultTableModel(column, 0){

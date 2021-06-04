@@ -28,9 +28,7 @@ import Decorator_Option.PizzaregularOption;
 import Decorator_Option.WestlargeOption;
 import Decorator_Option.WestmediumOption;
 import Decorator_Option.WestsmallOption;
-import GetSet.OptionValue;
 import static User.Store.Size_jComboBox;
-import static User.HashtagStore.Size_jComboBoxH;
 
 /**
  *
@@ -38,9 +36,8 @@ import static User.HashtagStore.Size_jComboBoxH;
  */
 public class OptionPrice extends Price {
 
-    String optionBox = (String)Size_jComboBox.getSelectedItem();
+    String optionBox = (String) Size_jComboBox.getSelectedItem();
     //String optionBox2 = (String)Size_jComboBoxH.getSelectedItem();
-
 
     public OptionPrice() {
         flyBehavior = new CategoyBox();
@@ -48,8 +45,9 @@ public class OptionPrice extends Price {
 
     public int display() {
         Menu m = new Basic();
-
-        if (optionBox.equals("소")) {
+        if (optionBox.equals("기본")) {
+            m.price();
+        } else if (optionBox.equals("소")) {
             m = new CafesmallOption(m);
         } else if (optionBox.equals("중")) {
             m = new CafemediumOption(m);
