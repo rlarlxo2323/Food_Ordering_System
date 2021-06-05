@@ -11,7 +11,7 @@ import javax.swing.DefaultComboBoxModel;
 
 public class CategoyBox implements PriceInterface {
 
-    public void fly() {
+    public void option() {
         String cafeOption[] = {"소", "중", "대"};
         String bunsickOption[] = {"기본","치즈추가", "사이즈업"};
         String chinaOption[] = {"기본","곱배기", "짬뽕국물추가"};

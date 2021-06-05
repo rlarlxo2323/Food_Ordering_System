@@ -470,7 +470,7 @@ public class Store extends javax.swing.JFrame {
         ov.setMyOption(myOption);
         System.out.println(myOption);
         Price option2 = new OptionPrice();
-        option2.performFly();
+        option2.myOption();
 
     }//GEN-LAST:event_Menu_jTableMouseClicked
 
@@ -512,7 +512,7 @@ public class Store extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         Price option2 = new OptionPrice();
-        option2.performFly();
+        option2.myOption();
 
         StoreNum storelist = new StoreNum();
         String sl = storelist.getStoreList();

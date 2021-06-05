@@ -6,9 +6,9 @@
 package Strategy;
 
 public abstract class Price {
-    protected PriceInterface flyBehavior;
-    public void performFly(){
-        flyBehavior.fly();
+    protected PriceInterface myoption;
+    public void myOption(){
+        myoption.option();
     }
     public abstract int display();
 }

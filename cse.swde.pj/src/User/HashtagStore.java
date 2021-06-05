@@ -236,7 +236,7 @@ public class HashtagStore extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         Price option2 = new OptionPrice_H();
-        option2.performFly();
+        option2.myOption();
 
         String hash = Hashsearch_jTextField.getText();
         Storename_jLabel.setText(hash);
@@ -323,7 +323,7 @@ public class HashtagStore extends javax.swing.JFrame {
         ov.setMyOption(myOption);
         System.out.println(myOption);
         Price option2 = new OptionPrice_H();
-        option2.performFly();
+        option2.myOption();
 
 
     }//GEN-LAST:event_Menu_jTableMouseClicked

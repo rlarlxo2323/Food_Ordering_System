@@ -39,7 +39,7 @@ public class OptionPrice_H extends Price {
     String optionBox2 = (String) Size_jComboBoxH.getSelectedItem();
 
     public OptionPrice_H() {
-        flyBehavior = new CategoyBox_H();
+        myoption = new CategoyBox_H();
     }
 
     public int display() {

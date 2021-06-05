@@ -6,5 +6,5 @@
 package Strategy;
 
 interface PriceInterface {
-    void fly();
+    void option();
 }
