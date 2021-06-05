@@ -11,15 +11,15 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author jda05
+ *시스템관리자의 gui를 구성하는 클래스이다.
+ * @author 정진희
  */
 public class SystemAdminView extends JFrame {
     /**
      * Creates new form SystemManager
      */
     public SystemAdminView() {
-        initComponents();  
+        initComponents(); // 화면을 구성하는 소스가 담겨져있다.
         System.out.println("SystemAdminView 생성자");        
         setTitle("가맹점 관리"); // gui창 제목 지정        
         //setResizable(false); // 창 크기 조절 제한    
@@ -27,53 +27,6 @@ public class SystemAdminView extends JFrame {
         setVisible(true); // gui를 보이게 한다.                   
     }
     
-    JTable table1;
-    public void setTable1(JTable table){
-        this.table1 = table;
-    }
-    public JTable getTable1(){
-        return table1;
-    }
-    
-    JTable table2;
-    public void setTable2(JTable table){
-        this.table2 = table;
-    }
-    public JTable getTable2(){
-        return table2;
-    }
-    
-    JButton btn1;
-    public void setButton1(JButton btn){
-        this.btn1 = btn;
-    }
-    public JButton getButton1(){
-        return btn1;
-    }
-    
-    JButton btn2;
-    public void setButton2(JButton btn){
-        this.btn2 = btn;
-    }
-    public JButton getButton2(){
-        return btn2;
-    }
-    
-    JButton btn3;
-    public void setButton3(JButton btn){
-        this.btn3 = btn;
-    }
-    public JButton getButton3(){
-        return btn3;
-    }
-    
-    JButton btn4;
-    public void setButton4(JButton btn){
-        this.btn4 = btn;
-    }
-    public JButton getButton4(){
-        return btn4;
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -111,7 +64,7 @@ public class SystemAdminView extends JFrame {
         jScrollPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane1.setPreferredSize(new java.awt.Dimension(452, 400));
 
-        ApproveRefuseModel arModel = ApproveRefuseModel.getInstance();
+        ApproveRefuseModelSingleton arModel = ApproveRefuseModelSingleton.getInstance();
         DefaultTableModel model1 = arModel.setTable1();
         jTable1.setModel(model1);
         jTable1.setPreferredScrollableViewportSize(jTable1.getPreferredSize());
@@ -183,7 +136,7 @@ public class SystemAdminView extends JFrame {
         jScrollPane2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane2.setPreferredSize(new java.awt.Dimension(452, 400));
 
-        ModifyDeleteModel mdModel = ModifyDeleteModel.getInstance();
+        ModifyDeleteModelSingleton mdModel = ModifyDeleteModelSingleton.getInstance();
         DefaultTableModel model2 = mdModel.setTable2();
         jTable2.setModel(model2);
         jTable2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -257,6 +210,53 @@ public class SystemAdminView extends JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+ JTable table1;
+    public void setTable1(JTable table){
+        this.table1 = table;
+    }
+    public JTable getTable1(){
+        return table1;
+    }
+    
+    JTable table2;
+    public void setTable2(JTable table){
+        this.table2 = table;
+    }
+    public JTable getTable2(){
+        return table2;
+    }
+    
+    JButton btn1;
+    public void setButton1(JButton btn){
+        this.btn1 = btn;
+    }
+    public JButton getButton1(){
+        return btn1;
+    }
+    
+    JButton btn2;
+    public void setButton2(JButton btn){
+        this.btn2 = btn;
+    }
+    public JButton getButton2(){
+        return btn2;
+    }
+    
+    JButton btn3;
+    public void setButton3(JButton btn){
+        this.btn3 = btn;
+    }
+    public JButton getButton3(){
+        return btn3;
+    }
+    
+    JButton btn4;
+    public void setButton4(JButton btn){
+        this.btn4 = btn;
+    }
+    public JButton getButton4(){
+        return btn4;
+    }    
     
 DefaultTableModel refreshModel1;
 public void setRefreshTable1(DefaultTableModel tableModel1){
@@ -278,14 +278,6 @@ public DefaultTableModel getRefreshTable2(){
     return refreshModel2;
 }
 
-//public DefaultTableModel getRefreshTable2(){
-//    DefaultTableModel model = (DefaultTableModel)jTable2.getModel(); // 현재 jtable의 모델을 가져온다.
-//    return model;
-//}
-//public void setRefreshTable2(DefaultTableModel tableModel2){
-//    jTable2.setModel(tableModel2); // 바뀐 내용을 jtable에 넣는다.
-//}
-    
     /**
      * @param args the command line arguments
      */

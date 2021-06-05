@@ -14,49 +14,77 @@ import javax.swing.table.DefaultTableModel;
 
 
 /**
- *
- * @author jda05
+ *시스템관리지가 gui(View 클래스)에서 입력한 값을 Model 클래스에
+ * 전달해주어 이벤트가 실행되도록 한다.
+ * @author 정진희 
  */
 public class SystemAdminController implements ActionListener {
-    SystemAdminView systemAdminView;
-    ModifyView modifyView;
-    ApproveRefuseModel approveRefuseModelSingleton;
-    ModifyDeleteModel modifyDeleteModelSingleton;
-   
-    JTable approveRefuseTable;    
-    JButton approveBtn;
-    JButton refuseBtn;
-    JButton refreshBtn1;
-    
-    JTable modifyDeleteTable;
-    JButton modifyBtn;
-    JButton modifyCompleteBtn;
-    JButton deleteBtn;  
-    JButton refreshBtn2;
+    SystemAdminView systemAdminView; // 시스템관리자 gui
+    ModifyView modifyView; // 가맹점 정보 수정 gui
+    ApproveRefuseModelSingleton approveRefuseModelSingleton; // 가맹점 승인, 거절 DB 작업처리 
+    ModifyDeleteModelSingleton modifyDeleteModelSingleton; // 가맹점 정보 수정, 삭제 DB 작업처리   
+    JTable approveRefuseTable; // 가맹점 대기목록 리스트 jtable    
+    JButton approveBtn; // 승인 버튼
+    JButton refuseBtn; // 거절 버튼
+    JButton refreshBtn1; // 가맹점 대기목록 리스트 새로고침하는 버튼    
+    JTable modifyDeleteTable; // 승인된 가맹점 목록 리스트
+    JButton modifyBtn; // 정보를 수정할 가맹점 선택 후  누르는 수정 버튼
+    JButton modifyCompleteBtn; // 수정할 정보 입력 후 누르는 수정 버튼
+    JButton deleteBtn;  // 삭제할 가맹점 선택 후 누르는 버튼
+    JButton refreshBtn2; // 승인된 가맹점 목록 리스트 새로고침하는 버튼
     
     public SystemAdminController(){
-        systemAdminView = new SystemAdminView();    
-        modifyView = new ModifyView();
-        approveRefuseModelSingleton =  ApproveRefuseModel.getInstance();       
-        modifyDeleteModelSingleton =  ModifyDeleteModel.getInstance();
+        systemAdminView = new SystemAdminView(); // 시스템관리자 gui화면 호출   
+        modifyView = new ModifyView(); // 수정할 가맹점 정보 입력하는 gui 화면 호출
+        approveRefuseModelSingleton =  ApproveRefuseModelSingleton.getInstance();       
+        modifyDeleteModelSingleton =  ModifyDeleteModelSingleton.getInstance();
         
-        approveRefuseTable = systemAdminView.getTable1();
-        approveBtn = systemAdminView.getButton1();
+        approveRefuseTable = systemAdminView.getTable1(); // 가맹점 대기목록 리스트 jtable  
+        approveBtn = systemAdminView.getButton1(); // 승인 버튼
         approveBtn.addActionListener(this);
-        refuseBtn = systemAdminView.getButton2();
+        refuseBtn = systemAdminView.getButton2(); // 거절 버튼
         refuseBtn.addActionListener(this);
-        refreshBtn1 = systemAdminView.jButton5;
+        refreshBtn1 = systemAdminView.jButton5; // 가맹점 대기목록 리스트 새로고침하는 버튼 
         refreshBtn1.addActionListener(this);
         
-        modifyDeleteTable = systemAdminView.getTable2();
-        modifyBtn = systemAdminView.getButton3();
+        modifyDeleteTable = systemAdminView.getTable2(); // 승인된 가맹점 목록 리스트
+        modifyBtn = systemAdminView.getButton3(); // 정보를 수정할 가맹점 선택 후  누르는 수정 버튼
         modifyBtn.addActionListener(this);
-        modifyCompleteBtn = ModifyView.jButton1; 
+        modifyCompleteBtn = ModifyView.jButton1;  // 수정할 정보 입력 후 누르는 수정 버튼
         modifyCompleteBtn.addActionListener(this);
-        deleteBtn = systemAdminView.getButton4();
+        deleteBtn = systemAdminView.getButton4(); // 삭제할 가맹점 선택 후 누르는 버튼
         deleteBtn.addActionListener(this);    
-        refreshBtn2 = systemAdminView.jButton6;
+        refreshBtn2 = systemAdminView.jButton6; // 승인된 가맹점 목록 리스트 새로고침하는 버튼
         refreshBtn2.addActionListener(this);
+    }    
+    
+    @Override
+    public void actionPerformed(ActionEvent e){
+        String sql; // store_state를 y 또는 n으로 바꾸는 sql문
+        if(e.getSource() == approveBtn){  // 가맹점 승인을 위해 "승인 버튼" 클릭시 발생하는 이벤트
+            System.out.println("승인 버튼 누름");
+            sql = "update store_list set store_state = 'y' where store_number = ?"; // 선택한 store_number의 store_state를 y로 변경
+            actionUpdate(sql); // sql문에 따른 승인 또는 거절 버튼의 기능 실행                
+        } else if(e.getSource() == refuseBtn){  // 가맹점 승인을 위해 "거절 버튼" 클릭시 발생하는 이벤트
+            System.out.println("거절 버튼 누름");
+            sql = "update store_list set store_state = 'n' where store_number = ?"; // 선택한 store_number의 store_state를 n으로 변경
+            actionUpdate(sql); // sql문에 따른 승인 또는 거절 버튼의 기능 실행     
+        } else if(e.getSource() == refreshBtn1){ // 데이터를 가져오기위해 "새로고침 버튼" 클릭 시 발생하는 이벤트
+            System.out.println("새로고침1 버튼 누름");
+            refreshTable1();            
+        } else if(e.getSource() == modifyBtn){  // 데이터 수정을 위해 "수정 버튼" 클릭 시 발생하는 이벤트
+            System.out.println("수정 버튼 누름");            
+            actionModify();
+        } else if(e.getSource() == modifyCompleteBtn){ // "수정 버튼" 클릭시 새로 뜬 창의 "수정 완료 버튼" 클릭 시 발생하는 이벤트
+            System.out.println("ModifyView의 수정 완료 버튼 누름");
+            actionModifyUpdate();            
+        } else if(e.getSource() == deleteBtn){ // 데이터 삭제를 위해 "삭제 버튼" 클릭 시 발생하는 이벤트
+            System.out.println("삭제 버튼 누름");
+            actionDelete();            
+        } else if(e.getSource() == refreshBtn2){ // 데이터를 가져오기위해 "새로고침 버튼" 클릭 시 발생하는 이벤트
+            System.out.println("새로고침2 버튼 누름");
+            refreshTable2();            
+        } 
     }
     
     public void setQuery(String sql){
@@ -169,35 +197,6 @@ public class SystemAdminController implements ActionListener {
     tableModel2 = modifyDeleteModelSingleton.setTable2(); //select문 결과를 담는다.
     modifyDeleteTable.setModel(tableModel2); // controller에 저장되어있는 jtable 객체도 바뀐 값을 넣어준다.
     systemAdminView.setRefreshTable2(tableModel2); // 업데이트된 tablemodel을 jtable에 넣어준다.
-    }
-    
-    @Override
-    public void actionPerformed(ActionEvent e){
-        String sql;
-        if(e.getSource() == approveBtn){  // 가맹점 승인을 위해 "승인 버튼" 클릭시 발생하는 이벤트
-            System.out.println("승인 버튼 누름");
-            sql = "update store_list set store_state = 'y' where store_number = ?"; // 선택한 store_number의 store_state를 y로 변경
-            actionUpdate(sql); // sql문에 따른 승인 또는 거절 버튼의 기능 실행                
-        } else if(e.getSource() == refuseBtn){  // 가맹점 승인을 위해 "거절 버튼" 클릭시 발생하는 이벤트
-            System.out.println("거절 버튼 누름");
-            sql = "update store_list set store_state = 'n' where store_number = ?"; // 선택한 store_number의 store_state를 n으로 변경
-            actionUpdate(sql); // sql문에 따른 승인 또는 거절 버튼의 기능 실행     
-        } else if(e.getSource() == refreshBtn1){ // 데이터를 가져오기위해 "새로고침 버튼" 클릭 시 발생하는 이벤트
-            System.out.println("새로고침1 버튼 누름");
-            refreshTable1();            
-        } else if(e.getSource() == modifyBtn){  // 데이터 수정을 위해 "수정 버튼" 클릭 시 발생하는 이벤트
-            System.out.println("수정 버튼 누름");            
-            actionModify();
-        } else if(e.getSource() == modifyCompleteBtn){ // "수정 버튼" 클릭시 새로 뜬 창의 "수정 완료 버튼" 클릭 시 발생하는 이벤트
-            System.out.println("ModifyView의 수정 완료 버튼 누름");
-            actionModifyUpdate();            
-        } else if(e.getSource() == deleteBtn){ // 데이터 삭제를 위해 "삭제 버튼" 클릭 시 발생하는 이벤트
-            System.out.println("삭제 버튼 누름");
-            actionDelete();            
-        } else if(e.getSource() == refreshBtn2){ // 데이터를 가져오기위해 "새로고침 버튼" 클릭 시 발생하는 이벤트
-            System.out.println("새로고침2 버튼 누름");
-            refreshTable2();            
-        } 
     }
     
     /**

@@ -10,41 +10,23 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author jda05
+ *가맹점주 gui를 구성하는 클래스이다.
+ * @param storeNumber 
+ * @author 정진희
  */
 public class StoreOwnerView extends JFrame {
-    String storeNumber;
-    String storeName;
-    /**
-     * Creates new form StoreManager
-     */
+    String storeNumber; // 가맹점 등록 번호
+    String storeName; // 가게 이름
+  
     public StoreOwnerView(String storeNumber) {
-        this.storeNumber = storeNumber;
-        initComponents();
+        this.storeNumber = storeNumber; // 로그인 시 넘겨받은 가맹점 등록번호
+        initComponents(); // 화면을 구성하는 소스가 담겨져있다.
         System.out.println("StoreManagerView 생성자");        
         setTitle("가게 관리"); // gui창 제목 지정        
         setResizable(false); // 창 크기 조절 제한    
         setLocationRelativeTo(null); // gui를 윈도우 창 가운데에 위치하게 한다.
         setVisible(true); // gui를 보이게 한다.
     }
-    
-    JTable table1;
-    public void setTable1(JTable table){
-        this.table1 = table;
-    }
-    public JTable getTable1(){
-        return table1;
-    }
-    
-    JTable table2;
-    public void setTable2(JTable table){
-        this.table2 = table;
-    }
-    public JTable getTable2(){
-        return table2;
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -59,7 +41,7 @@ public class StoreOwnerView extends JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         JScrollPane1 = new javax.swing.JScrollPane();
-        StoreInfoModel storeInfoModel = StoreInfoModel.getInstance();
+        StoreInfoModelSingleton storeInfoModel = StoreInfoModelSingleton.getInstance();
         storeInfoModel.setStoreInfoTextField(storeNumber);
         JTextArea1 = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
@@ -253,7 +235,7 @@ public class StoreOwnerView extends JFrame {
         jButton5.setFont(new java.awt.Font("맑은 고딕 Semilight", 0, 14)); // NOI18N
         jButton5.setText("새로고침");
 
-        MenuInfoModel menuInfoModel = MenuInfoModel.getInstance();
+        MenuInfoModelSingleton menuInfoModel = MenuInfoModelSingleton.getInstance();
         DefaultTableModel model1 = menuInfoModel.setMenuInfoTable(storeNumber);
         jTable1.setModel(model1);
         jTable1.setShowGrid(true);
@@ -370,7 +352,7 @@ public class StoreOwnerView extends JFrame {
         jButton7.setFont(new java.awt.Font("맑은 고딕 Semilight", 0, 14)); // NOI18N
         jButton7.setText("새로 고침");
 
-        ReviewsModel reviewsModel = ReviewsModel.getInstance();
+        ReviewsModelSingleton reviewsModel = ReviewsModelSingleton.getInstance();
         DefaultTableModel model2 = reviewsModel.setReviewsTable(storeNumber);
         jTable2.setModel(model2);
         jTable2.setShowGrid(true);
@@ -432,6 +414,22 @@ public class StoreOwnerView extends JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+JTable table1;
+    public void setTable1(JTable table){
+        this.table1 = table;
+    }
+    public JTable getTable1(){
+        return table1;
+    }
+    
+    JTable table2;
+    public void setTable2(JTable table){
+        this.table2 = table;
+    }
+    public JTable getTable2(){
+        return table2;
+    }
+    
 DefaultTableModel refreshModel1;
 public void setRefreshTable1(DefaultTableModel tableModel1){
     refreshModel1 = tableModel1;

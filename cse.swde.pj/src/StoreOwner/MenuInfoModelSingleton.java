@@ -14,25 +14,26 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author jda05
+ *가맹점주가 가맹점 메뉴를 등록 및 삭제 처리를 했을 때 * 
+ * 데이터베이스에서 처리해야하는 작업을 구성해놓은 클래스이다.
+ * @author 정진희
  */
-public class MenuInfoModel extends Connect_DB{
+public class MenuInfoModelSingleton extends Connect_DB{
     String storeNumber; // 사업자 등록번호
     String menuName; // 메뉴 이름
     String menuOption; // 메뉴 옵션
     String menuPrice; // 가격
     String menuHashtag; // 해시 태그   
     
-    private static MenuInfoModel menuInfoModel;
-    private MenuInfoModel(){
+    private static MenuInfoModelSingleton menuInfoModelSingleton;
+    private MenuInfoModelSingleton(){
         super();  // 부모 클래스(DbConnection)의 생성자 호출
         System.out.println("MenuInfoModel 생성자");
     }
     
-    public static MenuInfoModel getInstance(){
-        if(menuInfoModel == null) {menuInfoModel = new MenuInfoModel();}
-        return menuInfoModel;
+    public static MenuInfoModelSingleton getInstance(){
+        if(menuInfoModelSingleton == null) {menuInfoModelSingleton = new MenuInfoModelSingleton();}
+        return menuInfoModelSingleton;
     }
     
     public DefaultTableModel setMenuInfoTable(String storeNumber) {

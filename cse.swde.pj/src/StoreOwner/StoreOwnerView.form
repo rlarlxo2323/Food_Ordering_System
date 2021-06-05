@@ -193,7 +193,7 @@
                     <Property name="rows" type="int" value="5"/>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="StoreInfoModel storeInfoModel = StoreInfoModel.getInstance();&#xa;storeInfoModel.setStoreInfoTextField(storeNumber);"/>
+                    <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="StoreOwner.StoreInfoModelSingleton storeInfoModel = StoreOwner.StoreInfoModelSingleton.getInstance();&#xa;storeInfoModel.setStoreInfoTextField(storeNumber);"/>
                     <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="JTextArea1.setText(storeInfoModel.introduction);"/>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
                   </AuxValues>
@@ -470,7 +470,7 @@
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="setTable1(jTable1);"/>
-                    <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="MenuInfoModel menuInfoModel = MenuInfoModel.getInstance();&#xa;DefaultTableModel model1 = menuInfoModel.setMenuInfoTable(storeNumber);"/>
+                    <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="StoreOwner.MenuInfoModelSingleton menuInfoModel = StoreOwner.MenuInfoModelSingleton.getInstance();&#xa;DefaultTableModel model1 = menuInfoModel.setMenuInfoTable(storeNumber);"/>
                   </AuxValues>
                 </Component>
               </SubComponents>
@@ -656,7 +656,7 @@
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="setTable2(jTable2);"/>
-                    <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="ReviewsModel reviewsModel = ReviewsModel.getInstance();&#xa;DefaultTableModel model2 = reviewsModel.setReviewsTable(storeNumber);"/>
+                    <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="StoreOwner.ReviewsModelSingleton reviewsModel = StoreOwner.ReviewsModelSingleton.getInstance();&#xa;DefaultTableModel model2 = reviewsModel.setReviewsTable(storeNumber);"/>
                     <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="StoreOwnerView_jTable2"/>
                   </AuxValues>
                 </Component>

@@ -13,19 +13,20 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
- *
- * @author jda05
+ *가맹점주가 가게 리뷰를 관히하기위해 삭제 처리를 했을 때 * 
+ * 데이터베이스에서 처리해야하는 작업을 구성해놓은 클래스이다.
+ * @author 정진희
  */
-public class ReviewsModel extends Connect_DB {
-   private static ReviewsModel rModel;
-    private ReviewsModel(){
+public class ReviewsModelSingleton extends Connect_DB {
+   private static ReviewsModelSingleton reviewsModelSingleton;
+    private ReviewsModelSingleton(){
         super();
         System.out.println("ReviewsModel 생성자");
     }
 
-    public static ReviewsModel getInstance(){
-        if(rModel == null) {rModel = new ReviewsModel();}
-        return rModel;
+    public static ReviewsModelSingleton getInstance(){
+        if(reviewsModelSingleton == null) {reviewsModelSingleton = new ReviewsModelSingleton();}
+        return reviewsModelSingleton;
     }
     
     public DefaultTableModel setReviewsTable(String storeNumber) {        

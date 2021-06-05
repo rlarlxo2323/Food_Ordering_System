@@ -10,10 +10,11 @@ import java.sql.*;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author jda05
+ *가맹점주가 가맹점 영업정보를 등록 및 수정 처리를 했을 때 * 
+ * 데이터베이스에서 처리해야하는 작업을 구성해놓은 클래스이다.
+ * @author 정진희
  */
-public class StoreInfoModel extends Connect_DB {
+public class StoreInfoModelSingleton extends Connect_DB {
     String introduction; // 가게 소개
     String operatingTime; // 운영시간
     String closedDays; // 휴무일
@@ -21,18 +22,18 @@ public class StoreInfoModel extends Connect_DB {
     String address; // 주소
     String deliveryCost; // 배달팁  
     
-    private static StoreInfoModel storeInfoModel;
-    private StoreInfoModel(){
+    private static StoreInfoModelSingleton storeInfoModelSingleton;
+    private StoreInfoModelSingleton(){
         super();  // 부모 클래스(DbConnection)의 생성자 호출
         System.out.println("StoreInfoModel 생성자");
     }
     
-    public static StoreInfoModel getInstance(){
-        if(storeInfoModel == null) {storeInfoModel = new StoreInfoModel();}
-        return storeInfoModel;
+    public static StoreInfoModelSingleton getInstance(){
+        if(storeInfoModelSingleton == null) {storeInfoModelSingleton = new StoreInfoModelSingleton();}
+        return storeInfoModelSingleton;
     }
     
-//    public StoreInfoModel(String introduction, String operatingTime, String closedDays, String address, int deliveryCost) throws ClassNotFoundException { // 생성자
+//    public StoreInfoModelSingleton(String introduction, String operatingTime, String closedDays, String address, int deliveryCost) throws ClassNotFoundException { // 생성자
 //        super(); // 부모 클래스(DbConnection)의 생성자 호출
 //        this.introduction = introduction;
 //        this.operatingTime = operatingTime;

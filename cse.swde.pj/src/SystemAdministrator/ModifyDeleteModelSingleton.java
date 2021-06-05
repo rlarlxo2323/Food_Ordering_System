@@ -14,19 +14,20 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author jda05
+ *시스템 관리자가 가맹점 정보를 수정 또는 삭제 처리를 했을 때 * 
+ * 데이터베이스에서 처리해야하는 작업을 구성해놓은 클래스이다.
+ * @author 정진희
  */
-public class ModifyDeleteModel extends Connect_DB {
-    private static ModifyDeleteModel mdModel;
-    private ModifyDeleteModel(){
+public class ModifyDeleteModelSingleton extends Connect_DB {
+    private static ModifyDeleteModelSingleton modifyDeleteModelSingleton;
+    private ModifyDeleteModelSingleton(){
         super();
-        System.out.println("ModifyDeleteModel 생성자");
+        System.out.println("ModifyDeleteModelSingleton 생성자");
     }
 
-    public static ModifyDeleteModel getInstance(){
-        if(mdModel == null) {mdModel = new ModifyDeleteModel();}
-        return mdModel;
+    public static ModifyDeleteModelSingleton getInstance(){
+        if(modifyDeleteModelSingleton == null) {modifyDeleteModelSingleton = new ModifyDeleteModelSingleton();}
+        return modifyDeleteModelSingleton;
     }
 
     public DefaultTableModel setTable2() {

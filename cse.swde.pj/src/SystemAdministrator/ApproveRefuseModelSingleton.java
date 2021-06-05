@@ -13,19 +13,20 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
- *
- * @author jda05
+ *시스템 관리자가 가맹점 신청 대기 목록에서 승인과 거절 처리를 했을 때 
+ * 데이터베이스에서 처리해야하는 작업을 구성해놓은 클래스이다.
+ * @author 정진희
  */
-public class ApproveRefuseModel extends Connect_DB {
-    private static ApproveRefuseModel arModel;
-    private ApproveRefuseModel(){
+public class ApproveRefuseModelSingleton extends Connect_DB {
+    private static ApproveRefuseModelSingleton approveRefuseModelSingleton;
+    private ApproveRefuseModelSingleton(){
         super();
         System.out.println("ApproveRefuseModel 생성자");
     }
     
-    public static ApproveRefuseModel getInstance(){
-        if(arModel == null) {arModel = new ApproveRefuseModel();}
-        return arModel;
+    public static ApproveRefuseModelSingleton getInstance(){
+        if(approveRefuseModelSingleton == null) {approveRefuseModelSingleton = new ApproveRefuseModelSingleton();}
+        return approveRefuseModelSingleton;
     }
     
     public DefaultTableModel setTable1() {

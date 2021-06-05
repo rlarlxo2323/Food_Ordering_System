@@ -13,53 +13,73 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author jda05
+ * 가맹점주가 gui(View 클래스)에서 입력한 값을 Model 클래스에
+ * 전달해주어 이벤트가 실행되도록 한다.
+ * @author 정진희 
  */
 public class StoreOwnerController implements ActionListener{
-    String storeNumber;
-    
-    StoreOwnerView storeOwnerView;
-    StoreInfoModel storeInfoModelSingleton;
-    MenuInfoModel menuInfoModelSingleton;
-    ReviewsModel reviewsModelSingleton;
-    
-    JButton storeInfoRegisterBtn;
-    
-    JTable menuInfoTable;    
-    JButton menuInfoRegisterBtn;
-    JButton menuInfoDeleteBtn;
-    JButton menuInfoRegisterRefreshBtn;
-    
-    JTable reviewsTable;
-    JButton reviewsDeleteBtn;
-    JButton reviewsRefreshBtn;
+    String storeNumber; // 로그인 시 받아오는 사업자 등록번호    
+    StoreOwnerView storeOwnerView; // 가맹점주 gui
+    StoreInfoModelSingleton storeInfoModelSingleton;//가게 영업정보 등록 및 수정 DB 작업처리
+    MenuInfoModelSingleton menuInfoModelSingleton; // 메뉴 정보 등록, 삭제 DB 작업처리
+    ReviewsModelSingleton reviewsModelSingleton; // 리뷰 관리(삭제) DB 작업처리    
+    JButton storeInfoRegisterBtn; // 가게 영업정보 등록 및 수정하는 버튼    
+    JTable menuInfoTable; // 가게 메뉴 목록을 보여주는 jtable    
+    JButton menuInfoRegisterBtn; // 가게 메뉴 등록하는 버튼
+    JButton menuInfoDeleteBtn; // 가게 메뉴 삭제하는 버튼
+    JButton menuInfoRegisterRefreshBtn; // 가게 메뉴 새로고침하는 버튼    
+    JTable reviewsTable; // 가게 리뷰 목록 보여주는 jtable
+    JButton reviewsDeleteBtn; // 가게 리뷰 삭제하는 버튼
+    JButton reviewsRefreshBtn; // 가게 리뷰 목록 새로고침하는 버튼
     
     public StoreOwnerController(String number){ // storeNumber를 생성자에서 받을것임
-        storeNumber = number; // 로그인에서 가져온 사업자 등록번호(store_number)를 인스턴스변수 storeNumber에 넘겨줌
+        storeNumber = number; // 로그인에서 가져온 사업자 등록번호(store_number)를 인스턴스변수 storeNumber에 넘겨줌        
+        storeOwnerView = new StoreOwnerView(storeNumber); // 가맹점주 gui 화면 호출
+        storeInfoModelSingleton = StoreInfoModelSingleton.getInstance();
+        menuInfoModelSingleton = MenuInfoModelSingleton.getInstance();
+        reviewsModelSingleton = ReviewsModelSingleton.getInstance();
         
-        storeOwnerView = new StoreOwnerView(storeNumber);
-        storeInfoModelSingleton = StoreInfoModel.getInstance();
-        menuInfoModelSingleton = MenuInfoModel.getInstance();
-        reviewsModelSingleton = ReviewsModel.getInstance();
-        
-        storeInfoRegisterBtn = storeOwnerView.jButton1;
+        storeInfoRegisterBtn = storeOwnerView.jButton1; // 가게 영업정보 등록 및 수정하는 버튼    
         storeInfoRegisterBtn.addActionListener(this);
         
-        menuInfoTable = storeOwnerView.getTable1();       
-        menuInfoRegisterBtn = storeOwnerView.jButton3;
+        menuInfoTable = storeOwnerView.getTable1(); // 가맹점주 gui에서 메뉴 목록 리스트 jtable       
+        menuInfoRegisterBtn = storeOwnerView.jButton3; // 메뉴 등록 버튼
         menuInfoRegisterBtn.addActionListener(this);
-        menuInfoDeleteBtn = storeOwnerView.jButton4;
+        menuInfoDeleteBtn = storeOwnerView.jButton4; // 가게 메뉴 삭제하는 버튼
         menuInfoDeleteBtn.addActionListener(this);
-        menuInfoRegisterRefreshBtn = storeOwnerView.jButton5;
+        menuInfoRegisterRefreshBtn = storeOwnerView.jButton5; // 가게 메뉴 새로고침하는 버튼 
         menuInfoRegisterRefreshBtn.addActionListener(this);
         
-        reviewsTable = storeOwnerView.getTable2();
-        reviewsDeleteBtn = storeOwnerView.jButton6;
+        reviewsTable = storeOwnerView.getTable2();  // 가맹점주 gui에서 리뷰 목록 리스트 jtable       
+        reviewsDeleteBtn = storeOwnerView.jButton6;  // 가게 리뷰 삭제하는 버튼
         reviewsDeleteBtn.addActionListener(this);
-        reviewsRefreshBtn = storeOwnerView.jButton7;
+        reviewsRefreshBtn = storeOwnerView.jButton7; // 가게 리뷰 목록 새로고침하는 버튼
         reviewsRefreshBtn.addActionListener(this);
     }    
+    
+    @Override
+    public void actionPerformed(ActionEvent e){
+        if(e.getSource() == storeInfoRegisterBtn){  // 가맹점 승인을 위해 "승인 버튼" 클릭시 발생하는 이벤트
+            System.out.println("가게 정보 등록 버튼 누름");
+            storeInfoRegister();                          
+        } else if(e.getSource() == menuInfoRegisterBtn){  // 가맹점 승인을 위해 "승인 버튼" 클릭시 발생하는 이벤트
+            System.out.println("메뉴 등록 버튼 누름"); 
+            //System.out.println("버튼쪽 : "+storeNumber);            
+            menuInfoRegister();                      
+        } else if(e.getSource() == menuInfoDeleteBtn){ // 데이터 삭제를 위해 "삭제 버튼" 클릭 시 발생하는 이벤트
+            System.out.println("메뉴 삭제 버튼 누름");            
+            menuInfoDelete();         
+        } else if(e.getSource() == menuInfoRegisterRefreshBtn){ // 데이터를 가져오기위해 "새로고침 버튼" 클릭 시 발생하는 이벤트
+            System.out.println("메뉴 탭의 새로고침 버튼 누름");
+            refreshMenuInfoTable1();            
+        } else if(e.getSource() == reviewsDeleteBtn){ // 데이터 삭제를 위해 "삭제 버튼" 클릭 시 발생하는 이벤트
+            System.out.println("리뷰 삭제 버튼 누름");            
+            reviewsDelete();         
+        } else if(e.getSource() == reviewsRefreshBtn){ // 데이터를 가져오기위해 "새로고침 버튼" 클릭 시 발생하는 이벤트
+            System.out.println("리뷰 탭의 새로고침 버튼 누름");
+            refreshReviewsTable2();            
+        }      
+    }
     
     public void storeInfoRegister(){ // 가게 정보 등록 버튼을 누르면 실행함
         String introduction = storeOwnerView.JTextArea1.getText(); // 가게 소개
@@ -73,7 +93,7 @@ public class StoreOwnerController implements ActionListener{
         if(introduction.equals("") || operatingTime.equals("") ||closedDays.equals("") || phone.equals("") || address.equals("")){ 
             JOptionPane.showMessageDialog(null, "가게 정보가 비어있습니다. 모두 채워주세요.");       
         } else { //DB 처리 클래스 호출                        
-            storeInfoModelSingleton.setData(introduction, operatingTime, closedDays, phone, address, deliveryCost); // 입력값을 
+            storeInfoModelSingleton.setData(introduction, operatingTime, closedDays, phone, address, deliveryCost); // 입력받은 정보를 넘겨줘서 DB 작업을함
             storeInfoModelSingleton.storeInfoUpdate(storeNumber); // 해당 storeNumber를 가지는 가맹점의 가게 정보를 업데이트 한다.
         }    
     }
@@ -88,8 +108,8 @@ public class StoreOwnerController implements ActionListener{
         if(menuName.equals("") || menuOption.equals("") || menuPrice == 0 || menuHashtag.equals("")){ 
             JOptionPane.showMessageDialog(null, "메뉴 정보가 비어있습니다. 모두 채워주세요.");       
         } else { //DB 처리 클래스 호출      
-            menuInfoModelSingleton.menuInfoInsert(menuName, menuOption, menuPrice, menuHashtag);   
-            refreshMenuInfoTable1();
+            menuInfoModelSingleton.menuInfoInsert(menuName, menuOption, menuPrice, menuHashtag); // 입력받은 정보를 넘겨줘서 DB 작업을함   
+            refreshMenuInfoTable1(); // 메뉴 목록을 새로고침해서 보여줌
         }
     }
     
@@ -141,29 +161,6 @@ public class StoreOwnerController implements ActionListener{
         storeOwnerView.setRefreshTable2(tableModel2); // 업데이트된 tablemodel을 jtable에 넣어준다.
     }
     
-    @Override
-    public void actionPerformed(ActionEvent e){
-        if(e.getSource() == storeInfoRegisterBtn){  // 가맹점 승인을 위해 "승인 버튼" 클릭시 발생하는 이벤트
-            System.out.println("가게 정보 등록 버튼 누름");
-            storeInfoRegister();                          
-        } else if(e.getSource() == menuInfoRegisterBtn){  // 가맹점 승인을 위해 "승인 버튼" 클릭시 발생하는 이벤트
-            System.out.println("메뉴 등록 버튼 누름");
-            //System.out.println("버튼쪽 : "+storeNumber);            
-            menuInfoRegister();                      
-        } else if(e.getSource() == menuInfoDeleteBtn){ // 데이터 삭제를 위해 "삭제 버튼" 클릭 시 발생하는 이벤트
-            System.out.println("메뉴 삭제 버튼 누름");            
-            menuInfoDelete();         
-        } else if(e.getSource() == menuInfoRegisterRefreshBtn){ // 데이터를 가져오기위해 "새로고침 버튼" 클릭 시 발생하는 이벤트
-            System.out.println("메뉴 탭의 새로고침 버튼 누름");
-            refreshMenuInfoTable1();            
-        } else if(e.getSource() == reviewsDeleteBtn){ // 데이터 삭제를 위해 "삭제 버튼" 클릭 시 발생하는 이벤트
-            System.out.println("리뷰 삭제 버튼 누름");            
-            reviewsDelete();         
-        } else if(e.getSource() == reviewsRefreshBtn){ // 데이터를 가져오기위해 "새로고침 버튼" 클릭 시 발생하는 이벤트
-            System.out.println("리뷰 탭의 새로고침 버튼 누름");
-            refreshReviewsTable2();            
-        }      
-    }
 
     /**
      * @param args the command line arguments

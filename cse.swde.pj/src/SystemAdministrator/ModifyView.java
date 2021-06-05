@@ -6,16 +6,14 @@
 package SystemAdministrator;
 
 /**
- *
- * @author jda05
+ *시스템관리자가 가맹점 정보 수정 시 입력하는 정보를 받는 
+ * gui를 구성하는 클래스이다.
+ * @author 정진희
  */
 public class ModifyView extends javax.swing.JFrame {
 
-    /**
-     * Creates new form RowUpdateView
-     */
     public ModifyView() {
-        initComponents();
+        initComponents(); // 화면을 구성하는 소스가 담겨져있다.
         System.out.println("ModifyView 생성자");
     }
     
