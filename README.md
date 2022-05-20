@@ -26,9 +26,9 @@
 ## 3. 디자인 패턴
 
 ### 1. Template Method 패턴</br>
-![차단바 인식](image/템플릿메소드.PNG)<br/><br/>
-**문제점**<br/><br/>
-dddd<br/>
+![차단바 인식](image/템플릿메소드.PNG)<br/>
+**문제점**<br/>
+dddd<br/><br/>
 **해결방안**<br/><br/>
 dddd<br/>
 
