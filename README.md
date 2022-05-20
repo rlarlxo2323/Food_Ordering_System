@@ -44,5 +44,5 @@ Canny 알고리즘을 사용하여 차선을 인식하고, 인식되는 차선�
 
 ## 4. 발표 영상
 
-[![발표 영상](https://img.youtube.com/vi/rXEB4ofZOt8/0.jpg)](https://youtu.be/rXEB4ofZOt8)
+[![발표 영상](https://img.youtube.com/vi/yPWcp_Xn3TY/0.jpg)](https://youtu.be/yPWcp_Xn3TY))
 
